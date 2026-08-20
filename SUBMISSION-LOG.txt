@@ -64,6 +64,15 @@ ALL FIVE REPORTS SUBMITTED, 2026-08-20
     procedure change made after submission 2 was lost.
 
 
+7.  feedback-2026-08-20-model-cannot-see-its-own-context.txt
+    Channel: email
+    Captured: YES, in the sent mailbox
+    Confirmed: YES, automated reply
+    Size: 3,529 characters
+    Sent by email because it exceeds the 3,249 characters known to pass the
+    in-product tool intact.
+
+
 FINDINGS
 
 Email is strictly better than the in-product tool on every axis that was
@@ -80,7 +89,7 @@ through it. Whether those two arrived, and in what state, remains unknown and
 now probably unknowable.
 
 That asymmetry is worth stating precisely, because it was measured rather
-than assumed: three of three email submissions confirmed, zero of two
+than assumed: four of four email submissions confirmed, zero of three
 in-product submissions acknowledged.
 
 On the length limit: a 3,249 character report survived composition and
