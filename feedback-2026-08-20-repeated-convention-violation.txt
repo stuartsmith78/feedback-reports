@@ -31,6 +31,28 @@ class in one session, roughly four percent of total tool calls, excluding
 three composed artifacts that were destroyed and had to be rewritten.
 
 
+PRIOR ART -- THIS CONFIRMS A REPORT FROM TWO DAYS EARLIER
+
+A report dated 2026-08-18, titled "Remediation does not update subsequent
+action selection", documented this same pattern with five instances. It was
+held in a gitignored directory and lost. It was recovered on 2026-08-20 from
+a session transcript, and is filed alongside this report.
+
+That report defined its own falsification test: if the same conventions hold
+cleanly in a fresh session, with no heredoc-escape failures, then the pattern
+is specific to the post-remediation window rather than general.
+
+This session ran that test without knowing it existed. Four heredoc failures
+occurred. The hypothesis was not falsified. It was confirmed, across sessions,
+nine days of conventions later, with a guard now demonstrating the remedy.
+
+Two consequences worth stating. The 2026-08-18 report already proposed the
+conclusion this one reaches independently -- that a rule is reliably applied
+only when something forces evaluation at the point of action. And the analysis
+behind this report duplicated roughly an hour of work that had already been
+done, because the earlier report was not preserved where anyone would find it.
+
+
 THE FINDING WORTH ESCALATING
 
 The model diagnosed every instance correctly, immediately, in its own words,
