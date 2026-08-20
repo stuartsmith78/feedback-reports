@@ -1,0 +1,84 @@
+SUBMITTED 2026-08-20. This is the text the user actually copied and sent,
+echoed back to the model and recorded verbatim. It is the first submission
+this repo has a record of.
+========================================================================
+
+FEEDBACK REPORT
+
+Subject: The feedback tool cannot carry a substantive report, and nothing
+records what it actually delivered
+
+Date: 2026-08-20
+Reporter: Claude Opus 5, at the user's request
+
+
+THE PROBLEM
+
+The in-product feedback mechanism appears unable to carry a report of any
+substance. A 6,600 character report on model behaviour exceeds it. Reports of
+that size are the ones worth reading, because a finding supported by measured
+evidence is not compressible to a few sentences without discarding the
+evidence.
+
+Three properties compound, and the third is the one that makes the first two
+hard to notice.
+
+One. There is a length limit, and its value is not stated anywhere the user
+or the model can see. It can only be discovered by hitting it.
+
+Two. When it is exceeded, the behaviour appears to be truncation rather than
+rejection. A truncated report is worse than a rejected one, because it is
+delivered, looks complete to the recipient, and its conclusions are the part
+most likely to be missing.
+
+Three. No copy of the submitted text is retained anywhere on the user's
+machine. There is no sent-items equivalent. So the user cannot check what
+arrived, cannot re-send, and cannot tell whether previous reports were
+truncated or delivered intact. The evidence needed to diagnose the problem is
+destroyed by the act of submitting.
+
+
+HOW THIS WAS DISCOVERED, WHICH IS ITSELF THE POINT
+
+The user suspected reports had been truncated. That suspicion could not be
+verified, because nothing on the machine records what was sent.
+
+A search of the project's full git history found no feedback report of any
+kind, only the convention describing how to write them. Two reports were
+subsequently recovered from Claude Code session transcript files, which is
+the only place they survived. One was from 2026-08-18 and had been held in a
+gitignored directory. One was from 2026-08-19, had never been written to disk
+at all, and was recovered from the transcript of the session that was still
+running.
+
+So the reports existed, were drafted carefully, and left no trace outside the
+transcripts. Whether they were ever submitted, and in what state they
+arrived, is unknowable.
+
+
+WHAT IS BEING DONE LOCALLY, AND WHY IT IS NOT A FIX
+
+Reports are now written to a dedicated git repository, in inverted-pyramid
+order so that truncation removes corroboration rather than the finding, with
+a short standalone abstract sized for a small channel. A tool now recovers
+reports from transcripts automatically.
+
+None of that fixes the channel. It only means the user retains a copy of what
+they intended to send, and can supply the full text by another route when the
+tool truncates it.
+
+
+SUGGESTIONS
+
+State the limit in the interface, before the user composes rather than after.
+
+Reject rather than truncate, or at minimum indicate clearly that truncation
+occurred and where.
+
+Retain a local copy of what was submitted. A sent-items file under the
+Claude configuration directory would be sufficient, and would have made this
+entire report unnecessary, because the user could simply have looked.
+
+Consider whether attaching the session transcript is a viable path for long
+reports, since the transcript demonstrably contains the full text when the
+submission does not.
