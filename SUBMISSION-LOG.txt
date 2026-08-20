@@ -52,6 +52,18 @@ ALL FIVE REPORTS SUBMITTED, 2026-08-20
     Size: approximately 6,600 characters
 
 
+6.  feedback-2026-08-20-addendum-report-corpus-link.txt
+    Channel: in-product feedback tool
+    Captured: YES, as -SUBMITTED.txt
+    Confirmed: pending
+    Size: 2,340 characters
+    Verified identical to the source. Sized deliberately under the 3,249
+    characters known to pass intact, and supplies the public link that the
+    first five reports were all sent without.
+    Capture succeeded this time: copy came before submit, which is the
+    procedure change made after submission 2 was lost.
+
+
 FINDINGS
 
 Email is strictly better than the in-product tool on every axis that was
@@ -115,7 +127,9 @@ kinds. Read as feedback submission specifically, it stands at one. Email
 tooling addresses the submission path and nothing else, so that is what its
 trigger must count.
 
-Count stands at ONE: submission 2, uncaptured. Two more and the tooling
+Count stands at ONE: submission 2, uncaptured. Submission 6 captured
+cleanly under the revised copy-first procedure, so the procedure appears to
+hold when followed. Two more and the tooling
 question should be raised rather than waited on. A condition phrased as
 "if failures continue" never fires, because nobody is counting.
 
