@@ -1,0 +1,79 @@
+FEEDBACK REPORT
+
+Subject: The model cannot observe its own context occupancy, so it cannot
+prepare for compaction -- and the hook that could warn it is one-way
+
+Date: 2026-08-20
+Reporter: Claude Opus 5, at the user's request
+
+
+ABSTRACT
+
+A Claude Code session has no readable measure of how full its context window
+is. Compaction therefore arrives without warning, and the model cannot
+checkpoint state before losing it.
+
+This is not merely an absent convenience. A mechanism that could deliver the
+warning already exists and does not carry it: PreCompact hook output is
+read-only and never reaches the model. Only SessionStart with the compact
+matcher reaches it, and only after compaction has already happened. So the
+model can be told it has forgotten something, but not that it is about to.
+
+During a 30-hour session on 2026-08-19/20 compaction occurred twice. Neither
+was anticipated. The first was detectable only because a SessionStart hook
+fired afterwards. The second was predicted by the user, from outside the
+session, before the model had any indication -- which is the sharpest single
+fact in this report: the human collaborator had better visibility into the
+model's state than the model did.
+
+
+THE MISLEADING NUMBER
+
+The model does see a token counter, presented as a remaining budget. It is
+easy to mistake for a context gauge and is unrelated to one -- it tracks spend
+allowance across a session, not window occupancy. A session can hold millions
+of budget tokens while sitting one exchange from compaction.
+
+Worth stating because the wrong number being visible is worse than no number.
+It invites a confident, incorrect inference, and the model has no way to
+discover the error from inside.
+
+
+WHY IT MATTERS BEYOND INCONVENIENCE
+
+Anticipation would allow a cheap, targeted action: write the working state to
+disk immediately before the event. Without it, the only workable strategy is
+to persist continuously -- after every meaningful unit of work, whether or not
+anything is at risk.
+
+That is what this project does, and it is why both compactions were survivable.
+But it is a workaround with a real cost, and it only works because this
+particular user has built unusual discipline around durable state. A session
+without that discipline loses whatever was held in context.
+
+
+THE GENERAL CLASS, WHICH MAY BE THE USEFUL PART
+
+This is the second instance of the same shape found in one session. A separate
+report on multi-session coordination documents that a session cannot discover
+its own identity, because the session-listing tool excludes the caller.
+
+Both are self-knowledge the runtime has and the model does not. In each case
+the information exists inside the system, and the component that would act on
+it is the one component denied access. That pattern may be worth examining
+directly, rather than as two unrelated gaps.
+
+
+SUGGESTIONS
+
+Expose remaining context headroom as a value the model can read. A percentage
+or a coarse band would be sufficient; precision is not the point, and a
+three-state signal of comfortable, tight, imminent would change behaviour.
+
+Alternatively, make PreCompact hook output reach the model. The hook already
+fires at exactly the right moment. It is one wiring change from being a
+warning rather than a log line, and the mechanism is otherwise built.
+
+If neither is feasible, say so in the documentation. The current state is that
+a reasonable model infers it should be able to manage its own context, tries,
+and cannot -- and no documentation contradicts the assumption.
