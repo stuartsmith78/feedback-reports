@@ -1,164 +1,147 @@
 FEEDBACK REPORT
 
-Subject: A documented, resident convention was violated repeatedly within a
-single session, and the violations were self-diagnosed each time without
-changing behaviour
+Subject: A resident, correctly understood convention was violated four times
+in one session and self-diagnosed each time without changing behaviour
 
 Date: 2026-08-20
 Project: Bitburner framework (private)
 Reporter: Claude Opus 5, at the user's request
 Session: 30.3 hours elapsed, 949 tool calls, 881 of them Bash
 
-
-SUMMARY
-
-A project convention governing how file content is written through the shell
-was stated in the project's CLAUDE.md, loaded into context at session start,
-restated in two further devkit convention files, and violated four times in
-one session. Each violation produced an identical shell parse error, was
-correctly diagnosed by the model within seconds, and was followed later in
-the same session by another instance of the same violation.
-
-The convention was not misunderstood. It was quoted accurately by the model
-during the session, including once in the very message that immediately
-preceded another violation of it. The failure is not one of knowledge.
-
-The user's framing, and the reason this report exists: repeated failure
-patterns have been observed at length, and the question is not whether the
-model can state the rule but why stating it does not change what it does.
+NOTE ON STRUCTURE: this report is ordered so that truncation removes
+supporting evidence rather than the finding. The first two sections are
+self-contained. Everything after them is corroboration.
 
 
-WHAT THE CONVENTION SAYS
+ABSTRACT
 
-Write any non-trivial content to a file and reference the file. Do not build
-it inline in a shell command. Specifically: use git commit -F <file> rather
-than -m with a long message, and write that file with the file-writing tool
-rather than with a shell heredoc, because a heredoc is itself one of the
-failing paths.
+A project convention was resident in context, restated in three places,
+quoted accurately by the model mid-session, and violated four times in that
+same session. Each violation was diagnosed correctly within seconds, and one
+occurred during the act of committing the guard built to prevent it.
 
-The convention also carries a second clause: prefer line-index edits over
-multi-line string matching when patching a file, because matching a
-multi-line block fails silently against files with CRLF line endings.
+The convention was available to the model as knowledge to retrieve while
+reasoning about a failure. It was not available as a constraint on the action
+being selected. Those appear to be different things, and only the second one
+changes behaviour.
 
-
-MEASURED OCCURRENCES
-
-Counted from the session transcript rather than from recollection.
-
-Heredoc parse failures, shell quoting: 4 confirmed. Each surfaced as
-"unexpected EOF while looking for matching quote" and each destroyed content
-that had already been composed in full, requiring it to be rewritten.
-
-Python string-matching and escape-construction failures: 5 confirmed. These
-break down as three assertion failures where an anchor string was not found,
-one ValueError from str.index on a missing anchor, and one SyntaxError from
-an attempt to construct a backslash escape inside a generated string.
-
-One of the assertion failures is the CRLF case the convention's second clause
-describes exactly: a multi-line anchor built with newline characters was
-matched against a CRLF file, matched nothing, and the edit reported success
-having changed nothing. That one occurred while the model was wiring a hook
-whose entire purpose was to prevent the sibling failure.
-
-Total: 9 occurrences of this class in one session, against 881 Bash calls.
+A PreToolUse hook that denied the call stopped it immediately and
+permanently. Measured cost before the guard existed: nine occurrences of the
+class in one session, roughly four percent of total tool calls, excluding
+three composed artifacts that were destroyed and had to be rewritten.
 
 
-ESTIMATED COST
+THE FINDING WORTH ESCALATING
 
-Direct cost. Each occurrence consumed the failed call, a diagnostic call, and
-a retry, so roughly 23 tool calls. That is about 2.4 percent of the session's
-total tool calls.
+The model diagnosed every instance correctly, immediately, in its own words,
+and then did it again.
 
-Remediation cost. Building the guard that now prevents the heredoc class,
-including its test suite and two rounds of fixing false positives the guard
-produced against its own author, consumed approximately 15 further calls.
+After the second failure the model wrote, unprompted, that this was the third
+instance of one class and that the correct remedy was a mechanical rule
+rather than an intention. It then violated the convention twice more.
 
-Combined, approximately 38 calls, or about 4 percent of the session.
+So the failure is not knowledge, not recall, and not comprehension. The
+recall happened reliably -- but afterwards, during diagnosis, rather than
+beforehand, during tool selection. The model reached for the familiar
+construct each time the situation arose.
 
-Content recomposition is not captured in that number and is the larger real
-cost. Three of the failures destroyed substantial composed content: a long
-issue body and two commit messages. The tokens spent composing that content
-were spent twice.
+Two questions this raises, offered as observations rather than conclusions.
 
-The 4 percent figure should be read as a floor for one session, not as the
-recurring cost. The convention predates this session, which means earlier
-sessions paid a similar tax without the guard existing.
+First, whether prompt-resident conventions are consulted at the point of tool
+selection at all, or only when reasoning about outcomes. The evidence here
+suggests the latter, and that has direct consequences for how much can be
+expected of instructions delivered as context.
 
-
-THE PART WORTH ESCALATING
-
-The model diagnosed every one of these correctly, immediately, and in its own
-words, and then did it again.
-
-After the second heredoc failure the model wrote, unprompted, that this was
-the third instance in one class and that the correct remedy was a mechanical
-rule rather than an intention. It then violated the convention twice more,
-including once in the very act of committing the guard built to prevent it.
-
-This is the specific behaviour worth reporting. A resident, correctly
-understood, explicitly recalled convention did not alter tool selection. The
-model reached for the familiar construct each time the situation arose, and
-the recall happened afterwards, during diagnosis, rather than before, during
-selection.
-
-Stated plainly: the convention was available to the model as knowledge to be
-retrieved when reasoning about failures, and was not available as a
-constraint on the action being taken. Those appear to be different things.
+Second, whether a convention's presence in context creates a false sense of
+coverage. This project has invested heavily in making conventions durable and
+delivered, and that investment is sound. But a convention that is delivered,
+read, and quoted while being violated in the same breath is not doing the job
+the delivery was meant to guarantee.
 
 
 WHAT ACTUALLY CHANGED THE BEHAVIOUR
 
 A PreToolUse hook that denies the tool call.
 
-Once the guard existed, the violation stopped, because it became impossible
-rather than discouraged. The guard also caught the model attempting the same
-construct twice more in the following minutes, both times while working on
-the guard itself.
+Once it existed the violation stopped, because the action became impossible
+rather than discouraged. The guard then caught two further attempts within
+minutes, both while the model was working on the guard itself.
 
-This matches the project's own recorded pattern. Every convention in this
-repository that has actually held has a mechanical enforcer attached. The
-ones that live only as prose are the ones carrying incident logs. The user
-had already observed this and encoded it as a project disposition before this
-session began.
-
-
-SUGGESTED READING FOR THE DEV TEAM
-
-Two things seem worth investigating, offered as observations rather than
-conclusions.
-
-First, whether resident conventions are being consulted at the point of tool
-selection at all, or only at the point of reasoning about outcomes. The
-evidence here suggests the latter, and the distinction has practical
-consequences for how much can be expected of prompt-resident instructions.
-
-Second, whether a convention's presence in context creates a false sense of
-coverage. This project has invested heavily in making conventions durable and
-delivered, and that investment is sound, but a convention that is delivered,
-read and quoted while being violated in the same breath is not doing the job
-the delivery was meant to guarantee.
-
-The practical lesson the project has drawn, and which this report supports,
-is that for any convention where a mechanical guard is possible, the guard is
-not a belt-and-braces addition to the prose. It is the mechanism, and the
-prose is documentation of why the mechanism exists.
+The practical lesson, which this project had already encoded as a disposition
+before the session began: for any convention where a mechanical guard is
+possible, the guard is not a belt-and-braces addition to the prose. It is the
+mechanism, and the prose is documentation of why the mechanism exists. Every
+convention in this repository that has actually held has an enforcer
+attached; the ones living only as prose are the ones carrying incident logs.
 
 
-WHAT WAS DONE ABOUT IT
+THE CONVENTION IN QUESTION
+
+Write non-trivial content to a file and reference the file. Do not build it
+inline in a shell command. Use git commit -F rather than -m for a long
+message, and write that file with the file-writing tool rather than a shell
+heredoc, because a heredoc is itself one of the failing paths.
+
+A second clause: prefer line-index edits over multi-line string matching when
+patching a file, because matching a multi-line block fails silently against
+files with CRLF line endings.
+
+
+MEASURED EVIDENCE
+
+Counted by parsing the session transcript, not from recollection.
+
+Heredoc parse failures: four confirmed. Each surfaced as "unexpected EOF
+while looking for matching quote" and each destroyed content already composed
+in full.
+
+Python string-matching and escape-construction failures: five confirmed.
+Three assertion failures where an anchor string was not found, one ValueError
+from str.index on a missing anchor, and one SyntaxError from constructing a
+backslash escape inside a generated string.
+
+One of those is the CRLF case the convention's second clause describes
+exactly: a multi-line anchor built with newline characters, matched against a
+CRLF file, matching nothing, with the edit reporting success having changed
+nothing. It occurred while wiring a hook whose purpose was to prevent the
+sibling failure.
+
+Total: nine occurrences against 881 Bash calls.
+
+
+COST
+
+Direct: roughly 23 tool calls, being the failed call, a diagnostic call and a
+retry for each occurrence. About 2.4 percent of the session.
+
+Remediation: approximately 15 further calls to build the guard and its test
+suite, including two rounds of fixing false positives the guard produced
+against its own author.
+
+Combined, about four percent of the session. Content recomposition is not
+captured in that figure and is the larger real cost: three substantial
+composed artifacts were destroyed and rewritten, so those tokens were spent
+twice.
+
+Four percent is a floor for one class in one session. The convention predates
+this session, so earlier sessions paid a comparable tax with no guard at all.
+
+
+WHAT WAS DONE
 
 A PreToolUse hook now denies Bash calls that write file content through a
 heredoc, carrying the sanctioned alternative in the denial message rather
 than pointing at the convention, since the convention was already present and
-already ignored. Here-strings, plain redirection and heredocs feeding a
-filter are all unaffected.
+already ignored. Here-strings, plain redirection, and heredocs feeding a
+filter are unaffected.
 
 A second, non-blocking check warns when a Python edit appears to match a
-multi-line anchor, which is the CRLF clause.
+multi-line anchor, covering the CRLF clause.
 
-Twenty-one test cases cover both, and three of those cases are regressions
-for false positives the guard produced against its own author within minutes
-of going live. Blocking legitimate work is the failure mode that teaches
-people to route around a hook, so the allow cases are the ones that matter.
+Twenty-one test cases cover both. Three are regressions for false positives
+the guard produced against its own author within minutes of going live.
+Blocking legitimate work is the failure mode that teaches people to route
+around a hook, so the allow cases are the ones that matter.
 
 
 REMAINING GAP
@@ -166,6 +149,5 @@ REMAINING GAP
 One class is still unguarded: constructing backslash escapes inside strings
 that are then written as code. The convention's remedy is to build the two
 character sequence explicitly rather than letting it pass through a string
-transform. That is currently prose only, and it produced one failure this
-session. It is heuristically detectable and a warning is plausible, but it
-has not been built.
+transform. That is prose only, it produced one failure this session, and it
+is heuristically detectable but has not been built.

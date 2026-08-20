@@ -1,0 +1,26 @@
+A project convention was resident in context, restated in three places, and
+quoted accurately by the model mid-session -- then violated four times in that
+same session. Each violation was diagnosed correctly within seconds. One
+occurred during the act of committing the guard built to prevent it.
+
+The failure is not knowledge, recall, or comprehension. Recall happened
+reliably, but afterwards, while reasoning about the failure, rather than
+beforehand, while selecting the tool. The convention was available as
+knowledge to retrieve, not as a constraint on the action being taken.
+
+A PreToolUse hook that denied the call stopped it immediately and permanently,
+and then caught two further attempts within minutes.
+
+Measured from the session transcript: nine occurrences of the class across 881
+Bash calls, roughly four percent of total tool calls once remediation is
+included, excluding three composed artifacts destroyed and rewritten.
+
+Two questions worth investigating. Whether prompt-resident conventions are
+consulted at tool-selection time at all, or only when reasoning about
+outcomes. And whether a convention's presence in context creates a false sense
+of coverage -- this project has invested heavily in making conventions durable
+and delivered, and a convention that is delivered, read and quoted while being
+violated in the same breath is not doing the job that delivery was meant to
+guarantee.
+
+Full report with evidence and method available on request.
