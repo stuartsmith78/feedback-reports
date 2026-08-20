@@ -12,7 +12,7 @@ They look adjacent and are not.
 |---|---|---|
 | subject | the **user** — evaluation histograms, work-time accounting | the **model and its tooling** |
 | audience | the user alone | an external dev team |
-| sharing posture | private, permanently | private by default, **written to be sent** |
+| sharing posture | private, permanently | **public** since 2026-08-20, so a link can be pasted into a length-limited field |
 
 The distinction is load-bearing rather than tidy: a report meant to be shared should not require extracting it from a repo full of personal evaluation data. Mixing them makes the sharing step awkward enough to discourage it, which is how reports stop being sent.
 
@@ -64,7 +64,7 @@ Established 2026-08-20 by the user, from Anthropic's own documentation and suppo
 Machine-local, in `~/.claude/devkit.json`:
 
 ```json
-{ "feedbackReportsPath": "C:/Users/stuar/Documents/Projects/feedback-reports" }
+{ "feedbackReportsPath": "<absolute path to this clone>" }
 ```
 
 Same mechanism as `growthLedgerPath`, and for the same reason: neither repo knows where the other was cloned, and the answer differs per machine.
