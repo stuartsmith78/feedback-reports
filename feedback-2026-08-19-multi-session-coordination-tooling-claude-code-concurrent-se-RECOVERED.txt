@@ -1,0 +1,311 @@
+RECOVERED FROM A SESSION TRANSCRIPT by bin/recover-feedback-reports.mjs.
+Source: ~/.claude/projects/C--Users-stuar-Documents-Projects-Bitburner/3af1eb80-fc43-4b71-8561-6ab74e5ba6ea.jsonl
+
+This is what was DRAFTED. It is not a record of what was submitted -- no
+copy of submitted text is retained, and the submission channel is believed
+to truncate. Treat as evidence of intent, not of delivery.
+========================================================================
+
+FEEDBACK REPORT: MULTI-SESSION COORDINATION TOOLING
+Claude Code, concurrent sessions in a single git repository
+Prepared 2026-08-19
+
+
+SUMMARY
+
+Claude Code supports running several sessions against the same working
+directory at the same time. In practice those sessions cannot see one
+another, cannot identify themselves, and cannot reliably deliver a message
+to one another. They can and do interfere destructively, including
+rewriting each other's git history.
+
+The user and the model have between them built roughly 730 lines of
+convention text, guard scripts and test harnesses whose sole purpose is to
+work around this. That work produced no product value. It exists entirely
+to stop concurrent sessions damaging shared state.
+
+The most important point in this report is not any single defect. It is
+that none of these limitations were disclosed. The model did not warn the
+user that concurrent sessions were unsafe. The user discovered it by
+having work damaged, and every safeguard since has been built reactively,
+after an incident, at the user's prompting rather than the model's.
+
+
+SCOPE AND METHOD
+
+Evidence is drawn from one private repository used continuously for
+roughly three weeks, with concurrent sessions in routine use. All incident
+records quoted are contemporaneous notes written at the time by the
+sessions involved, not reconstructions. Line counts are from the working
+tree on 2026-08-19. Effort estimates are labelled as estimates.
+
+The repository is a hobby project, which matters in one direction only:
+the stakes were low enough that the incidents were survivable. The same
+failures in a professional context would not have been.
+
+
+FINDING 1 - A SESSION CANNOT DISCOVER ITS OWN IDENTITY
+
+The session-listing tool excludes the calling session by design. A session
+therefore cannot learn its own identifier. Confirmed empirically on
+2026-08-17, when the only running session called it and received "No other
+sessions found" rather than seeing itself.
+
+This is not merely inconvenient. It defeats the obvious coordination
+design. The natural protocol is "announce yourself by identity, then
+others can address you", and that cannot be written, because a session
+does not know what to announce.
+
+The workaround adopted was for each session to invent its own identifier,
+a three-word slug plus a number, and register it in a shared file. That
+self-assigned handle is now the primary key for all cross-session
+coordination in this repository, because it is the only identifier a
+session can always state about itself. Two machine-generated identifier
+namespaces exist alongside it and are correlated after the fact by
+matching working directory and branch, because nothing else joins them.
+
+A session starting alone can never learn its own identifier at all, since
+no peer exists to tell it. That is benign but it illustrates the shape of
+the problem: identity is only obtainable secondhand.
+
+
+FINDING 2 - SESSIONS ARE NOT NATIVELY AWARE OF ONE ANOTHER
+
+There is no ambient awareness. A session must deliberately call a tool to
+discover peers, and nothing prompts it to. A session that never thinks to
+ask proceeds as though it is alone, which it will do by default, because
+nothing in its starting context suggests otherwise.
+
+Two consequences observed directly.
+
+  Destructive interaction with spawned background sessions
+
+  A session can start another session to perform background work. The
+  spawned session inherits no knowledge of what the spawning session has
+  in flight. It can and will modify the same files, stage the same paths,
+  and commit over work in progress. The spawning session has no mechanism
+  to lock, reserve, or even flag the region it is working in.
+
+  This is the risk with the worst shape, because it is created by an
+  action the model takes on its own initiative. The user does not
+  necessarily know a second session now exists.
+
+  Race conditions on shared documentation
+
+  This repository, like many, keeps its task tracker and planning
+  documents in the repository itself, and by convention those files are
+  always committed directly to the main branch rather than travelling on
+  feature branches. That convention exists for a good reason: the tracker
+  had previously diverged across two concurrent feature branches, each
+  accumulating real, non-overlapping entries, with no clean way to
+  reconcile them short of manual line-by-line merging.
+
+  The result is that every concurrent session writes to the same handful
+  of files on the same branch. Those files are precisely the ones that
+  record what each session is doing, so contention is highest exactly
+  where coordination information lives.
+
+  On 2026-08-17 three sessions independently allocated the same task item
+  number. Resolving it required renumbering a batch of items and amending
+  the conventions to prevent recurrence. Item-number allocation is a
+  distributed counter with no coordination primitive, so collisions are
+  not a risk but a certainty at sufficient concurrency.
+
+
+FINDING 3 - MESSAGES ARE NEITHER PREEMPTIVE NOR GUARANTEED TO BE READ
+
+A session can send a message to another session. The message arrives in
+the target session as a user turn. It does not interrupt, it is not
+acknowledged, and nothing guarantees the recipient processes it.
+
+The measured record in this repository:
+
+  Nine cross-session messages sent, across three sending sessions.
+  Zero answered.
+
+  Three from one session, described at the time as "none had a confirmed
+  reply, target session appeared idle or queued". Five from another,
+  described as "none of which arrived as a labeled turn in the target's
+  own conversation". One further broadcast, likewise unanswered.
+
+That is a zero percent success rate on every recorded attempt.
+
+The failure mode is worse than silence. On at least two occasions a
+session later stated that it had received no messages at all, and the
+messages were found only when the user directed a transcript search. So
+the recipient session was not merely slow to act. It had no awareness the
+messages existed, and reported their absence in good faith.
+
+The practical consequence is that no coordination convention may depend on
+a reply. This repository's protocol is explicitly written that way: the
+load-bearing step is one where each session unilaterally records what it
+observes about its peers, because that step completes without anyone
+answering. Messaging is retained only as a courtesy and is documented as
+best-effort, not as a protocol step.
+
+A messaging feature with a zero percent observed delivery-to-action rate
+is not a coordination mechanism. It is a log.
+
+
+FINDING 4 - NO SAFETY NET
+
+Sessions may interact destructively and nothing prevents it.
+
+The clearest incident, 2026-08-10. One session amended a commit to fix a
+wording typo. Amend targets whatever the branch head currently is, not the
+commit the session made a moment earlier. In the interval, a second
+session's commit had landed. The amend rewrote that commit instead, using
+its parent as the new commit's parent, and silently dropped the second
+session's real bugfix out of the branch ancestry. The content survived in
+the other session's working tree, but the commit was no longer reachable
+from the main branch.
+
+Two properties make this the representative case.
+
+  It was silent. Nothing errored. The damage was detectable only by
+  explicitly testing whether the other commit was still an ancestor of
+  the branch head.
+
+  It was caused by a routine, low-stakes action. The session was fixing a
+  typo in a commit message.
+
+The same afternoon also produced a divergence between the local and remote
+main branch, and the item-number collision described above. Three
+coordination incidents in one afternoon, from three or four concurrent
+sessions.
+
+No tooling detected any of them. All were found by a human noticing
+something looked wrong, or by a later session auditing state.
+
+Even minimal protection would have helped, and none exists. There is no
+advisory lock on a working directory. No warning when two sessions target
+the same repository. No detection that a history rewrite is about to
+affect a commit the current session did not create. The last of these is
+a single ancestry check and would have caught the incident above outright.
+
+
+FINDING 5 - THE LIMITATIONS WERE NEVER DISCLOSED
+
+This is the finding with the widest applicability, because it is about
+model behaviour rather than tooling.
+
+Across three weeks of concurrent-session use, the model did not at any
+point caution the user that concurrent sessions were unsafe, that messages
+between sessions were unreliable, or that history-rewriting operations
+were hazardous in a shared checkout. Every safeguard now in place was
+built after an incident, and in most cases at the user's explicit
+direction rather than the model's proposal.
+
+The pattern is consistent: the user experienced damage, the user asked for
+a safeguard, the model built one. The model was capable of reasoning about
+the risk once asked. It did not raise it unprompted.
+
+Swim-at-your-own-risk is a defensible policy for a developer tool. It is
+only defensible with disclosure. The reasonable default is informed
+consent: tell the user what concurrency does and does not guarantee, at
+the point they start a second session, before the first collision rather
+than after it.
+
+The most that would be required is a warning when a second session opens
+against a working directory that already has one, plus honest
+documentation of the messaging feature's delivery guarantees. Neither
+requires solving the coordination problem. Both would have converted
+several days of confusing damage into an informed decision.
+
+
+EFFORT EXPENDED WORKING AROUND THIS
+
+Offered so the cost can be weighed against the cost of addressing it.
+Figures are from the working tree; effort estimates are estimates and are
+labelled as such.
+
+Artifacts that exist only because of this problem:
+
+  Session registration convention, 229 lines
+  Session roster and protocol document, 113 lines
+  Shared-document commit guard, 97 lines
+  History-rewrite guard, 117 lines
+  Guard test harness and case file, 102 lines
+  Primary-session command guard, 62 lines
+  Cross-session coordination convention, 9 lines
+
+  Total, approximately 730 lines.
+
+None of this is product code. It is entirely compensating control.
+
+Work discarded along the way, which is a truer measure of waste than the
+surviving artifact:
+
+  A line-level parsing carve-out in the shared-document guard, built to
+  let session pointers be edited by any session while the rest of the file
+  stayed restricted. It was brittle, its pattern did not match the format
+  the conventions themselves documented, and it broke on ordinary edits.
+  It was ultimately deleted and replaced by moving session pointers into
+  their own file.
+
+  A restructuring of the task tracker, driven partly by session narrative
+  having grown to more than half its size. One rotation of dead session
+  entries reduced that file from 30,845 to 15,719 bytes.
+
+  A renumbering pass across several task items after the three-way
+  collision.
+
+Estimated human and model effort, stated as a range because it was spread
+across many sessions rather than tracked as a project:
+
+  Model time: on the order of several full sessions' work, of which this
+  session alone spent a substantial fraction on session identity,
+  registration, hand-off verification and coordination conventions before
+  any project work began.
+
+  User time: recurring. The user has personally directed each safeguard,
+  reviewed each convention, adjudicated collisions, and on at least two
+  occasions directed transcript searches to recover messages the tooling
+  had failed to deliver. This is the cost that should weigh most heavily,
+  because it is attention spent supervising the tool rather than using it.
+
+There is also a continuing tax that does not appear in any line count.
+Every session now begins with a registration and verification procedure
+before useful work starts, and every session must end with a documented
+hand-off. That overhead is permanent, is paid on every session, and exists
+only because sessions cannot see each other.
+
+
+WHAT WOULD HELP, IN ORDER OF VALUE PER UNIT OF EFFORT
+
+Disclosure first. Warn when a second session opens against a working
+directory that already has one, and document the messaging feature's
+actual delivery semantics. This is cheap, requires no new coordination
+machinery, and addresses Finding 5 outright.
+
+Let a session know its own identity. This is presumably a one-line change
+to what the listing tool returns, and it removes the need for the entire
+self-assigned-identifier workaround.
+
+Make peer awareness ambient rather than opt-in. A session should know at
+start that other sessions exist against the same working directory,
+without having to think to ask.
+
+Give messages a delivery signal. Even a bare acknowledgement that a
+message was surfaced to the recipient would raise the observed zero
+percent to something measurable, and would let coordination conventions
+depend on it.
+
+A minimal safety net. An advisory lock per working directory, or a check
+before history-rewriting operations that the affected commits belong to
+the current session. The specific incident described above would have been
+prevented by one ancestry test.
+
+None of the above requires solving distributed coordination. The first two
+are disclosure and a field in an existing response.
+
+
+CLOSING NOTE ON HOW THIS REPORT WAS PRODUCED
+
+The model wrote this report about its own tooling, which is a conflict of
+interest worth stating. The incident records quoted were written
+contemporaneously by earlier sessions, before this report was
+contemplated, and the line counts are mechanically verifiable from the
+repository. The judgement that the model should have warned the user
+unprompted is the model's own assessment of its behaviour, and the user
+raised it first.
