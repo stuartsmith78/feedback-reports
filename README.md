@@ -32,6 +32,21 @@ That is the same failure the convention was written to fix, one level up. The co
 
 Canonical statement: `conventions/feedback-reports.md` in the devkit.
 
+## Submission channels
+
+Established 2026-08-20 by the user, from Anthropic's own documentation and support articles. **There is no dedicated address for Claude Code technical feedback** — recorded here because that absence is itself the answer, and re-deriving it costs a search every time.
+
+| Channel | For | Notes |
+|---|---|---|
+| **`feedback@anthropic.com`** | **general platform feedback, and incorrect or unexpected model responses** | **The right route for the reports in this repo.** An email leaves a sent copy in the mailbox, which is the one property the in-product tool lacks. |
+| `/feedback` or `/bug` in-terminal | product feedback and bug reports | Sends **logs and details** to the product team, so it may carry more than the visible text field. **But it truncates, and retains no local copy** — see `feedback-2026-08-20-feedback-tool-insufficient.txt`. |
+| Support Center / in-app messenger | account and technical support | Routes to agents triaging account and billing. A technical report on model behaviour is likely to be closed as out of scope rather than forwarded. |
+| `usersafety@anthropic.com` | safety and security concerns | **Do NOT route ordinary behaviour or tooling reports here.** Nothing in this repo belongs on a safety channel; using it for product feedback degrades it for its actual purpose. |
+
+**Before submitting**: `/doctor` or `/debug` check for configuration or runtime issues, which is worth doing first if the report concerns a malfunction rather than a behaviour pattern.
+
+**Recommended practice**: send by email, paste the `-ABSTRACT.txt` as the body or lead, and offer the full report. Then save what was actually sent as `-SUBMITTED.txt` in this repo — **that is the only way the next "was it truncated?" question is answerable with evidence rather than inference.**
+
 ## Naming
 
 `feedback-YYYY-MM-DD-<short-subject>.txt`
