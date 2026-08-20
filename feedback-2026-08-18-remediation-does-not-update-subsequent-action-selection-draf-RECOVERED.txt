@@ -1,5 +1,5 @@
 RECOVERED FROM A SESSION TRANSCRIPT by bin/recover-feedback-reports.mjs.
-Source: ~/.claude/projects/C--Users-stuar-Documents-Projects-Bitburner/7d4f28a6-0626-44c2-902d-f6a9045df494.jsonl
+Source: a local Claude Code session transcript (session 7d4f28a6-0626-44c2-902d-f6a9045df494)
 
 This is what was DRAFTED. It is not a record of what was submitted -- no
 copy of submitted text is retained, and the submission channel is believed
