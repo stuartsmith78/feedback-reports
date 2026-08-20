@@ -1,65 +1,91 @@
 SUBMISSION LOG
 
-What was sent, when, by which channel, and whether the sent text was captured.
+What was sent, when, by which channel, whether the sent text was captured,
+and whether delivery was confirmed.
 
-This file exists because the reports in this repo document a channel that
-retains no sent copy. Without a log, "was it truncated?" is unanswerable --
-which is precisely the state that produced the 2026-08-20 report on the
-feedback tool. The log is the local half of the fix; the channel half is
-still missing.
+This file exists because the reports here document a channel that retains no
+sent copy. Without a log, "was it truncated?" is unanswerable -- which is
+exactly the state that produced the 2026-08-20 report on the feedback tool.
 
 CAPTURED means the exact text sent is stored here as a -SUBMITTED.txt file.
-NOT CAPTURED means the report was sent but the text was not recorded, so
-whether it arrived intact is unknowable.
+CONFIRMED means delivery was acknowledged by the recipient.
 
 
-2026-08-20  feedback-2026-08-20-feedback-tool-insufficient.txt
-            Channel: in-product feedback tool
-            Text: CAPTURED, as -SUBMITTED.txt
-            Size: 3,249 characters
-            Verified identical to the source apart from one leading blank
-            line, so nothing was lost at the copy stage.
+ALL FIVE REPORTS SUBMITTED, 2026-08-20
 
-2026-08-20  feedback-2026-08-20-repeated-convention-violation-ABSTRACT.txt
-            Channel: in-product feedback tool
-            Text: NOT CAPTURED
-            Size: 1,469 characters (source file, presumed content)
-            The submit action was taken before the text was copied. The
-            source file is unmodified, so what was INTENDED is known; what
-            was actually transmitted is not.
-            Worth recording plainly rather than glossing: this is the exact
-            failure the log was created to prevent, occurring on the first
-            occasion after the log was proposed. The capture step depends on
-            remembering to copy before submitting, and that is a weak point
-            in the procedure rather than a lapse by the user.
+1.  feedback-2026-08-20-feedback-tool-insufficient.txt
+    Channel: in-product feedback tool
+    Captured: YES, as -SUBMITTED.txt
+    Confirmed: NO acknowledgement of any kind
+    Size: 3,249 characters
+    Verified identical to the source apart from one leading blank line, so
+    nothing was lost at the copy stage.
 
-2026-08-20  feedback-2026-08-19-multi-session-coordination-tooling-...txt
-            Channel: email, to the general feedback address
-            Text: NOT CAPTURED here, but email retains a sent copy
-            Size: approximately 14,000 characters
-            Email is the only channel used so far that keeps its own record,
-            so this submission is verifiable from the mailbox without any
-            local capture. That property is the main argument for preferring
-            email over the in-product tool for anything substantial.
+2.  feedback-2026-08-20-repeated-convention-violation-ABSTRACT.txt
+    Channel: in-product feedback tool
+    Captured: NO
+    Confirmed: NO
+    Size: 1,469 characters (source file, presumed content)
+    Submitted before the text was copied. What was INTENDED is known from the
+    unmodified source; what was transmitted is not. Recorded plainly because
+    it is the exact failure this log was created to prevent, occurring on the
+    first occasion after the log was proposed -- a weakness in the procedure
+    rather than a lapse, since the capture step depends on remembering to
+    copy before the irreversible action.
+
+3.  feedback-2026-08-19-multi-session-coordination-tooling-...RECOVERED.txt
+    Channel: email, general feedback address
+    Captured: YES, in the sent mailbox
+    Confirmed: YES, automated reply
+    Size: approximately 14,000 characters
+
+4.  feedback-2026-08-18-remediation-does-not-update-...RECOVERED.txt
+    Channel: email
+    Captured: YES, in the sent mailbox
+    Confirmed: YES, automated reply
+    Size: approximately 6,200 characters
+
+5.  feedback-2026-08-20-repeated-convention-violation.txt
+    Channel: email
+    Captured: YES, in the sent mailbox
+    Confirmed: YES, automated reply
+    Size: approximately 6,600 characters
 
 
-WHAT THE LOG HAS ESTABLISHED SO FAR
+FINDINGS
 
-A 3,249 character report survives composition and copying intact. A 6,600
-character report was reported as too large for the in-product tool. The limit
-therefore sits above 3,249 and at or below 6,600.
+Email is strictly better than the in-product tool on every axis that was
+actually tested.
 
-That bound exists only because one submission was captured. It is the first
-quantitative fact anyone has had about this channel.
+It retains its own sent copy, so no discipline is required and the capture
+cannot be forgotten -- which is precisely how submission 2 was lost. It
+acknowledges receipt, so delivery is confirmed rather than assumed. It has no
+practical length limit, so the 14,000 character report went whole. And it can
+carry a link to this repository for anything longer still.
+
+The in-product tool provided no acknowledgement for either submission made
+through it. Whether those two arrived, and in what state, remains unknown and
+now probably unknowable.
+
+That asymmetry is worth stating precisely, because it was measured rather
+than assumed: three of three email submissions confirmed, zero of two
+in-product submissions acknowledged.
+
+On the length limit: a 3,249 character report survived composition and
+copying intact through the in-product tool, and a 6,600 character report was
+reported as too large for it. The limit sits above 3,249 and at or below
+6,600. That bound exists only because one submission was captured, and it is
+the only quantitative fact anyone has about this channel.
 
 
 PROCEDURE
 
-Copy the text FIRST, then submit. The capture is the fragile step and it
-comes before the irreversible one.
+Use email for anything substantial. It captures, confirms, and does not
+truncate.
 
-For anything substantial, prefer email: it retains its own sent copy, has no
-practical length limit, and can carry a link to this repository.
+If the in-product tool is used, copy the text FIRST, then submit. The capture
+is the fragile step and the irreversible one comes second, which is the wrong
+order and the reason submission 2 has no record.
 
-Repository, now public and linkable in any submission:
+For anything past a few thousand characters, link rather than paste:
 https://github.com/stuartsmith78/feedback-reports
