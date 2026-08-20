@@ -87,9 +87,12 @@ If the in-product tool is used, copy the text FIRST, then submit. The capture
 is the fragile step and the irreversible one comes second, which is the wrong
 order and the reason submission 2 has no record.
 
-ESCALATION PATH, IF THIS KEEPS FAILING
+For anything past a few thousand characters, link rather than paste:
+https://github.com/stuartsmith78/feedback-reports
 
-The user has stated (2026-08-20) that if process failures around submission
+ESCALATION PATH, IF FEEDBACK SUBMISSION KEEPS FAILING
+
+The user has stated (2026-08-20) that if FEEDBACK SUBMISSION process failures
 continue, they are amenable to adding tooling that gives the model partial
 access to email, and already has a specific approach in mind. Not built, and
 deliberately not designed here -- recorded so the option is not lost and does
@@ -100,15 +103,20 @@ capture step depends on a human remembering to copy before an irreversible
 action. Model-side send removes that ordering problem entirely, because the
 text is already in hand when the send happens.
 
-TRIGGER, stated as a number so it can actually fire. Apply this project's own
-threshold rule -- once is a coincidence, twice is an exception, three times is
-a pattern -- to submissions that are sent without a captured copy, or sent and
+TRIGGER, stated as a number so it can actually fire, and SCOPED so it counts
+the right thing. Apply this project's own threshold rule -- once is a
+coincidence, twice is an exception, three times is a pattern -- to FEEDBACK
+SUBMISSION failures only: a report sent without a captured copy, or sent and
 unacknowledged where acknowledgement was expected.
+
+The scoping matters. Read as process failures generally, the count would
+already be far past three, since this project logs failure patterns of many
+kinds. Read as feedback submission specifically, it stands at one. Email
+tooling addresses the submission path and nothing else, so that is what its
+trigger must count.
 
 Count stands at ONE: submission 2, uncaptured. Two more and the tooling
 question should be raised rather than waited on. A condition phrased as
 "if failures continue" never fires, because nobody is counting.
 
 
-For anything past a few thousand characters, link rather than paste:
-https://github.com/stuartsmith78/feedback-reports
