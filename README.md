@@ -32,6 +32,14 @@ That is the same failure the convention was written to fix, one level up. The co
 
 Canonical statement: `conventions/feedback-reports.md` in the devkit.
 
+## Status: PUBLIC
+
+Made public 2026-08-20, after a privacy sweep found no email addresses, repo URLs, absolute paths, personal names or third parties. The one leak — a transcript path in the recovery headers carrying an OS username fragment — was sanitised, and the tool that generates them was fixed so it cannot recur.
+
+**Public so that a link can be pasted into a length-limited feedback field.** A link carries unlimited length past any character cap, survives triage as a single short line, and gives the recipient the full evidence rather than a summary — which is the concrete problem the reports here document.
+
+**See `SUBMISSION-LOG.txt`** for what has actually been sent, through which channel, and whether the sent text was captured.
+
 ## Submission channels
 
 Established 2026-08-20 by the user, from Anthropic's own documentation and support articles. **There is no dedicated address for Claude Code technical feedback** — recorded here because that absence is itself the answer, and re-deriving it costs a search every time.
