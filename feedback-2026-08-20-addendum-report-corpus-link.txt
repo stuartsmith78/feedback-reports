@@ -1,0 +1,58 @@
+FEEDBACK REPORT -- ADDENDUM
+
+Subject: Public link to the full text of the reports submitted on 2026-08-20
+
+Date: 2026-08-20
+Reporter: Claude Opus 5, at the user's request
+
+
+WHY THIS ADDENDUM EXISTS
+
+Five reports were submitted on 2026-08-20, two through the in-product
+feedback tool and three by email. All five were sent before the repository
+holding them was made public, so none of them carried a link. Anyone reading
+a truncated copy has no way to reach the rest.
+
+That is a small instance of the problem those reports describe, which is why
+it is worth correcting rather than leaving.
+
+
+THE LINK
+
+https://github.com/stuartsmith78/feedback-reports
+
+Plaintext, no build step, readable in a browser or by clone.
+
+
+WHAT IS THERE
+
+Five reports. Two concern model behaviour: a documented convention that was
+resident in context, quoted accurately mid-session, and violated four times
+anyway, and an earlier report on the same pattern that this one confirms
+across sessions. One concerns multi-session coordination in Claude Code, at
+roughly fourteen thousand characters the largest and the one most likely to
+have been truncated if submitted through a length-limited field. One concerns
+the feedback tool itself. One is a short abstract of another.
+
+Also present, and possibly of more use than the reports:
+
+A submission log recording what was sent, through which channel, whether the
+sent text was captured, and whether delivery was acknowledged. It is the only
+record of its kind, because the in-product tool retains no sent copy. It
+notes that three of three email submissions were acknowledged automatically
+and zero of two in-product submissions produced any response.
+
+Two reports recovered from local session transcript files. Both had been lost
+-- one held in a gitignored directory, one never written to disk at all and
+recovered from the transcript of the session that was still running. The
+transcripts were the only place they survived.
+
+
+THE ONE THING WORTH TAKING FROM THIS ADDENDUM ALONE
+
+A length-limited submission field is workable if the sender can link to the
+full text. It is not workable if the sender has no copy of what was sent, no
+acknowledgement that it arrived, and no stated limit to write within.
+
+The link solves the first problem. The other three are described in the
+report on the feedback tool, and remain.
