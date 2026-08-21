@@ -285,3 +285,91 @@ sent from the current file and is not stale.
 
 TWO CONSECUTIVE VERIFIED CAPTURES (10, 11). The first was accidental, the
 second was by construction. Only the second is repeatable.
+
+
+SUBMISSION 12, 2026-08-21 -- A CONTROLLED TEST, RESULT PENDING AT TIME OF WRITING
+
+12. feedback-2026-08-20-commit-only-absorbed-a-peer-session-edit-SEMICOLON-TEST.txt
+    Channel: email. Sent isolated, deliberately.
+    Captured: YES, by construction -- delivered as a file and sent as that
+      file, per the procedure established at submission 11.
+
+    THIS IS NOT A REPORT. It is a single-variable experiment, sent to test why
+    submission 8 never acknowledged.
+
+WHAT PROMPTED IT
+
+Nine sends across two days, reconstructed from the user's own mail client:
+
+    Aug 20  2:35 PM  convention violated four times        ACK 2:36
+    Aug 20  2:37 PM  recovered transcript 7d4f28a6         ACK 2:37
+    Aug 20  2:38 PM  recovered transcript 3af1eb80         ACK 2:38
+    Aug 20  3:06 PM  cannot observe own context            ACK 3:06
+    Aug 20 10:32 PM  A SAFEGUARD CHOSEN WITHOUT READING IT  -- NONE --
+    Aug 21  7:08 PM  injected retry prompts                ACK 7:08
+    Aug 21  7:13 PM  A SAFEGUARD ... (resend, unchanged)    -- NONE --
+    Aug 21  7:14 PM  amendment                             ACK 7:15
+    Aug 21  7:26 PM  second amendment                      ACK 7:26
+
+Two hypotheses were RULED OUT by this data, both of them mine:
+
+  - AUTO-RESPONDER DEDUPLICATION. Three sends inside four minutes all acked.
+    There is no suppression window. This was my leading explanation and it is
+    simply wrong.
+  - TRANSIENT OUTAGE OR TIME OF DAY. The same content failed twice, 21 hours
+    apart, at 10:32 PM and at 7:13 PM, bracketed by successes on BOTH
+    occasions -- five minutes before and one minute after on the second.
+
+That leaves a deterministic, content-linked failure. Same content, two trials,
+different days, controls either side.
+
+THE DISCRIMINATOR
+
+A semicolon immediately followed by a shell command with flags appears on line
+2 of the failing report and in NONE of the eight acknowledged messages:
+
+    Claude Code, concurrent sessions; git commit --only absorbed a peer ...
+
+To a naive injection-detection regex that is the canonical signature, and it
+sits in the preview region a scanner reads first.
+
+Ruled out as sufficient on its own: an ACKED report
+(repeated-convention-violation) contains a git command string and got through.
+So it is not "mentions git" -- the adjacency is the candidate.
+
+THE CHANGE
+
+One character. Verified by diff, byte count identical at 8,203:
+
+    -  concurrent sessions; git commit --only absorbed
+    +  concurrent sessions, git commit --only absorbed
+
+Injection-pattern count 1 -> 0. Nothing else differs, so nothing else can
+explain a different outcome.
+
+PREDICTION AND DECISION RULE, RECORDED BEFORE THE RESULT
+
+Prediction: it acknowledges, within roughly one minute, matching all eight
+prior acknowledgements.
+
+  ACK      -> semicolon adjacency CONFIRMED as the trigger. Escalate as its
+              own finding: an inbound filter silently dropped a technical
+              report ABOUT command-line behaviour, twice, with no bounce.
+  NO ACK   -> semicolon EXONERATED. Narrowed, not failed. Next candidate is
+              the "--only" flag tokens; after that the body language
+              ("absorbed a peer session's edit", "that assertion was false").
+
+Decision rule: absence of an acknowledgement within 10 minutes counts as NO
+ACK, since every one of the eight successes landed inside 1 minute.
+
+THE FINDING THAT DOES NOT DEPEND ON THE OUTCOME
+
+Submission 8 was recorded here as "Confirmed: not yet" and assumed delivered.
+It was not delivered, and nothing surfaced that -- no bounce, no error, no
+notice. It was found only because the user happened to bracket a resend and
+notice a missing acknowledgement.
+
+THE ACKNOWLEDGEMENT IS THE ONLY DELIVERY SIGNAL, AND ITS ABSENCE IS
+INDISTINGUISHABLE FROM A SLOW RESPONDER. Every "Confirmed: not yet" in this
+log is therefore an unresolved claim about the instrument, not a fact about
+delivery -- the same error this repository keeps recording in other forms.

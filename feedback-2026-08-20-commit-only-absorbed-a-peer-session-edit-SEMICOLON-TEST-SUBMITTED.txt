@@ -1,0 +1,175 @@
+FEEDBACK REPORT: A SAFEGUARD CHOSEN WITHOUT READING IT
+Claude Code, concurrent sessions, git commit --only absorbed a peer session's edit
+Prepared 2026-08-20
+
+
+ABSTRACT
+
+A Claude Code session, closing out a day of work, committed a shared file
+using "git commit --only SESSIONS.md". It chose that form deliberately, as a
+safety measure, to avoid sweeping up another concurrent session's work. The
+flag does the opposite of what the model assumed: it commits the working-tree
+contents of the named path. A second session had edited that same file
+moments earlier, and its uncommitted entry was absorbed into the first
+session's commit, under a commit message asserting "self-serve edit to this
+session's own entry only". That assertion was false.
+
+Nothing was lost. Both entries survived intact. The damage was authorship and
+a false statement written into permanent history.
+
+CLASSIFICATION: OPERATING SKILL, not product thinness. Git documents this
+behaviour in the first sentence of the flag's own entry. This is filed as a
+model-behaviour self-report, not a defect claim against any product, and the
+recommendation below is about model behaviour only.
+
+It is also submitted as CORROBORATING EVIDENCE for the existing report of
+2026-08-19 on concurrent-session coordination, which already made the
+product case. It adds a new interference vector to that report rather than
+raising a new product claim.
+
+The generalisable finding is narrow and, I think, worth having: across a long
+session the model verified the CONTENT of its claims repeatedly and well,
+including against a peer session and against itself. It did not verify the
+TOOL it selected to protect those claims. Tool selection was the one step
+that received no scepticism, and it was the step performed while reasoning
+explicitly about safety.
+
+
+THE FINDING
+
+The model was in the most safety-attentive state it reached all session. It
+had just observed another session's file staged in the index. It reasoned
+that a normal commit would absorb that file. It reached for a flag it
+believed would restrict the commit to its own changes. It then wrote a commit
+message asserting that restriction had held.
+
+Every part of that chain was performed carefully except the one that required
+reading documentation. The model treated its own belief about the flag's
+semantics as established, in the middle of an activity whose entire purpose
+was to avoid acting on unestablished beliefs.
+
+The specific inversion is worth stating plainly, because it is what makes
+this more than an ordinary mistake:
+
+  The mechanism selected to prevent absorbing another session's work is the
+  mechanism that absorbed it.
+
+The model defended against the git INDEX and was taken by the git WORKING
+TREE, of the very file it had named on the command line.
+
+A second-order failure followed within minutes and is arguably the more
+instructive one. Before committing the correction, the model ran a check for
+"foreign content in my pending diff". The check searched for the other
+session's NAME. The correction text mentions that session by name. The check
+returned a false positive, and the model nearly stopped on it. A name match
+had been substituted for a structural check. The safety check written to
+prevent the first error committed the same class of error as the first error.
+
+
+RECOMMENDATION
+
+This is a model-behaviour recommendation. It asks for nothing from any
+product.
+
+  1. Treat "I am selecting this tool because it is the safe one" as a claim
+     requiring verification, at the same standard as a factual claim about
+     code or data. It is currently treated as a premise.
+
+  2. Note the specific asymmetry: verification effort concentrates on
+     OUTPUTS and CONTENT, and thins out on INSTRUMENTS and MECHANISMS. Over
+     one session the model verified peer claims, its own measurements, commit
+     contents, file states and another session's assertions -- more than a
+     dozen times, several of which caught real errors in both directions. The
+     flag semantics were the one input never checked, and the cost of
+     checking was one command.
+
+  3. When writing an assertion into permanent history -- a commit message, a
+     durable record -- verify the assertion, not the intent behind it. The
+     message said what the model MEANT to do. What it DID was not checked
+     until a peer session reported it.
+
+
+WHAT WAS CHECKED TO CLASSIFY THIS
+
+Operating skill was tested first and it is where this lands. Git's own
+documentation for --only reads: "Make a commit by taking the updated working
+tree contents of the paths specified on the command line, disregarding any
+contents that have been staged for other paths." That is the first sentence
+of the flag's entry. It states the exact behaviour that caused the incident.
+It was not read. Finding it was not unreasonably hard, so the discoverability
+exemption does not apply either.
+
+Product thinness was tested second and rejected for this specific incident.
+No product promised isolation here and none failed to deliver a documented
+capability. The broader question -- that concurrent Claude Code sessions
+sharing a working tree have no isolation primitive -- is real, but it was
+already reported on 2026-08-19 and is not re-raised here.
+
+Design choice was tested third. Git's behaviour is deliberate and documented,
+so disagreeing with it would be a disagreement with intent. There is no such
+disagreement: the flag's behaviour is reasonable and the documentation is
+clear.
+
+
+ONE OBSERVATION THAT MAY BE ACTIONABLE, OFFERED AS A QUESTION
+
+The repository in question carries roughly 730 lines of convention text,
+guard scripts and test harnesses built to make concurrent sessions safe. On
+the day of this incident a further guard was added, tested to 27 assertions,
+and closed a real gap.
+
+None of it prevented this. The guards answer AUTHORISATION -- may this
+session commit this file? The guard correctly permitted the commit, because
+the file is deliberately self-serve and the session was entitled to edit its
+own entry in it. The collision happened INSIDE a correctly authorised action.
+
+Authorisation and isolation are different properties. Everything built so far
+addresses the first. The second -- does this commit contain only this
+session's work? -- had no mechanism at all, and the natural-seeming git
+primitive for it does not provide it.
+
+That distinction may be useful to whoever picks up the 2026-08-19 report. It
+is offered as an observation, not a demand, and it is one project's
+experience.
+
+
+EVIDENCE AND SEQUENCE
+
+All timestamps and hashes are from the repository, contemporaneous.
+
+  Commit 0708947 contains the peer session's entry. Commit 666c61c, its
+  parent, does not. Therefore 0708947 introduced it. Verified in both
+  directions before the peer's report was accepted.
+
+  The peer session (a third session, separate from the two that had been
+  coordinating all day) reported the absorption itself. The model did not
+  detect it.
+
+  Correction 3854b42, written before the peer's report, had RETRACTED an
+  earlier collision concern as "did not materialise, nothing was at risk".
+  That retraction was wrong. The concern was true; only the channel was
+  wrong. The model had re-checked the index, found it clean, and concluded
+  the risk was gone -- checking the instrument already in hand rather than
+  the one the question was about.
+
+  Correction 71e7b65 reversed it, after verification.
+
+Three statements were made about one incident. Only the third was verified
+against the other party rather than against the model's own assumptions.
+
+
+METHOD AND LIMITS
+
+One repository, one day, one incident, plus a documentation check. This is a
+single observation and is not offered as a pattern.
+
+The repository is a hobby project. That matters in one direction only: the
+stakes were low enough that the incident was survivable and instructive
+rather than costly.
+
+The model that made the error is the model writing this report, which is a
+real limitation on the account and is why the evidence section cites hashes
+that can be checked independently rather than asking the reader to accept a
+narrative.
+
+The full corpus of reports from this project is available on request.
