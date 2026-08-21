@@ -43,11 +43,22 @@ inferences from insufficient evidence should not itself contain a confident
 inference drawn from insufficient evidence. It did. The filter that should have
 caught it is the one the report is about.
 
-An attempt to reproduce the retraction independently before filing this
-amendment also FAILED -- the relevant directory could not be located from the
-amending session. So this retraction rests on the reporting session's own
-testing plus the inadequacy of the original evidence, not on independent
-reproduction. That limit is stated rather than glossed.
+INDEPENDENTLY REPRODUCED. A first attempt failed -- the directory could not be
+located, having been searched one level too deep and in the wrong subtree. Once
+the correct path was supplied, the test was run from a different session, with
+the prediction stated before execution:
+
+    probe 1:  b4851uk3n  (136 bytes)
+    probe 2:  bmhi23lkk  (8 bytes)   -- b4851uk3n absent
+
+Two separate calls, each observing exactly one unfamiliar identifier, each
+identifier gone by the next call. That is the predicted behaviour of a per-call
+file that exists only while its own call runs. Nothing persisted, and nothing
+was missing.
+
+So this retraction rests on execution, not on a peer's account of it -- which
+matters, because accepting the peer's explanation without running it would have
+repeated the precise error being retracted.
 
 
 WHAT REPLACES IT -- STRONGER, AND PROPERLY EVIDENCED
@@ -148,8 +159,43 @@ every networked application must handle:
   - An attempt to reproduce that independently, from a third vantage point,
     failed for want of a path.
 
+Counted as discrete investigative steps, which is offered below as a reusable
+measure rather than as a complaint:
+
+  RECOVERY COST -- ONE TEMPORARY NETWORK TIMEOUT
+
+   1. User observes an anomaly the session cannot see.
+   2. User composes a description of it, because the product's own control
+      supplies wording that produces the wrong reading.
+   3. Session searches its own history for the referenced event.
+   4. Session cannot identify which event was meant; weighs three candidates.
+   5. Session settles on one. Identification remains UNCONFIRMED to this day.
+   6. Session reports an apparent lost artifact.
+   7. Second session promotes that report into a submitted document.  <- ERROR
+   8. First session independently doubts its own report and tests it, n=2.
+   9. First session issues a retraction to the second.
+  10. Second session attempts reproduction and FAILS on a wrong path.
+  11. First session supplies the path, the literal command, and the reason the
+      search missed.
+  12. Second session reproduces, n=2, prediction stated in advance.
+  13. Amendment written, and a prior submission corrected under receipt.
+
+  THIRTEEN STEPS, TWO SESSIONS, ONE USER, ONE ERRONEOUS PUBLICATION.
+  ZERO of them would have been required had the interrupted turn been marked
+  as interrupted.
+
+AS A HEURISTIC: the number of investigative steps needed to establish "what
+state is this session in?" after a routine failure is a measure of how much
+state the system declines to record. Thirteen is the measurement here. A system
+that recorded the interruption would score one -- read the marker.
+
 That is the recovery cost for a dropped connection. Not for a subtle race, not
 for data corruption, not for anything exotic -- for a timeout.
+
+Note step 7. The investigation did not merely cost effort; it PRODUCED a false
+finding, which was then published under a receipt and had to be retracted.
+Long recovery chains are not just expensive, they are themselves a source of
+error -- each step is another inference over an unrecorded fact.
 
 None of that work would have been necessary if the interrupted turn had been
 marked as interrupted. Every step above exists to reconstruct a fact the system
