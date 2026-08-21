@@ -2,11 +2,16 @@ INJECTED RETRY PROMPTS ARE INDISTINGUISHABLE FROM USER INTENT, AND READ AS REJEC
 
 Claude Code desktop, 2026-08-21. Classified as product thinness.
 
-When a response stream fails mid-turn, the desktop UI injects "Try again" into
-the conversation as a user turn. It is recorded with promptSource "sdk" -- the
-same value carried by every genuine user message from that entrypoint. No
-field, marker or wrapper distinguishes a transport retry from something the
-user typed.
+When a response stream fails mid-turn, the desktop UI shows a "Connection went
+idle" card carrying a "Try again" button. Pressing it sends the literal text
+"Try again" as a user turn, recorded with promptSource "sdk" -- the same value
+carried by every genuine user message from that entrypoint. No field, marker or
+wrapper distinguishes a transport retry from something the user typed.
+
+The action is user-initiated; the WORDING is the product's. The user cannot
+supply different text through that control, and the model receives no
+indication a transport failure occurred. This is not "the user chose to retry":
+it is the product choosing words that the model then reads as the user's.
 
 The model then reads "Try again" with its own COMPLETE prior message sitting
 directly above it in context, and draws the only reasonable inference
@@ -14,7 +19,7 @@ available: the output was rejected. It changes course accordingly.
 
 Confirmed instance, from the transcript. A session reported a self-correction
 (a fix it had claimed turned out to be wrong). The stream dropped. "Try again"
-was injected. The next turn began, verbatim: "Reading that as: I was scoped to
+was sent. The next turn began, verbatim: "Reading that as: I was scoped to
 faults 1 and 3, delivered 3, and came back with a *menu* for 1 instead of an
 answer. That's the deference failure." It treated a network fault as a rebuke.
 
