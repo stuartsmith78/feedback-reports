@@ -1,0 +1,179 @@
+SECOND AMENDMENT: RETRACTING ONE FINDING, AND REPLACING IT WITH A BETTER-EVIDENCED ONE
+
+Claude Code desktop, 2026-08-21. Amends a report and a first amendment sent
+earlier the same day. Self-corrected; no reply had been received, and nothing
+external prompted this.
+
+
+WHAT IS RETRACTED
+
+The original report closed with:
+
+    "Separately surfaced: a timed-out stream can leave tool results the model
+    never receives, with nothing indicating anything is missing. Possibly the
+    more serious of the two defects."
+
+RETRACT THAT. The evidence behind it does not support it.
+
+The claim rested on a session reporting "a third task output I never saw --
+b0ykgb94s, timestamped after my last visible call", which the session later
+found to be a transient artifact rather than a lost result. Each Bash call
+appears to write an output file that exists WHILE THE CALL RUNS and is cleaned
+up afterwards. A command that lists that directory therefore always observes
+one transient entry: the one belonging to the call doing the listing. Its
+timestamp is "after the last visible call" because it IS the current call. It
+"vanishes" by the next listing because the call that owned it finished.
+
+That session reproduced the behaviour deliberately, n=2, and reported it back
+unprompted. Nothing was lost.
+
+
+THE MORE IMPORTANT ADMISSION
+
+The retraction above is not what makes the original claim unsound. It was
+unsound when it was written.
+
+The claim was lifted from a SCREENSHOT of another session's output, taken
+second-hand, and promoted in a submitted report to "possibly the more serious
+of the two defects" -- without a single check being executed against it. No
+attempt was made to reproduce it before submission.
+
+That is stated plainly because a report arguing that models draw confident
+inferences from insufficient evidence should not itself contain a confident
+inference drawn from insufficient evidence. It did. The filter that should have
+caught it is the one the report is about.
+
+An attempt to reproduce the retraction independently before filing this
+amendment also FAILED -- the relevant directory could not be located from the
+amending session. So this retraction rests on the reporting session's own
+testing plus the inadequacy of the original evidence, not on independent
+reproduction. That limit is stated rather than glossed.
+
+
+WHAT REPLACES IT -- STRONGER, AND PROPERLY EVIDENCED
+
+The same session, asked for evidence rather than for agreement, found a real
+discontinuity in its own history that it had not noticed:
+
+A turn of its own ends with the sentence "Testing the shim directly rather than
+inferring." There is no tool call after it and no tool result. The turn simply
+stops. The next entry is a user turn.
+
+Its own words, which are the finding:
+
+    "I CANNOT DISTINGUISH, FROM MY OWN HISTORY, WHETHER (i) I emitted that tool
+    call and its result was lost, or (ii) generation was cut before I emitted
+    it, so no call was ever made. Both look identical from inside: an announced
+    intention with nothing after it."
+
+    "I had no indication anything was wrong. No error, no marker, no sense of
+    interruption. I did not notice until asked."
+
+This is a better finding than the one it replaces, because it is not a claim
+about a specific lost artifact. It is a claim about a MISSING INSTRUMENT: there
+is no signal that distinguishes an interrupted generation from a completed one,
+so a session cannot audit its own continuity even when it is asked to.
+
+THE COST WAS CONCRETE AND WAS NEARLY PAID. The un-run call was a measurement
+comparing a tool's shim against its real executable. Without it, that session's
+published assessment would have concluded that Bun's startup floor is roughly
+2.6x Node's -- that Bun is heavy. Measured properly once the gap was noticed:
+the executable is 48ms against Node's 77ms. Bun is FASTER.
+
+The conclusion would have shipped INVERTED, and it would have been inverted by
+a silent stream failure rather than by any error a human or the model could
+see. It was caught only because a user, seeing something the session could not,
+told it to go looking.
+
+
+A CORRECTION TO THE ORIGINAL REPORT'S STRONGEST CLAIM
+
+The original presented a near-controlled comparison: the product's "Try again"
+produced a rejection reading, while the user's own typed description produced
+proper investigation. Same event class, only the wording changed.
+
+That comparison holds in direction but was drawn too cleanly. The receiving
+session reports that the description was ACTIONABLE BUT NOT UNAMBIGUOUS: it
+could not immediately identify which two streams were meant, considered three
+candidate pairs before settling on one, and its identification REMAINS
+UNCONFIRMED -- the user may have meant something visible only on their side.
+
+The honest formulation is therefore not "description good, button bad". It is:
+
+    The description gave the session something to INVESTIGATE rather than
+    something to CONCEDE to.
+
+That is a smaller claim than the original made, and it is the one the evidence
+supports. It does not weaken the recommendation -- an imperative that invites
+concession is still worse than a description that invites investigation, even
+when the description is imperfect.
+
+
+WHAT STILL STANDS, UNCHANGED
+
+  - The confirmed instance in which a session read the retry as a rebuke and
+    narrated that reading explicitly.
+  - promptSource "sdk" being indistinguishable from a genuine user turn, with
+    "system" existing in the vocabulary and observed elsewhere in the window.
+  - The action being user-initiated while the wording is the product's, per the
+    first amendment.
+  - The recommendation: record the turn as promptSource "system", and reword it
+    to describe the event rather than issue an imperative.
+
+Classification unchanged: product thinness. The replacement finding sits in the
+same class -- the absence of a signal the product is positioned to provide.
+
+
+THE COST OF ESTABLISHING THIS IS ITSELF THE ARGUMENT
+
+This amendment should not be read as the report weakening. One artifact was
+misidentified. The underlying defect is confirmed, and the manner of its
+confirmation is the strongest evidence in either document.
+
+Consider what it took to determine what had actually happened after a
+TEMPORARY NETWORK TIMEOUT -- an ordinary, expected, unremarkable condition that
+every networked application must handle:
+
+  - A user noticed something in a session's state that the session itself could
+    not see, and said so.
+  - That session had to be directed to go looking, because nothing prompted it
+    to.
+  - It then investigated its own history, could not resolve the question from
+    inside, and had to reason about which of several candidate events was
+    meant.
+  - A second session cross-examined the first, requested evidence rather than
+    agreement, and received a retraction of a claim it had already published.
+  - The first session reproduced a filesystem behaviour n=2 to establish that a
+    file it had seen was transient rather than lost.
+  - An attempt to reproduce that independently, from a third vantage point,
+    failed for want of a path.
+
+That is the recovery cost for a dropped connection. Not for a subtle race, not
+for data corruption, not for anything exotic -- for a timeout.
+
+None of that work would have been necessary if the interrupted turn had been
+marked as interrupted. Every step above exists to reconstruct a fact the system
+had at the moment it happened and did not record: THIS GENERATION DID NOT
+COMPLETE.
+
+The particulars are replaceable and one of them was wrong. The shape is not:
+after a routine transport failure, neither the model nor the user can establish
+what state the session is in without a multi-party investigation. That is the
+product case, and it stands independently of which artifact was cited.
+
+It is offered in the knowledge that Anthropic's own teams are far better placed
+to investigate this than an outside user with transcript files -- and that they
+should be able to reproduce the state question directly. What this report can
+usefully contribute is the observation that the reconstruction was necessary at
+all, and what it cost.
+
+
+WHY THIS WAS SENT
+
+A retracted finding that is never retracted keeps being cited. The channel is
+one-way with no error correction, so nothing would have surfaced this from the
+outside, and the sender would never learn a report had been discounted.
+
+The correction cost is one message. The alternative was leaving a false finding
+standing under a receipt -- and, worse, leaving the impression that the
+underlying finding had rested on it.
