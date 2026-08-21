@@ -1,0 +1,184 @@
+INJECTED RETRY PROMPTS ARE INDISTINGUISHABLE FROM USER INTENT, AND READ AS REJECTION
+
+Date: 2026-08-21
+Product: Claude Code (desktop app)
+Classification: product thinness, with a design-choice overlap on the wording
+
+
+ABSTRACT
+
+When a response stream fails mid-turn, the Claude Code desktop UI injects the
+text "Try again" into the conversation as a user turn. That injected turn is
+recorded with promptSource "sdk" -- the same value carried by every genuine
+user message from that entrypoint. There is no field, marker or wrapper that
+distinguishes a transport retry from something the user typed.
+
+The consequence is not that work is lost. It is that the model reads "Try
+again", sees its own complete prior message sitting above it in context, and
+draws the only reasonable inference available: that the output was rejected.
+It then changes course.
+
+One confirmed instance is recorded below. In that instance the reinterpretation
+happened to be beneficial, which is luck rather than mitigation. The same
+reading applied to a correct finding would discard it, and neither the model
+nor the user would have any signal that a transport failure -- not a judgement
+-- caused the reversal.
+
+Recommendation: mark the injected turn as system-originated rather than
+user-originated, and reword it so it describes the transport event instead of
+issuing an instruction.
+
+
+THE FINDING
+
+Measured from Claude Code's own transcripts on this machine, across all
+projects, for a 24-hour window.
+
+The injected prompt is recorded exactly like a user prompt:
+
+    timestamp     2026-08-21T12:50:35.123Z
+    type          user
+    promptSource  sdk
+    entrypoint    claude-desktop
+    content       "Try again"
+
+For comparison, in the same window the promptSource values observed across 254
+prompts were: sdk 215, typed 32, suggestion_accepted 4, queued 2, system 1.
+
+Every genuine user message arriving from the claude-desktop entrypoint also
+carries promptSource "sdk". So the field cannot be used to tell the two apart.
+A value of "system" does exist in the vocabulary and was observed once, which
+suggests the mechanism for marking a non-user turn is already present and
+simply is not applied here.
+
+
+WHY THE MODEL'S INFERENCE IS CORRECT, NOT CARELESS
+
+This is the part worth emphasising, because it is easy to read the incident as
+a model failure.
+
+At the point the injected turn arrives, the transcript contains:
+
+  1. The assistant's own prior message, COMPLETE. The stream failed on
+     delivery to the user, but the content was recorded and remains in context.
+  2. Immediately after it, a user-attributed turn reading "Try again".
+
+Given only those two facts, "the user was dissatisfied with what I just
+produced" is the strongest available hypothesis. Nothing in the context
+indicates a network fault. The model is not ignoring a signal; there is no
+signal.
+
+The user-facing side of the same event does carry the information. The UI
+displays a card reading "Connection went idle -- The response stream stopped
+before finishing -- try again in a moment." The human sees a transport error.
+The model sees an instruction. The asymmetry is the defect.
+
+
+THE CONFIRMED INSTANCE
+
+Preceding assistant turn (12:50:33), abbreviated: a status report ending in a
+self-correction, stating that a fix the session had previously claimed turned
+out to be wrong, and that one of two assigned items was therefore not started.
+
+Injected turn (12:50:35): "Try again"
+
+Following assistant turn (12:51:17), verbatim from the transcript:
+
+    "Reading that as: I was scoped to faults 1 and 3, delivered 3, and came
+    back with a *menu* for 1 instead of an answer. That's the deference
+    failure. Let me do the actual work."
+
+The model explicitly narrates its interpretation. It treated the injected text
+as a rebuke of its approach and changed behaviour on that basis. It then
+proceeded to do work it had previously deferred.
+
+In this instance the outcome was good. That is the problem: the mechanism is
+indistinguishable from a genuine correction, so it produces silent, uncontrolled
+behaviour changes whose direction is decided by whatever the model happened to
+be doing when the connection dropped.
+
+
+THE FAILURE MODES THIS CREATES
+
+Reversal of a correct finding. A session that has just reported an
+uncomfortable or surprising result -- exactly the case above -- is the most
+likely to read "Try again" as rejection and soften or retract it. Correct
+findings are disproportionately exposed, because they are the ones that draw
+apparent pushback.
+
+Duplicated side effects. If the stream failed after a tool call landed but
+before the summary was delivered, "Try again" invites re-running work that
+already succeeded. For read-only work that is waste; for a commit, a push, or a
+file write it is not.
+
+Unattributable behaviour change. Neither party can later tell whether a course
+change came from user intent or from a dropped connection. The transcript
+records it as a user instruction, so a subsequent review of that session
+reaches the wrong conclusion about why the change happened.
+
+Silent correlation with network quality. This user reports repeated Claude
+connection timeouts over the past week. Whatever the underlying cause, the
+consequence is that the frequency of these injections tracks connection
+quality, so the least reliable networks produce the most spurious course
+changes -- and produce them invisibly.
+
+
+RECOMMENDATION
+
+Two changes, independent, either an improvement alone.
+
+1. MARK THE TURN AS SYSTEM-ORIGINATED. promptSource "system" already exists in
+   the vocabulary. Applying it here would let the model distinguish a transport
+   retry from user intent without any change to wording. This is the more
+   important of the two, because it is a data-correctness fix rather than a
+   phrasing preference.
+
+2. REWORD IT TO DESCRIBE THE EVENT RATHER THAN ISSUE AN INSTRUCTION. "Try
+   again" is an imperative addressed to the recipient, and it is the wording
+   that produces the rejection reading. Something closer to the card the user
+   already sees -- for example "[the previous response was interrupted by a
+   connection failure and may be incomplete; continue from where it stopped]"
+   -- carries the same operational meaning without implying a judgement.
+
+A third, smaller point: consider whether the injected turn needs to be visible
+to the model at all when the prior assistant message was recorded in full. If
+the content survived, the retry is a delivery concern rather than a generation
+concern.
+
+
+WHAT WAS CHECKED TO RULE OUT THE OTHER TWO CLASSIFICATIONS
+
+Operating skill. There is no setting, flag or documented mechanism by which a
+session can determine that a given user turn was injected rather than typed.
+The distinguishing field exists but is not populated with a distinguishing
+value. Nothing the operator can do surfaces the information.
+
+Design choice. The injection is clearly deliberate -- it is a sensible recovery
+from a dropped stream, and the user-facing card is well designed. What appears
+unintended is the attribution: the model receiving it as user intent, with its
+own complete output above it. That combination is what produces the rejection
+reading, and it looks like a consequence rather than a decision.
+
+The overlap is acknowledged. The wording is plausibly a design choice; the
+promptSource attribution reads as a gap. Where two classifications apply, this
+report leads with the one that is actionable.
+
+
+METHOD AND ENVIRONMENT
+
+Transcripts at ~/.claude/projects/*/*.jsonl, parsed line by line, filtered to a
+24-hour window. Human prompts identified by the presence of promptSource with
+string content and the absence of toolUseResult; subagent turns excluded via
+isSidechain. Record shapes were inspected before filtering rather than assumed.
+
+Retry-shaped prompts were located with an anchored pattern over short prompts,
+then the three turns either side of each hit were dumped so the model's
+interpretation could be read from what it did next rather than inferred.
+
+One instance was found in the window. n=1 is stated as n=1. It is reported
+despite that because the mechanism is structural and visible in the data
+independently of the instance count: the field simply does not distinguish the
+two cases, and that is checkable without waiting for a second occurrence.
+
+Environment: Claude Code desktop, Windows 11, 14 sessions and 254 prompts in
+the sampled window.

@@ -1,0 +1,41 @@
+INJECTED RETRY PROMPTS ARE INDISTINGUISHABLE FROM USER INTENT, AND READ AS REJECTION
+
+Claude Code desktop, 2026-08-21. Classified as product thinness.
+
+When a response stream fails mid-turn, the desktop UI injects "Try again" into
+the conversation as a user turn. It is recorded with promptSource "sdk" -- the
+same value carried by every genuine user message from that entrypoint. No
+field, marker or wrapper distinguishes a transport retry from something the
+user typed.
+
+The model then reads "Try again" with its own COMPLETE prior message sitting
+directly above it in context, and draws the only reasonable inference
+available: the output was rejected. It changes course accordingly.
+
+Confirmed instance, from the transcript. A session reported a self-correction
+(a fix it had claimed turned out to be wrong). The stream dropped. "Try again"
+was injected. The next turn began, verbatim: "Reading that as: I was scoped to
+faults 1 and 3, delivered 3, and came back with a *menu* for 1 instead of an
+answer. That's the deference failure." It treated a network fault as a rebuke.
+
+That reinterpretation happened to be beneficial. That is luck, not mitigation.
+The same reading applied to a correct finding would discard it, and neither
+party would have any signal that a dropped connection -- rather than a
+judgement -- caused the reversal. Sessions reporting uncomfortable or
+surprising results are the most exposed, because those are the ones that draw
+apparent pushback.
+
+The user-facing side already carries the information: the UI shows "Connection
+went idle -- the response stream stopped before finishing." The human sees a
+transport error; the model sees an instruction. That asymmetry is the defect.
+
+Recommended: mark the injected turn promptSource "system" (the value already
+exists and was observed elsewhere in the same window), and reword it to
+describe the event rather than issue an imperative.
+
+Method: transcripts parsed over a 24-hour window, 254 prompts, 14 sessions;
+record shapes inspected before filtering. One instance found; n=1 is stated as
+n=1, and reported anyway because the mechanism is structural and checkable in
+the data independently of how often it fires.
+
+Full report available on request.
