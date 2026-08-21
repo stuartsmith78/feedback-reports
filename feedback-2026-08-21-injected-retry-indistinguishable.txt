@@ -7,11 +7,17 @@ Classification: product thinness, with a design-choice overlap on the wording
 
 ABSTRACT
 
-When a response stream fails mid-turn, the Claude Code desktop UI injects the
-text "Try again" into the conversation as a user turn. That injected turn is
-recorded with promptSource "sdk" -- the same value carried by every genuine
-user message from that entrypoint. There is no field, marker or wrapper that
-distinguishes a transport retry from something the user typed.
+When a response stream fails mid-turn, the Claude Code desktop UI shows an
+error card reading "Connection went idle -- The response stream stopped before
+finishing -- try again in a moment", carrying a "Try again" button. Pressing
+that button sends the literal text "Try again" into the conversation as a user
+turn, recorded with promptSource "sdk" -- the same value carried by every
+genuine user message from that entrypoint. There is no field, marker or
+wrapper that distinguishes a transport retry from something the user typed.
+
+The action is user-initiated; the WORDING is the product's. The user cannot
+supply different text through that control, and the model receives no
+indication that a transport failure occurred.
 
 The consequence is not that work is lost. It is that the model reads "Try
 again", sees its own complete prior message sitting above it in context, and
@@ -98,6 +104,43 @@ behaviour changes whose direction is decided by whatever the model happened to
 be doing when the connection dropped.
 
 
+THE CONTRAST CASE -- THE SAME EVENT, DESCRIBED RATHER THAN COMMANDED
+
+The strongest evidence here is not the failure. It is that the same user, on
+the same day, handled a later occurrence by IGNORING the "Try again" control
+and typing a description of the event instead:
+
+    "you have two streams that have timed out and likely returned empty.
+     please locate them and retry those actions"
+
+The receiving session's next turn began:
+
+    "Let me look rather than guess -- checking the background task outputs and
+    eval logs for what's actually empty."
+
+It then located a tool result it had never received: "There's a third task
+output I never saw -- b0ykgb94s, timestamped after my last visible call."
+
+This is close to a controlled comparison. The underlying event is the same
+class -- a stream that failed to deliver. The only variable changed is the
+wording of the turn that follows it. The product's wording produced a
+reinterpretation of prior work as rejected. The user's wording produced an
+investigation of what was actually lost, and recovered a dropped tool result
+in the process.
+
+That the workaround exists and works is not a mitigation. It requires the user
+to know the failure mode, to distrust the button the product offers, and to
+hand-write a replacement every time. What it does establish is that the
+remedy is small: the difference between the two outcomes is one sentence of
+copy.
+
+It also surfaces a second issue worth separating: a timed-out stream can leave
+tool results that the model never receives, with no indication that anything is
+missing. The session above only found the third output because it was told to
+go looking. That is a distinct defect from the wording, and possibly the more
+serious of the two.
+
+
 THE FAILURE MODES THIS CREATES
 
 Reversal of a correct finding. A session that has just reported an
@@ -175,10 +218,22 @@ Retry-shaped prompts were located with an anchored pattern over short prompts,
 then the three turns either side of each hit were dumped so the model's
 interpretation could be read from what it did next rather than inferred.
 
-One instance was found in the window. n=1 is stated as n=1. It is reported
-despite that because the mechanism is structural and visible in the data
-independently of the instance count: the field simply does not distinguish the
-two cases, and that is checkable without waiting for a second occurrence.
+AT LEAST THREE INSTANCES were observed. One was found in the transcript search
+and is the fully documented case above, including the model narrating its own
+reinterpretation. Two further occurrences were captured by screenshot in a
+concurrent session within a single short stretch of work, both showing the same
+"Connection went idle" card; those two were not traced through to their
+following turns, so no claim is made about how that session interpreted them.
+
+The transcript search deliberately used an anchored pattern over prompts of 40
+characters or fewer, which finds "Try again" as a standalone turn. It would not
+match a retry whose text was merged into a longer turn, so three should be read
+as a floor rather than a count.
+
+The frequency matters less than the mechanism, which is structural: the field
+that could distinguish these two cases exists, is populated with a
+distinguishing value elsewhere in the same window, and is not used here. That
+is checkable without reference to how often the condition fires.
 
 Environment: Claude Code desktop, Windows 11, 14 sessions and 254 prompts in
 the sampled window.

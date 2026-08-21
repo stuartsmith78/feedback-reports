@@ -33,9 +33,18 @@ Recommended: mark the injected turn promptSource "system" (the value already
 exists and was observed elsewhere in the same window), and reword it to
 describe the event rather than issue an imperative.
 
+Near-controlled comparison: the same user later ignored the button and typed a
+DESCRIPTION of the event instead. That session replied "Let me look rather than
+guess", investigated, and recovered a tool result it had never received. Same
+event class, only the wording changed, opposite outcomes -- so the remedy is
+one sentence of copy.
+
+Separately surfaced: a timed-out stream can leave tool results the model never
+receives, with nothing indicating anything is missing. Possibly the more
+serious of the two defects.
+
 Method: transcripts parsed over a 24-hour window, 254 prompts, 14 sessions;
-record shapes inspected before filtering. One instance found; n=1 is stated as
-n=1, and reported anyway because the mechanism is structural and checkable in
-the data independently of how often it fires.
+record shapes inspected before filtering. At least three occurrences observed;
+treat three as a floor, since the search only matches standalone retry turns.
 
 Full report available on request.
