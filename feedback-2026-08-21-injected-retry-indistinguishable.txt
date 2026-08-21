@@ -189,6 +189,48 @@ the content survived, the retry is a delivery concern rather than a generation
 concern.
 
 
+4. TREATING AN EMPTY STREAM AS UNREMARKABLE SHOULD BE CONSIDERED HARMFUL
+
+This is the general form of the second defect above, and it is worth stating as
+a principle rather than as an instance.
+
+An empty or truncated tool result is indistinguishable, at the point of use,
+from a genuine result of "nothing found". The model receives the same thing in
+both cases: nothing. So an absent result is silently converted into a negative
+finding, and a negative finding is exactly the kind that ends an investigation
+rather than continuing it.
+
+The asymmetry is what makes it dangerous. A malformed result announces itself
+and gets retried. An EMPTY one looks like an answer. It reads as "the search
+found nothing", "the table has no rows", "the process is not running" -- all
+conclusions a session will act on and report onward. Nothing marks the moment
+where an absence should have been treated as a fault in the instrument rather
+than a fact about the world.
+
+The observed instance: a session with a timed-out stream had a tool result it
+never received, and found it only because a human told it to go looking. Had
+nobody intervened, the absence would simply have been absorbed as "there was
+nothing there."
+
+What would address it, roughly in order of value:
+
+  - Where the transport knows a result was dropped or truncated, say so IN
+    BAND, in the result the model receives. An error is far safer than an
+    empty success, because it cannot be mistaken for a finding.
+  - Where the transport does not know, prefer surfacing the uncertainty over
+    presenting a clean empty. "No content received" and "no results" must not
+    render identically.
+  - Consider whether the model should be told, at minimum, that its previous
+    turn was interrupted -- which is recommendation 1 above, arriving from a
+    different direction.
+
+The user's framing, which is the sharper one: an empty stream should not be
+unremarkable on its face. The default assumption for an empty result should be
+that the instrument failed, until the input has been shown to be genuinely
+empty. That standard is cheap to hold and it is the only one that
+distinguishes the two cases.
+
+
 WHAT WAS CHECKED TO RULE OUT THE OTHER TWO CLASSIFICATIONS
 
 Operating skill. There is no setting, flag or documented mechanism by which a
