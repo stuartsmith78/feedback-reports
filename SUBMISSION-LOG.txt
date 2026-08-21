@@ -438,3 +438,9 @@ THE STANDING LESSON, restated because it has now cost two hypotheses
 Bisecting inside a frame cannot test the frame. Both failed hypotheses were
 reasonable, both were tested properly, and both were wrong in the same
 direction -- because the unexamined assumption was not the one being varied.
+
+SPAMASSASSIN: 2.2, run locally by the user. Default threshold is 5.0, so this
+is BELOW the spam bar and eliminates generic spam heuristics as the cause.
+Two caveats: a local run tests generic rules, not Anthropic's actual inbound
+pipeline; and 2.2 would only bite under an unusually aggressive threshold.
+The RULE BREAKDOWN would be diagnostic where the total is not -- requested.
