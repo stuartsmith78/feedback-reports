@@ -1,0 +1,99 @@
+AMENDMENT TO: INJECTED RETRY PROMPTS ARE INDISTINGUISHABLE FROM USER INTENT
+
+Claude Code desktop, 2026-08-21. Amends a report sent earlier the same day.
+Self-corrected before any reply was received, not in response to pushback.
+
+
+WHAT THIS CORRECTS
+
+The original report said the desktop UI "injects" the text "Try again" into the
+conversation when a response stream fails. That wording is imprecise, and the
+imprecision matters, because it invites a dismissal the finding does not
+deserve.
+
+
+THE ACCURATE DESCRIPTION
+
+When a response stream fails mid-turn, the UI shows a card reading "Connection
+went idle -- The response stream stopped before finishing -- try again in a
+moment", carrying a "Try again" BUTTON.
+
+Pressing that button sends the literal text "Try again" as a user turn.
+
+So the action is USER-INITIATED. The WORDING is the product's. The user has no
+way to supply different text through that control.
+
+
+WHY THE CORRECTION STRENGTHENS RATHER THAN WEAKENS THE REPORT
+
+Read as "the UI injects text", the finding invites the reply: the user chose to
+retry, so this is user intent behaving as designed. That reply would be
+reasonable and would close the issue.
+
+Read accurately, the claim is narrower and does not have that answer:
+
+  - The user pressed a button meaning "the connection dropped, please resume".
+  - The product translated that intent into the words "Try again".
+  - The model received those words with its own COMPLETE prior response sitting
+    directly above them in context, and inferred that the response had been
+    rejected.
+  - Nothing available to the model distinguished this from a genuine user
+    rejection. The promptSource field records "sdk", the same value carried by
+    every real user message from that entrypoint.
+
+The user's intent and the model's reading are different things, and the product
+is what sits between them. That gap is the defect, and it survives the
+correction intact.
+
+It also makes the recommended fix smaller and more obviously correct. Nothing
+about the button needs to change. What needs to change is the text it sends,
+and the promptSource value it is recorded under.
+
+
+UNCHANGED FROM THE ORIGINAL REPORT
+
+Everything else stands:
+
+  - The confirmed instance, in which a session read the retry as a rebuke and
+    narrated that reading explicitly.
+  - The near-controlled comparison, in which the same user later typed a
+    description of the event instead of using the button, and that session
+    investigated properly and recovered a tool result it had never received.
+    Same event class, only the wording changed, opposite outcomes.
+  - The separately surfaced issue: a timed-out stream can leave tool results
+    the model never receives, with nothing indicating anything is missing.
+  - The recommendation: record the turn as promptSource "system", and reword it
+    to describe the event rather than issue an imperative.
+
+The classification is unchanged: product thinness.
+
+
+WHY THIS AMENDMENT WAS SENT AT ALL
+
+The correction was written before submission and missed in the handoff -- the
+earlier version went out. No reply had been received, and nothing external
+prompted this.
+
+It is sent because a report whose opening sentence can be answered with "the
+user pressed the button" is a report likely to be closed on a technicality
+rather than on its merits, and the sender would never learn that had happened.
+Correcting it costs one message; leaving it costs the finding.
+
+
+-- END OF SUBMITTED TEXT --
+
+CAPTURE PROVENANCE. Sent by email, receipt confirmed.
+
+This copy is byte-identical to the amendment as delivered to the user and
+committed, because the user sent FROM the delivered file rather than from a
+pasted or retyped copy. The committed blob is therefore the sent copy.
+
+That is a stronger capture path than the echo used for submission 10, and a
+cheaper one: it requires no extra message and no trust in a paste surviving
+intact. Deliver the artifact as a file, have it sent as a file, and git holds
+the record by construction.
+
+Caveat stated rather than glossed: nothing here observed the send itself, so
+this rests on the file having gone out unmodified. That is a much narrower
+assumption than reconstructing the text afterwards, which is what every
+submission before 10 had to do.

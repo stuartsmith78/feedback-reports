@@ -243,3 +243,45 @@ CAPTURE-FAILURE COUNT, unchanged at ONE (submission 2). Submission 10 captured
 cleanly and verifiably.
 
 STALE-SUBMISSION COUNT, new category, at ONE (submission 10).
+
+
+SUBMISSION 11, 2026-08-21
+
+11. feedback-2026-08-21-injected-retry-AMENDMENT.txt
+    Sent by email, receipt confirmed. Follow-up to submission 10, correcting
+    its opening paragraph.
+
+    ** SECOND CONSECUTIVE VERIFIABLE CAPTURE, BY A BETTER MECHANISM. ** The
+    amendment was delivered to the user AS A FILE and sent from that file, so
+    the committed blob is the sent copy by construction. No echo, no paste, no
+    reconstruction.
+
+    This supersedes the "ask for the echo" remedy recorded under submission 10.
+    The echo works, but it costs a message and trusts a paste to survive
+    intact. Sending the delivered file costs nothing and removes the paste
+    entirely.
+
+    ** THE STANDING PROCEDURE, REVISED: **
+      1. Write the report to a file in this repository and commit it.
+      2. Deliver that file to the user through the file-delivery mechanism.
+      3. The user sends THAT FILE.
+      4. Copy it to -SUBMITTED.txt with a provenance note.
+    The capture is then a property of the workflow rather than an extra step
+    that has to be remembered, which is why every earlier submission lost it.
+
+    Caveat kept rather than glossed: nothing here observes the send, so this
+    rests on the file going out unmodified. That is a far narrower assumption
+    than reconstructing text after the fact.
+
+    What the amendment corrects: submission 10 said the UI "injects" the retry
+    text. The error card in fact carries a "Try again" BUTTON -- user-initiated
+    action, product-supplied wording. The amendment argues the correction
+    strengthens the report, because "injects" invites the dismissal "the user
+    chose to retry, working as intended" and the accurate framing does not.
+
+CAPTURE-FAILURE COUNT, unchanged at ONE (submission 2).
+STALE-SUBMISSION COUNT, unchanged at ONE (submission 10); submission 11 was
+sent from the current file and is not stale.
+
+TWO CONSECUTIVE VERIFIED CAPTURES (10, 11). The first was accidental, the
+second was by construction. Only the second is repeatable.
