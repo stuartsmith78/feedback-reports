@@ -444,3 +444,75 @@ is BELOW the spam bar and eliminates generic spam heuristics as the cause.
 Two caveats: a local run tests generic rules, not Anthropic's actual inbound
 pipeline; and 2.2 would only bite under an unusually aggressive threshold.
 The RULE BREAKDOWN would be diagnostic where the total is not -- requested.
+
+
+RESOLVED: THE ACKNOWLEDGEMENT IS A GOOGLE GROUPS AUTO-RESPONDER, AND ITS
+ABSENCE MEANS THE POST WAS NOT ACCEPTED
+
+Settled 2026-08-21 by reading the raw headers of an acknowledgement rather
+than reasoning about the ones that did not arrive.
+
+THE DECISIVE HEADERS, from the ack to submission 11:
+
+    Return-Path: <...@listserv.bounces.google.com>
+    Auto-Submitted: auto-replied
+    From: Feedback <feedback+noreply@anthropic.com>
+    In-Reply-To: <the original message's Message-ID>
+    dkim=pass  spf=pass  dmarc=pass (p=REJECT)
+
+feedback@anthropic.com IS A GOOGLE GROUP. The "acknowledgement" is a Groups
+auto-responder threaded to each specific message. It is not a delivery
+receipt, not a human, and not an Anthropic system.
+
+A Groups auto-reply fires ONLY on a post that is accepted and distributed. A
+post held for moderation or classified as spam by Google's own classifier
+yields no auto-reply, no bounce, and complete silence to the sender.
+
+COUNT RECONCILIATION, which is what closed it:
+
+    10 sends  -  3 silent failures  =  7 acknowledgements
+    Search for feedback+noreply returned exactly 7.
+
+Nothing left over. The acks were never generated; they did not land somewhere
+unexamined. That was my final hypothesis and it is also dead -- but it was
+closed by COUNTING rather than by another inference, which is why it is closed
+rather than lingering.
+
+WHAT THIS MEANS FOR SUBMISSION 8
+
+The report almost certainly NEVER REACHED A HUMAN at Anthropic, on any of
+three attempts, and nothing on their side records that it was sent. That is
+materially worse than "read and discounted", and it was invisible from here.
+
+FOUR OF MY HYPOTHESES FAILED ON THIS QUESTION
+
+  1. Auto-responder deduplication      -- killed by 3 acks in 4 minutes
+  2. Semicolon adjacency               -- killed by submission 12, byte-identical
+  3. Recipient mismatch                -- killed by identical To: headers
+  4. Acks arrived but were mis-filed   -- killed by the count reconciling
+
+And one elimination I made was itself wrong: SpamAssassin scoring 2.2 was
+treated as ruling out spam classification. It ruled out SPAMASSASSIN. Google
+Groups uses its own classifier, so the measurement was against the wrong
+instrument -- the same error class the rest of this log records.
+
+THE STANDING LESSON
+
+Every failed hypothesis was tested properly and every one was wrong in the
+same direction: I was modelling a filter at ANTHROPIC when the gate was at
+GOOGLE GROUPS, one hop earlier. Bisecting content could never have found that,
+because content was not the variable -- and seven eliminations without
+convergence was the signal to stop bisecting and go read the headers of a
+message that WORKED.
+
+READ THE SUCCESSFUL CASE. Four hypotheses were spent on the failures, and the
+answer was sitting in the raw source of any acknowledgement the whole time.
+
+REMEDY, NOT YET TESTED
+
+Stop varying the body. Send the report as a .txt ATTACHMENT with a two-line
+covering note: attachment payloads are not subject to the same body-text
+classification. One test, high prior, no guessing which phrase offended.
+
+If that also fails, the channel cannot carry this report and it goes through
+the in-product tool instead, accepting the loss of a sent copy.
