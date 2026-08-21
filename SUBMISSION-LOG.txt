@@ -195,3 +195,51 @@ CAPTURE-FAILURE COUNT, unchanged at ONE (submission 2). Submissions 6, 7 and
 followed. Submission 8 is not counted as a failure -- email retains its own
 sent copy by construction -- but it is also not counted as a clean capture,
 because nothing here verified it.
+
+
+SUBMISSION 10, 2026-08-21
+
+10. feedback-2026-08-21-injected-retry-indistinguishable-ABSTRACT.txt
+    Sent by email, receipt confirmed. Second report sent by email rather than
+    through the in-product tool.
+
+    ** FIRST VERIFIABLE SUBMITTED COPY IN THIS REPOSITORY. ** The user echoed
+    the abstract back into the session verbatim immediately before sending, so
+    -SUBMITTED.txt is a real capture rather than an assumption. Every prior
+    email submission was recorded as "not a failure, but not a clean capture,
+    because nothing here verified it". This one is verified.
+
+    The mechanism that produced the capture was accidental -- the user pasted
+    the text to confirm it, not to archive it. Worth making deliberate: ASK FOR
+    THE ECHO BEFORE SENDING. It costs one message and it closes the gap this
+    log has carried since submission 2.
+
+    ** SENT ONE REVISION STALE. ** A correction had been written and delivered
+    to the user before submission, and was missed in the handoff; the earlier
+    text went out. The corrected abstract is the working copy; the sent text is
+    preserved in -SUBMITTED.txt.
+
+    The correction: the original says the UI "injects" the retry text. In fact
+    the error card carries a "Try again" BUTTON -- the action is user-initiated
+    and only the wording is the product's. That distinction is load-bearing,
+    because "injects" invites the dismissal "the user chose to retry, working
+    as intended", and the accurate framing has no such answer.
+
+    Amendment written and pending submission:
+    feedback-2026-08-21-injected-retry-AMENDMENT.txt
+
+    ** PROCESS FAILURE, AND IT IS A NEW ONE. ** Not a capture failure -- the
+    capture succeeded. A DELIVERY-ORDERING failure: a correction existed, was
+    committed, was delivered, and the stale version was sent anyway because the
+    two crossed. The report's own subject is a message being read without the
+    context that would have changed its interpretation, which makes this an
+    instance of the defect being reported, occurring inside the reporting of it.
+
+    Remedy, cheap and mechanical: before sending, diff the working copy against
+    what is about to go out, or re-request the file. Do not send from a copy
+    held open in another window.
+
+CAPTURE-FAILURE COUNT, unchanged at ONE (submission 2). Submission 10 captured
+cleanly and verifiably.
+
+STALE-SUBMISSION COUNT, new category, at ONE (submission 10).

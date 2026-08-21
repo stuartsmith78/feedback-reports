@@ -1,0 +1,65 @@
+INJECTED RETRY PROMPTS ARE INDISTINGUISHABLE FROM USER INTENT, AND READ AS REJECTION
+
+Claude Code desktop, 2026-08-21. Classified as product thinness.
+
+When a response stream fails mid-turn, the desktop UI injects "Try again" into
+the conversation as a user turn. It is recorded with promptSource "sdk" -- the
+same value carried by every genuine user message from that entrypoint. No
+field, marker or wrapper distinguishes a transport retry from something the
+user typed.
+
+The model then reads "Try again" with its own COMPLETE prior message sitting
+directly above it in context, and draws the only reasonable inference
+available: the output was rejected. It changes course accordingly.
+
+Confirmed instance, from the transcript. A session reported a self-correction
+(a fix it had claimed turned out to be wrong). The stream dropped. "Try again"
+was injected. The next turn began, verbatim: "Reading that as: I was scoped to
+faults 1 and 3, delivered 3, and came back with a *menu* for 1 instead of an
+answer. That's the deference failure." It treated a network fault as a rebuke.
+
+That reinterpretation happened to be beneficial. That is luck, not mitigation.
+The same reading applied to a correct finding would discard it, and neither
+party would have any signal that a dropped connection -- rather than a
+judgement -- caused the reversal. Sessions reporting uncomfortable or
+surprising results are the most exposed, because those are the ones that draw
+apparent pushback.
+
+The user-facing side already carries the information: the UI shows "Connection
+went idle -- the response stream stopped before finishing." The human sees a
+transport error; the model sees an instruction. That asymmetry is the defect.
+
+Recommended: mark the injected turn promptSource "system" (the value already
+exists and was observed elsewhere in the same window), and reword it to
+describe the event rather than issue an imperative.
+
+Near-controlled comparison: the same user later ignored the button and typed a
+DESCRIPTION of the event instead. That session replied "Let me look rather than
+guess", investigated, and recovered a tool result it had never received. Same
+event class, only the wording changed, opposite outcomes -- so the remedy is
+one sentence of copy.
+
+Separately surfaced: a timed-out stream can leave tool results the model never
+receives, with nothing indicating anything is missing. Possibly the more
+serious of the two defects.
+
+Method: transcripts parsed over a 24-hour window, 254 prompts, 14 sessions;
+record shapes inspected before filtering. At least three occurrences observed;
+treat three as a floor, since the search only matches standalone retry turns.
+
+Full report available on request.
+
+
+-- END OF SUBMITTED TEXT --
+
+CAPTURE PROVENANCE. This file is the text ACTUALLY SENT, captured verbatim
+from the user echoing it back into the session immediately before submission.
+That makes it the first entry in this repository whose submitted copy is
+verifiable rather than assumed.
+
+It is the PRE-AMENDMENT version. A correction was written after this was sent
+and is being submitted separately -- see
+feedback-2026-08-21-injected-retry-AMENDMENT.txt. The difference is the
+opening paragraph: this version says the UI "injects" the text, when in fact
+the retry is triggered by a user pressing a "Try again" button on the
+error card. The action is user-initiated; only the wording is the product's.
