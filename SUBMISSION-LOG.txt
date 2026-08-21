@@ -143,3 +143,55 @@ question should be raised rather than waited on. A condition phrased as
 "if failures continue" never fires, because nobody is counting.
 
 
+
+
+SUBMISSIONS 8 AND 9, 2026-08-20
+
+8.  feedback-2026-08-20-commit-only-absorbed-a-peer-session-edit.txt
+    Channel: email
+    Captured: BY THE EMAIL CLIENT'S OWN SENT COPY, not independently
+      verified here. Email is preferred in this repo's convention precisely
+      because it leaves a sent copy; that copy has not been diffed against
+      the source file, so "identical" is assumed, not measured.
+    Confirmed: not yet
+    Size: 8,203 characters (source file)
+
+9.  feedback-2026-08-20-commit-only-absorbed-a-peer-session-edit-ABSTRACT.txt
+    Channel: NOT STATED by the user. Recorded as unknown rather than guessed.
+    Captured: YES, as -ABSTRACT-SUBMITTED.txt
+    Confirmed: not yet
+    Size: 1,981 characters
+    VERIFIED BYTE-IDENTICAL to the source: 35 lines, diff clean after newline
+    normalisation. Nothing was truncated.
+
+
+WHAT SUBMISSION 9 MEASURES, AND WHAT IT DOES NOT
+
+This is the first entry in this log where a COMPLETE ROUND TRIP was actually
+measured rather than assumed. The user sent the text and echoed it back; it
+was diffed against the source and matched exactly.
+
+That matters because this repo's founding premise is that the channel retains
+no copy of what arrived, that truncation is believed to occur, and that past
+truncation is therefore unverifiable and should be assumed. Submission 9 puts
+a VERIFIED FLOOR under the channel's capacity at 1,981 characters.
+
+It does not establish a ceiling. One measurement below a limit says nothing
+about where that limit sits, and the 1,200-1,500 character target for
+abstracts was never a claim about the channel -- it is a claim about what a
+reader will actually read. Both remain correct. The assume-truncation posture
+stands for anything longer, and the inverted-pyramid rule stands regardless,
+because it protects against a reader stopping early as much as a channel
+cutting off.
+
+One honest note on this submission's own abstract: at 1,981 characters it is
+roughly 30 percent over the 1,200-1,500 target. It was trimmed once, from
+2,254, and then stopped rather than cutting the classification line or the
+inversion, which are the two things that must survive any clipping. The
+overage was flagged to the user before sending rather than shipped quietly.
+
+CAPTURE-FAILURE COUNT, unchanged at ONE (submission 2). Submissions 6, 7 and
+9 all captured cleanly. The copy-first procedure continues to hold when
+followed. Submission 8 is not counted as a failure -- email retains its own
+sent copy by construction -- but it is also not counted as a clean capture,
+because nothing here verified it.

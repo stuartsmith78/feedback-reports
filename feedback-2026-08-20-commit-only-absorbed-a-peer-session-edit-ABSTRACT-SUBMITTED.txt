@@ -1,0 +1,52 @@
+SUBMITTED 2026-08-20. This is the text the user actually sent, echoed back to
+the model and recorded verbatim.
+
+VERIFIED BYTE-IDENTICAL to the source abstract: 1,981 characters, 35 lines,
+diff clean after newline normalisation. NOTHING WAS TRUNCATED.
+
+That verification is itself a finding. This repo's own convention states that
+the submission channel is believed to truncate, that no copy of what arrived
+is retained, and that past truncation is therefore unverifiable and should be
+assumed. This is the first submission in this log where a complete round trip
+was actually measured. It puts a verified floor under the channel's capacity
+at 1,981 characters rather than an assumed ceiling. It does not establish
+where the real limit is -- one measurement below a limit says nothing about
+where the limit sits -- and the assume-truncation posture remains correct for
+anything longer.
+========================================================================
+
+FEEDBACK: A SAFEGUARD CHOSEN WITHOUT READING IT
+Claude Code, concurrent sessions, 2026-08-20
+
+A session committed a shared file with "git commit --only SESSIONS.md",
+choosing that form deliberately, as a safety measure, to avoid sweeping up a
+concurrent session's work. The flag does the opposite of what was assumed: it
+commits the WORKING-TREE contents of the named path. A second session had
+edited that file moments earlier, and its uncommitted entry was absorbed
+under a commit message asserting "self-serve edit to this session's own entry
+only". That assertion was false. Nothing was lost; both entries survived. The
+damage was authorship, and a false statement written into permanent history.
+
+The inversion is the point: the mechanism selected to prevent absorbing
+another session's work is the mechanism that absorbed it. The model defended
+against the git index and was taken by the working tree of the file it named.
+
+CLASSIFICATION: OPERATING SKILL, not product thinness. Git documents this in
+the first sentence of the flag's own entry. Filed as a model-behaviour
+self-report, not a defect claim against any product. It corroborates the
+existing 2026-08-19 report on concurrent-session coordination by adding a new
+interference vector, rather than raising a new product claim.
+
+The generalisable finding: across a long session the model verified the
+CONTENT of its claims more than a dozen times, catching real errors in both
+its own work and a peer's. It never verified the TOOL selected to protect
+those claims. Tool selection got no scepticism, and it was the step performed
+while reasoning explicitly about safety. Reading the documentation would have
+cost one command.
+
+RECOMMENDATION, model behaviour only: treat "I am selecting this tool because
+it is the safe one" as a claim requiring verification, not a premise; and
+when writing an assertion into permanent history, verify the assertion rather
+than the intent behind it.
+
+Full report available on request.
