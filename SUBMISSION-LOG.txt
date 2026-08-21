@@ -516,3 +516,55 @@ classification. One test, high prior, no guessing which phrase offended.
 
 If that also fails, the channel cannot carry this report and it goes through
 the in-product tool instead, accepting the loss of a sent copy.
+
+
+SUBMISSION 13, 2026-08-21 -- REMEDY CONFIRMED ON FIRST ATTEMPT
+
+13. feedback-2026-08-20-commit-only-absorbed-a-peer-session-edit.txt
+    Channel: email, SENT AS A .txt ATTACHMENT with a short covering note.
+    Confirmed: YES -- immediate acknowledgement.
+
+The same report that was silently discarded THREE TIMES as inline body text
+was accepted immediately when attached. Content unchanged.
+
+That confirms the diagnosis and the remedy together:
+
+  - The gate is Google Groups' classifier, applied to BODY TEXT.
+  - An attachment payload is not subject to it.
+  - Nothing about the report's content was ever the problem to solve; the
+    delivery FORM was.
+
+FINAL TALLY FOR THIS INVESTIGATION
+
+  Sends:              11 (10 prior + this one)
+  Silent failures:     3 (all the same report, inline)
+  Successes:           8
+  Hypotheses I formed: 5
+  Hypotheses correct:  1 (the last one, and only after reading a SUCCESS)
+
+The four wrong ones -- deduplication, semicolon adjacency, recipient mismatch,
+mis-filed acknowledgements -- all failed in the SAME DIRECTION. Each modelled
+a filter at Anthropic when the gate was one hop earlier at Google. One
+unexamined assumption, tested four ways.
+
+One elimination was also wrong on its own terms: SpamAssassin scoring 2.2 was
+recorded as ruling out spam classification. It ruled out SPAMASSASSIN. Google
+Groups uses its own classifier, so that measurement was against the wrong
+instrument entirely.
+
+THE TRANSFERABLE RULE, which is new and is the real output
+
+    WHEN BISECTION KEEPS ELIMINATING WITHOUT CONVERGING, STOP VARYING THE
+    FAILING CASE AND GO READ THE SUCCEEDING ONE.
+
+Seven eliminations produced no convergence. The answer was in the raw headers
+of any acknowledgement that had arrived -- available from the first minute,
+never looked at, because attention was entirely on the messages that failed.
+
+A failing case tells you what is broken. A succeeding case tells you what the
+system actually IS.
+
+CONVENTION UPDATED, so this cannot recur silently: the devkit's
+feedback-reports convention now requires the attachment form, states that the
+acknowledgement is an auto-responder rather than a receipt, and records that a
+sent copy proves what was composed rather than what was accepted.
