@@ -373,3 +373,68 @@ THE ACKNOWLEDGEMENT IS THE ONLY DELIVERY SIGNAL, AND ITS ABSENCE IS
 INDISTINGUISHABLE FROM A SLOW RESPONDER. Every "Confirmed: not yet" in this
 log is therefore an unresolved claim about the instrument, not a fact about
 delivery -- the same error this repository keeps recording in other forms.
+
+RESULT OF SUBMISSION 12: NO ACKNOWLEDGEMENT. PREDICTION WRONG.
+
+The prediction recorded above was "it acknowledges, within roughly one
+minute". It did not. Per the decision rule written before the result, that is
+a NO ACK, and the semicolon-adjacency hypothesis is EXONERATED.
+
+Recorded plainly because the prediction was written down precisely so it could
+be wrong in public. That is the second of my hypotheses to fail on this
+question; the first was auto-responder deduplication.
+
+WHAT THE THREE FAILURES NOW ESTABLISH
+
+Three sends, all unacknowledged: Aug 20 22:32, Aug 21 19:13 (unchanged
+resend), Aug 21 ~19:45 (semicolon variant). Eight other sends across the same
+two days acknowledged within one minute, including messages one and five
+minutes either side of a failure.
+
+ELIMINATED BY EVIDENCE, not by argument:
+
+  - Auto-responder deduplication. Three sends inside four minutes all acked.
+  - Transient outage / time of day. Failures at 22:32 and 19:13, successes at
+    19:08 and 19:14.
+  - MESSAGE SIZE. An acknowledged report is 10,980 bytes; the failing one is
+    8,203. Larger got through.
+  - THE STRING "git commit". An acknowledged report
+    (repeated-convention-violation) contains it too.
+  - SEMICOLON ADJACENT TO A COMMAND. Submission 12 removed it, byte count
+    identical, and still failed.
+
+STILL LIVE, and it is weak:
+
+  - "--flag" TOKENS. The failing report contains "--only" three times.
+    Acknowledged reports contain ZERO double-dash flag tokens. It is the last
+    surviving content discriminator -- but it is hard to credit a filter that
+    passes "git commit" and blocks "--only".
+
+⚠️ THE FRAME ITSELF IS NOW SUSPECT, AND THAT MATTERS MORE THAN THE REMAINING
+CANDIDATE.
+
+Every hypothesis so far has assumed the difference is IN THE MESSAGE BODY.
+Two have now failed inside that frame. The assumption underneath all of them
+is that the failing sends and the succeeding sends went to THE SAME PLACE, and
+that has never been checked.
+
+The failing sends display as "to feedback" -- a contact name, not an address.
+If that autocomplete entry resolves to a different or malformed address than
+the one used for the successes, the behaviour is explained completely and
+deterministically: same recipient chosen the same way, same non-delivery,
+regardless of content. It would also explain why content bisection keeps
+eliminating candidates without converging.
+
+NEXT CHECK, and it is cheaper than any further bisection: expand the "to"
+field on a FAILING message and on a SUCCEEDING one and compare the resolved
+addresses. Also check the sent folder for a bounce, and check whether the
+failures were composed by reply/forward rather than as new mail.
+
+Only if the addresses match identically should content bisection resume, with
+"--only" as the next variable.
+
+THE STANDING LESSON, restated because it has now cost two hypotheses
+
+Bisecting inside a frame cannot test the frame. Both failed hypotheses were
+reasonable, both were tested properly, and both were wrong in the same
+direction -- because the unexamined assumption was not the one being varied.
