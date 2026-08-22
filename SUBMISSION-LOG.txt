@@ -1009,3 +1009,32 @@ check, because testing it the obvious way exonerates it." That is the
 instrument-correlated property already recorded in this log, occurring one level
 down: the natural way to verify the scanner is to run its pattern by itself,
 which is precisely the condition under which it works.
+
+
+A GATE THAT RAN AFTER THE ACTION IT GATED, CAUGHT IMMEDIATELY, RECORDED BECAUSE
+IT IS THIS LOG'S OWN SUBJECT
+
+The privacy scan and the push were chained in a single invocation. The scan
+printed first and the push followed without the output being read. It reported
+three email-address matches in this file and the push had already happened.
+
+Outcome benign, checked after the fact: the three are Anthropic's own published
+feedback address, its auto-responder address, and a redacted Google bounces
+path, all pre-existing in this file since the previous day's commit and none
+introduced by that change. The user's own address appears in no file in this
+repository, verified across the whole tree.
+
+The result being benign is luck, not process. The convention states it plainly:
+a check that runs after the action it was meant to gate is theatre, and chaining
+a verification with a destructive or irreversible step means the check prints
+once the damage is done. Gate, then act -- never in the same command.
+
+That rule had been read off disk earlier the same session, quoted in a report
+committed the same day, and applied correctly three times before this. The
+fourth time it was chained anyway, in the very command whose purpose was to
+verify before publishing.
+
+STANDING CHANGE: scan as its own invocation, read the result, then push. The two
+must not share a command line, regardless of ordering within it.
+
+GATE-AFTER-ACTION COUNT: ONE, self-caught, no harm done.
