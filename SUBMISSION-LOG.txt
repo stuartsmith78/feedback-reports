@@ -568,3 +568,118 @@ CONVENTION UPDATED, so this cannot recur silently: the devkit's
 feedback-reports convention now requires the attachment form, states that the
 acknowledgement is an auto-responder rather than a receipt, and records that a
 sent copy proves what was composed rather than what was accepted.
+
+
+SUBMISSION 14, 2026-08-22 -- PENDING. A CORRECTION, AND THE FIRST REPORT THIS
+REPO HAS RETRACTED
+
+14. feedback-2026-08-22-correction-context-occupancy-is-readable.txt
+    plus -ABSTRACT.txt
+    Channel: email, AS A .txt ATTACHMENT per the convention established at
+      submission 13. Not yet sent.
+    Captured: by construction -- delivered to the user as a file.
+
+WHAT IT CORRECTS
+
+Submission 7 (feedback-2026-08-20-model-cannot-see-its-own-context.txt, sent by
+email 2026-08-20, acknowledged) opened with "A Claude Code session has no
+readable measure of how full its context window is."
+
+THAT CLAIM IS FALSE. Measured 2026-08-22.
+
+Every session writes a JSONL transcript to disk live. Every assistant entry
+carries message.usage, and input_tokens + cache_creation_input_tokens +
+cache_read_input_tokens is the context occupancy at that turn. It is readable
+with Bash, which every session has. Measured on the session that found it: 63
+assistant turns, 59,339 to 127,854 tokens, monotonic non-decreasing across all
+63, read live while the session was still running and had never compacted. Lag
+is at most one turn.
+
+CLASSIFICATION.md flagged this report on 2026-08-20 as UNVERIFIED, possible
+operating skill, on the grounds that it asserted an absence without recording a
+search. IT WAS RIGHT, AND THE ACTION IT SPECIFIED SAT UNDISCHARGED FOR TWO DAYS
+WHILE THE REPORT STOOD SUBMITTED AND ACKNOWLEDGED.
+
+METHOD, because the point of this one is the method
+
+A prediction was written to a file BEFORE the observation existed, naming the
+falsifying outcome and naming in advance the single confound that could produce
+a false positive: that the session spend budget readout is NOT a context gauge
+and finding it must not be counted as a hit. It was not counted. The two are
+different quantities and the original report was correct to say so.
+
+The trace was verified monotonic across all 63 turns rather than sampled once.
+One reading could be coincidence; a 63-point trace tracking real growth cannot.
+
+WHAT SURVIVES OF SUBMISSION 7
+
+Its section THE MISLEADING NUMBER, which correctly identified that the visible
+token figure is a spend budget rather than a context gauge. That was right when
+written and is still right. It makes the error worse rather than better: the
+author noticed one number was the wrong number and stopped, instead of asking
+whether a right one existed.
+
+The residual product finding, much narrowed: the measure is PULL not PUSH,
+nothing announces it, no documentation found mentions it, and the transcript
+carries the NUMERATOR ONLY -- no context window limit was found in the
+transcript or in any settings file, so headroom cannot be computed without
+supplying the denominator. Recommendation narrows from "expose a new capability"
+to "document what is already there, and expose the limit beside it".
+
+NOT RE-TESTED, and recorded as unverified rather than restated: submission 7's
+second claim, that PreCompact hook output never reaches the model.
+
+THE GENERAL CLASS SURVIVES WITH A BETTER INSTANCE
+
+Submission 7 proposed a class -- self-knowledge the runtime holds and the model
+is denied -- and gave two instances. The context instance is withdrawn. The
+identity instance was independently re-measured on 2026-08-22 by a peer session
+and HOLDS: a session is addressable by every peer and cannot obtain its own
+address; the peer listing returns no row for the caller, confirmed directly
+twice. Addresses rotated four or more times across three sessions in one day;
+one rotation landed between a message being read and its reply composed, so a
+correctly copied address was stale on use; and a bounce was twice misread as the
+recipient having ended while both sessions were live. The near-miss suggestion
+in the bounce text is similarity-dependent and fails precisely where the stem
+changes, which is the case that most needs it.
+
+NEW COUNTER: UNVERIFIED-CLAIM COUNT, at ONE (submission 7), now corrected.
+
+The category is created here at ONE rather than waiting for three, and the
+reason is stated at creation per the threshold rule: this is a SILENT class.
+Nothing on the recipient's side reports a wrong claim back, no bounce arrives,
+and the auto-responder acknowledges a false report exactly as it acknowledges a
+true one. Observed count therefore does not track true count, so counting is
+not the instrument. Risk times likelihood governs instead, and the risk is
+credibility on every other report in this corpus.
+
+WORSE, AND THIS IS WHY IT IS ESCALATED RATHER THAN LOGGED: this class is
+INSTRUMENT-CORRELATED. The obvious way to check a report about what the model
+cannot see is to ask the model what it can see -- which returns the same blind
+spot that produced the report. The check and the subject share a failure mode.
+That weights the risk term upward and is why this is acted on at one occurrence
+rather than watched.
+
+STANDING REMEDY, mechanical rather than diligent: before any report asserting
+that something does not exist, record the search that looked for it, in the
+report. One sentence. A searched absence and an assumed absence read identically
+without it, and the reader cannot ask.
+
+PRIVACY SCAN, run before the drafts crossed into this public repo
+
+Scanned across every category: absolute user paths, session and client UUIDs,
+the user's email, secret/token/key/PSK strings, IP addresses, MAC addresses and
+hostnames, serial/COM/tty device identifiers, private repository and project
+names, and peer session slugs. ZERO HITS on both files. The only external
+reference is this repository's own public URL, which is intentional.
+
+THE SCAN WAS THEN CONTROL-TESTED, and that is the part worth keeping. A scanner
+returning "none" in every category is the too-convenient result, and identical
+to a scanner that is silently broken. It was re-run against a working file known
+to contain absolute paths and a UUID, and it fired on all four categories. The
+zero-hits result carries information only because the instrument was shown
+capable of a non-zero one.
+
+Caveat kept rather than glossed, and it is the peer session's own: a
+pattern-based scan silently misses the categories its author failed to
+enumerate. This is a first pass that reduces risk, not a clearance.

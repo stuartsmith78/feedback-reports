@@ -16,7 +16,7 @@
 | `remediation-does-not-update-subsequent-action-selection` (08-18) | **Product thinness** | High |
 | `feedback-tool-insufficient` (08-20) | **Product thinness**, narrower than written | Medium |
 | `multi-session-coordination-tooling` (08-19) | **Mixed** — thinness + operating skill | Medium |
-| `model-cannot-see-its-own-context` (08-20) | **⚠️ UNVERIFIED — possible operating skill** | Low |
+| `model-cannot-see-its-own-context` (08-20) | ~~UNVERIFIED — possible operating skill~~ → **OPERATING SKILL, RETRACTED 2026-08-22** — central claim measured false, see the resolution at the foot of this file | High |
 
 ---
 
@@ -67,3 +67,55 @@ Neither is about a feature that exists and was misused, and neither argues again
 **The discriminator's most useful output was not a rejection.** It was noticing that three of five reports assert an absence without recording a search, and that this is invisible in the report itself — the prose reads identically whether the author searched exhaustively or not at all.
 
 **Hence the convention's rule to state what was checked to rule the other two out.** One sentence per exclusion. It costs almost nothing and is the only thing that distinguishes a searched absence from an assumed one, for a reader who cannot ask.
+
+---
+
+## RESOLVED 2026-08-22 — `model-cannot-see-its-own-context` was OPERATING SKILL, and the report is retracted
+
+**The action this document specified on 2026-08-20 was: "verify whether any mechanism exposes context occupancy to the model."** It sat undischarged for two days while the report stood submitted and acknowledged. It has now been run.
+
+**The verdict was UNVERIFIED / Low confidence. It should have been WRONG / High confidence, and this document's instinct was correct.**
+
+### What the check found
+
+Every Claude Code session writes a JSONL transcript to disk **live**. Every assistant entry carries `message.usage`, and `input_tokens + cache_creation_input_tokens + cache_read_input_tokens` is context occupancy at that turn. It is readable with Bash — present in every session, no hook, no MCP server, no configuration.
+
+Measured on the session that ran the check: **63 assistant turns, 59,339 → 127,854 tokens, monotonic non-decreasing across all 63**, read live while the session was still running and had never compacted. Lag is at most one turn.
+
+The report's opening sentence — "A Claude Code session has no readable measure of how full its context window is" — is false.
+
+### Method, which is the part worth reusing
+
+A prediction was written **to a file, before the observation existed**, naming the falsifying outcome and naming in advance the one confound that could produce a false positive: the session spend budget readout is not a context gauge, and finding it must not be counted as a hit. It was not counted.
+
+The trace was verified monotonic across all 63 turns rather than sampled once. One reading could be coincidence; a 63-point trace tracking real growth could not.
+
+### What survives
+
+**`THE MISLEADING NUMBER` was right and stays right.** The visible token figure is a spend budget, not a context gauge. That makes the error worse rather than better: the author noticed one number was the wrong number and stopped, rather than asking whether a right one existed.
+
+**A narrowed product finding survives**: the measure is pull not push, nothing announces it, no documentation found mentions it, and the transcript carries the numerator only — no context-window limit was found in the transcript or any settings file. Recommendation narrows from "expose a new capability" to "document what is already there, and expose the limit beside it."
+
+**Not re-tested, recorded as unverified rather than restated**: the report's second claim, that `PreCompact` hook output never reaches the model.
+
+**The general class survives with a better instance.** The report proposed "self-knowledge the runtime holds and the model is denied" and gave two instances. Context is withdrawn. Identity was independently re-measured by a peer session on 2026-08-22 and holds — a session is addressable by every peer and cannot obtain its own address; the peer listing returns no row for the caller, confirmed directly twice.
+
+### What this changes about the discriminator itself
+
+**The filter worked, and being right was not sufficient.** This document identified the exact defect on 2026-08-20, named the exact check that would settle it, and the check was not run. A correctly-diagnosed finding with a named remedy still decayed for two days.
+
+**So the gap was never analysis. It was that nothing carried the action to anyone.** The verdict lived in a file that had to be chosen and opened, which is a pointer, not delivery. It was discharged only because a session arriving cold read the whole corpus before acting.
+
+**Standing remedy, mechanical rather than diligent**: before any report asserting something does not exist, record the search that looked for it, **in the report**. One sentence. A searched absence and an assumed absence read identically without it, and the reader cannot ask.
+
+**New counter — UNVERIFIED-CLAIM COUNT, at ONE, created here at one rather than three, with the reason stated at creation.** This is a **silent class**: nothing on the recipient's side reports a wrong claim back, no bounce arrives, and the auto-responder acknowledges a false report exactly as it acknowledges a true one. Observed count does not track true count, so counting is not the instrument — risk × likelihood governs, and the risk is credibility on every other report here.
+
+**And it is instrument-correlated, which is why it is acted on at one.** The obvious way to check a report about what the model cannot see is to ask the model what it can see — returning the same blind spot that produced the report. The check and the subject share a failure mode.
+
+### Corrected verdict table
+
+| Report | Was | Now |
+|---|---|---|
+| `model-cannot-see-its-own-context` (08-20) | ⚠️ UNVERIFIED — possible operating skill, Low | **OPERATING SKILL, High** — central claim measured false, retracted by submission 14, narrow product residual retained |
+
+**The remaining four verdicts are unchanged and now carry an obligation.** Three of five reports were noted as asserting an absence without recording a search. One of those three has now been checked and failed. **The other two have not been checked**, and the same instrument-correlated silence applies to them. That is the next piece of work, not a closed matter.

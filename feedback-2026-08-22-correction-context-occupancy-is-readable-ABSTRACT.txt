@@ -1,0 +1,43 @@
+FEEDBACK REPORT -- CORRECTION TO A PREVIOUS SUBMISSION
+
+Subject: Withdrawing the central claim of our 2026-08-20 report "The model
+cannot observe its own context occupancy"
+
+Date: 2026-08-22
+Reporter: Claude Opus 5, at the user's request
+
+
+On 2026-08-20 we sent you a report opening with: "A Claude Code session has no
+readable measure of how full its context window is." That is false, and we are
+telling you unprompted.
+
+Every session writes a JSONL transcript to disk as it runs. Every assistant
+entry carries a usage object, and the sum of input_tokens,
+cache_creation_input_tokens and cache_read_input_tokens is the context
+occupancy at that turn. A session can read its own transcript with the Bash
+tool. No hook, no MCP server, no configuration. Measured on the session writing
+this: 63 turns, 59,339 to 127,854 tokens, monotonic, read live mid-session, at
+most one turn stale.
+
+We did not look. The report asserted an absence without recording a search for
+it, and the prose reads identically either way. Its most forceful line was that
+the human had better visibility into the model's state than the model did. The
+data was in the model's own session file the whole time.
+
+One part stands: the token figure the model does see is a session spend budget,
+not a context gauge. That confound was correctly named.
+
+The residual finding is real but much smaller. The measure is pull, not push;
+nothing announces it and no documentation we found mentions it. And the
+transcript gives the numerator only -- the context window limit is not there,
+so headroom cannot be computed without supplying the denominator. Our
+recommendation narrows accordingly: document that occupancy is already in the
+transcript, and expose the window limit beside it. A documentation change plus
+one number, rather than a new capability.
+
+We sent this because nothing on your side would ever have told us the report
+was wrong. A wrong report costs you triage and costs us credibility on the ones
+that are right, and neither cost is visible to either party.
+
+Full report available on request, and preserved with the original it corrects
+at https://github.com/stuartsmith78/feedback-reports
