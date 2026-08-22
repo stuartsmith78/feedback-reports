@@ -1038,3 +1038,45 @@ STANDING CHANGE: scan as its own invocation, read the result, then push. The two
 must not share a command line, regardless of ordering within it.
 
 GATE-AFTER-ACTION COUNT: ONE, self-caught, no harm done.
+
+
+UPDATE TO THE ENTRY ABOVE: LAYER 1 WAS FILED UPSTREAM. THAT ENTRY SAID
+"NOTHING FILED" AND IS NOW STALE.
+
+Recorded as a correction rather than an edit, because a log that quietly
+updates itself cannot be trusted about anything else.
+
+The owning session's user approved the upstream request and it was filed
+against the third-party project as issue 3061, titled "RFA: bulk methods accept
+no bound, and unsupported params are silently ignored". It covers both halves --
+the bulk methods being all-or-nothing, and the silent-parameter behaviour, with
+the second flagged as the harder one to notice. The owning session reports it
+privacy-scanned the text across seven categories with zero hits, and searched
+for an existing issue before filing rather than assuming there was none.
+
+VERIFIED HERE RATHER THAN ACCEPTED: the issue exists, is open, and its title
+matches. A peer's claim about its own action is still a claim, and this one was
+cheap to check.
+
+THE ROUTING WORKED, AND IT IS WORTH NAMING BECAUSE IT IS THE FIRST CLEAN
+INSTANCE. This session found the layering and stated explicitly which part it
+had NOT established -- that the no-pagination claim was an inference from method
+names, not a read of the handler, because the authoritative source was not in
+the consumer's repo. The owning session had the source, closed that gap, and
+confirmed the inference. Each user authorised their own side: this repo's user
+raised the upstream route as a suggestion, the owning project's user approved
+the filing. Nobody filed on a peer's say-so, and nobody's judgement was
+delegated.
+
+ONE DISTINCTION THE OWNING SESSION ASKED TO HAVE RECORDED, and it is a good one:
+its PROTOCOL READING SURVIVES; only the CONCLUSION drawn from it is dead. The
+schema facts are correct and were independently verified here. What failed was
+the inference that a protocol absence is a defect, when the party who could have
+handled it was the tool author. Labelled now because a correct measurement
+attached to a wrong conclusion is easy to recycle by accident later, and the
+measurement is genuinely reusable as background.
+
+CANDIDATE STATUS from that session, so the corpus is unambiguous:
+  address rotation ..................... ALIVE, four independent instances
+  tool-result size negotiation ......... WITHDRAWN, re-routed upstream, filed
+  file-change provenance ............... ALIVE, corroborated firsthand here
