@@ -97,27 +97,19 @@ The original report proposed a class: self-knowledge the runtime holds and the
 model is denied. It offered two instances -- context occupancy, and a session
 being unable to discover its own identity. The first instance is now withdrawn.
 
-The second has been independently re-measured by a different session today, and
-it holds. A session can be addressed by every peer and cannot obtain its own
-address. The peer listing returns rows for other sessions and no row for the
-caller; we confirmed this directly, twice, in the session writing this
-correction. The consequences were measured rather than supposed: addresses
-rotated four or more times across three sessions in one working day; one
-rotation landed between a message being read and its reply being composed, so a
-correctly copied address was already stale and the send bounced; and a bounce
-was twice read as the recipient having ended when both sessions were live.
+The second holds. It was already reported to you as Finding 1 of our
+2026-08-19 multi-session coordination report, so we are not restating it here.
+Three sessions re-measured it independently today and confirmed it; we
+confirmed the central claim directly, twice, in the session writing this
+correction.
 
-There is a near-miss suggestion in the bounce text, and it is similarity
-dependent -- it recovered the address where old and new names shared a stem and
-produced nothing where the stem differed. So the fallback exists and does not
-cover the case that most needs it.
-
-We flag the boundary honestly: we found no documentation calling this
-asymmetry intentional, and absence of a stated intent is not evidence of absent
-intent. What argues for a gap rather than a decision is the shape. The
-information plainly exists and is published to every other session, so it is
-not being withheld for isolation or privacy. It is simply not routed back to
-the one party that needs it in order to record it anywhere durable.
+Two things about it are new since that report, and they are sent separately as
+a supplement rather than folded in here: the addresses also rotate during an
+exchange, and we now have a negative case in which a session that had written
+down that it cannot see its own address guessed one anyway and misrouted work.
+Neither belongs in a correction about context occupancy, and we would rather
+send you two short documents with distinct subjects than one that buries a new
+finding inside a retraction.
 
 
 WHY WE SENT THIS AT ALL

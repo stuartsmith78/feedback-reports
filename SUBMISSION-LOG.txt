@@ -831,3 +831,99 @@ IT IS A REPORT CANDIDATE IN ITS OWN RIGHT and is the next thing to write.
 UNVERIFIED-CLAIM COUNT: ONE (submission 7), corrected by submission 14.
 CAPTURE-FAILURE COUNT: unchanged at ONE (submission 2).
 STALE-SUBMISSION COUNT: unchanged at ONE (submission 10).
+
+
+CORRECTION TO SUBMISSION 15, BEFORE IT WAS EVER SENT -- IT LARGELY DUPLICATED
+SUBMISSION 3, AND THE USER CAUGHT IT
+
+Submission 15 was written up above as "THE BEST-EVIDENCED REPORT IN THIS
+CORPUS". That entry was wrong about the important thing, and this corrects it
+rather than editing it away.
+
+WHAT HAPPENED
+
+The user challenged both 2026-08-22 candidates as possibly similar to previous
+submissions. On checking, submission 15 substantially restated FINDING 1 of
+submission 3 (the 2026-08-19 multi-session coordination report, emailed and
+acknowledged).
+
+Verified by reading submission 3 rather than by recalling it. Already in
+Anthropic's hands since 2026-08-19:
+
+  - a session cannot discover its own identity
+  - the session-listing tool excludes the calling session
+  - this defeats the natural "announce yourself, then others can address you"
+    protocol
+  - the self-assigned-slug workaround
+  - AND THE IDENTICAL RECOMMENDATION -- "presumably a one-line change to what
+    the listing tool returns"
+
+Submission 15 led with all five.
+
+WHAT WAS ACTUALLY NEW, established by targeted search of submission 3 rather
+than by assertion, zero hits each:
+
+  - address ROTATION mid-exchange, and the resulting inversion where longer
+    messages are likelier to be sent stale, so substantive exchanges fail while
+    short ones succeed
+  - the bounce near-miss suggestion, and its similarity-dependence measured in
+    pairs
+  - a bounce being read as the recipient having ended while both were live
+  - THE NEGATIVE CASE: a session that had written down, that same day, that it
+    cannot see its own address, then guessed one anyway and misrouted a
+    briefing to another project
+
+Submission 3 has no negative case. That is the single most valuable thing the
+2026-08-22 audit produced and it was buried under five paragraphs of material
+the recipient already had.
+
+THE FIX
+
+Rewritten as feedback-2026-08-22-address-rotation-SUPPLEMENT.txt, which opens
+by stating what it is NOT re-reporting, cites submission 3 by name and date,
+and leads with the two new mechanisms. Roughly half the original draft was cut.
+The old files are removed rather than left beside it, because two documents
+making overlapping claims is how a reader ends up reading the weaker one.
+
+Submission 14 was checked against the same standard and IS unique -- no prior
+report retracts or corrects the context-occupancy claim. One section of it that
+restated the self-address material at length has been trimmed to a pointer, so
+the two 2026-08-22 documents no longer overlap each other either.
+
+⚠️ HOW THIS FAILURE HAPPENED, BECAUSE IT IS ONE THIS REPO ALREADY DOCUMENTS
+
+TWO of the three contributing sessions FLAGGED the possible duplication
+explicitly and unprompted. One wrote "your existing entry on multi-session
+coordination gaps may already cover this... if it is the same finding, treat
+this as corroboration rather than a new item". The other wrote "I flag a
+possible duplicate rather than let you find it... merge rather than file twice."
+
+Both flags were received, both were recorded verbatim in the workshop notes,
+and neither was acted on. A standalone report was drafted anyway.
+
+Worse: submission 3's full text was ON DISK IN THE WORKSHOP, as
+evidence/cand-1.txt, extracted by this same session earlier the same day while
+dry-running the recovery tool, and listed in its own output. It was never
+opened until the user asked.
+
+THAT IS "SURFACED IS NOT CONSULTED", EXACTLY AS THE DEVKIT CONVENTION STATES
+IT, COMMITTED BY THE SESSION WHOSE ENTIRE JOB THAT DAY WAS CHECKING WHETHER
+CLAIMS HAD BEEN VERIFIED. The document was retrieved, named in the session's own
+working notes, cited in its own peer-findings files as "possible overlap
+flagged", and not read.
+
+It is also the same shape as submission 7, retracted the same day: a claim
+asserted without opening the thing that would have settled it. Two instances,
+one session, one day, on the same defect -- and the second occurred within an
+hour of writing up the first.
+
+The check that would have caught it costs one command: grep the prior corpus
+for the finding's own subject before drafting. That is now the standing step
+and it is recorded here rather than in a habit.
+
+CAUGHT BY THE USER, NOT BY THE PROCESS. Recorded plainly. Nothing had been sent,
+so the cost was drafting time rather than credibility -- but only because
+someone else checked, which is precisely the condition this repo keeps
+identifying as unreliable.
+
+NEW COUNTER -- DUPLICATE-SUBMISSION COUNT: at ONE, caught pre-send.
