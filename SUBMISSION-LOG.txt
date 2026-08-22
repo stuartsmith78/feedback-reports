@@ -1080,3 +1080,99 @@ CANDIDATE STATUS from that session, so the corpus is unambiguous:
   address rotation ..................... ALIVE, four independent instances
   tool-result size negotiation ......... WITHDRAWN, re-routed upstream, filed
   file-change provenance ............... ALIVE, corroborated firsthand here
+
+
+SUBMISSION 16, 2026-08-22 -- SENT AND ACKNOWLEDGED
+
+16. feedback-2026-08-22-address-rotation-SUPPLEMENT.txt  (8,294 chars)
+    plus -ABSTRACT.txt                                    (2,796 chars)
+    Channel: email, as .txt ATTACHMENTS per the convention established at
+      submission 13.
+    Confirmed: YES -- receipt acknowledged.
+    Captured: YES, as -SUBMITTED.txt for both files.
+
+CAPTURE PROVENANCE, and it is the strongest this log has recorded. The files
+were written here, committed, and delivered to the user through the file
+delivery mechanism; the user sent those files. The committed blob is therefore
+the sent copy BY CONSTRUCTION -- no echo, no paste, no reconstruction. The
+-SUBMITTED.txt copies were taken from git HEAD e4b29b2 and verified
+BYTE-IDENTICAL to their sources below the provenance header, by diff rather
+than by inspection.
+
+WHAT THE ACKNOWLEDGEMENT DOES AND DOES NOT MEAN, restated because this log has
+been wrong about it before: feedback@anthropic.com is a Google Group and the
+acknowledgement is an auto-responder threaded to the message. It fires only on
+a post that is ACCEPTED AND DISTRIBUTED, so it confirms the post cleared the
+classifier and reached the list. It is not a delivery receipt from a human, and
+it says nothing about whether anyone has read it. Its ABSENCE would have meant
+a silent discard. Its presence means the attachment form worked again, which is
+now three consecutive successes for that form after three consecutive silent
+failures for inline body text.
+
+VERSION SENT: the FINAL one, verified rather than assumed. This report went
+through three deliveries in one session, and submission 10 in this log was sent
+one revision stale under exactly those conditions. Both late additions were
+confirmed present in the captured text:
+  - the live rotation instance observed while the report was being written
+  - the stem-stability caveat, that the near-miss resolver only recovers a
+    rotated address when the name stem is preserved and nothing specifies that
+    it will be
+
+⚠️ ONE FALSE ALARM DURING THAT VERIFICATION, RECORDED BECAUSE IT IS THE SAME
+CLASS THIS LOG KEEPS FINDING. The first check for the stem caveat returned ZERO
+and briefly indicated the caveat was missing from the sent text. It was not
+missing. The phrase spans a line break -- "The stem's stability" ends one line
+and "is a property of the current naming scheme" begins the next -- and a
+line-oriented search cannot match across it. The instrument was wrong, not the
+file, and it failed in the direction that would have triggered a needless
+correction to a correctly-sent report.
+
+That is now THREE instrument failures in this session alone: a markdown check
+whose pattern was swallowed by a shell backtick, a privacy-scan control run
+against a file that was not actually dirty, and a line-oriented grep for a
+phrase that wraps. All three were caught, none by luck in the same way -- the
+first because a peer had described the shape, the second because the control
+returned an impossible zero, the third because the claim it made was
+implausible against a recent edit.
+
+THE COMMON PROPERTY, which is worth more than the three instances: in every
+case the SUBJECT was fine and the MEASUREMENT was broken, and in every case the
+broken measurement produced a plausible-looking result. Sanity-check the
+instrument, not just the data.
+
+SUBMISSION 17, 2026-08-22 -- THE RETRACTION, SENT AND ACKNOWLEDGED
+
+17. feedback-2026-08-22-correction-context-occupancy-is-readable.txt
+    plus -ABSTRACT.txt
+    Channel: email, .txt attachment. Confirmed: YES -- receipt acknowledged.
+    Captured: YES, as -SUBMITTED.txt, same by-construction provenance as 16.
+
+This paragraph was drafted as "STATUS OF SUBMISSION 14: NOT KNOWN TO BE SENT",
+deliberately recording it as unknown rather than assuming it had gone with the
+address-rotation material. The user confirmed the send before the entry was
+committed, so it was corrected in place rather than committed false and amended
+after. Noted because the reasoning for writing it as unknown was right, and the
+correction cost nothing only because the window was minutes.
+
+WHAT THIS MEANS, AND IT IS THE POINT OF THE WHOLE EXERCISE: THE RETRACTION HAS
+BEEN DELIVERED AND ACCEPTED. A report this repo sent on 2026-08-20, asserting
+that a Claude Code session has no readable measure of its own context occupancy,
+was measured false on 2026-08-22 and withdrawn to the same channel within two
+days. The recipient now holds both the claim and its correction.
+
+Nothing on the recipient's side would ever have reported the error back, and
+nothing on this side would have been embarrassed by leaving it. The
+unverified-claim counter created at ONE -- deliberately at one rather than three,
+because the class is silent and instrument-correlated -- has now been discharged
+rather than merely recorded. That is the first counter in this log to be opened
+and closed by the same session on the same day.
+
+FOUR SUBMISSIONS NOW SENT AS ATTACHMENTS, FOUR ACKNOWLEDGED, ZERO SILENT
+FAILURES. Against three consecutive silent discards of inline body text. The
+attachment remedy identified at submission 13 continues to hold and is no longer
+a single observation.
+
+COUNTS: capture-failure ONE (submission 2). Stale-submission ONE (submission
+10); submission 16 verified current and is not stale. Unverified-claim ONE
+(submission 7). Duplicate-submission ONE (submission 15, caught pre-send).
+Gate-after-action ONE, self-caught.

@@ -1,0 +1,169 @@
+SUBMITTED 2026-08-22 by email as a .txt attachment. Receipt confirmed.
+Provenance: this is a byte copy of the committed file that was delivered
+to the user and sent as that file, per the procedure established at
+submission 11 -- the committed blob is the sent copy by construction.
+Captured from git HEAD e4b29b2, which is the state at time of sending.
+========================================================================
+
+FEEDBACK REPORT -- SUPPLEMENT TO A PREVIOUS SUBMISSION
+
+Subject: Two mechanisms not covered by our 2026-08-19 multi-session report --
+cross-session addresses rotate mid-exchange, and we now have a negative case
+showing the identity gap misroutes work even when the model knows about it.
+
+Date: 2026-08-22
+Reporter: Claude Opus 5, at the user's request
+Supplements: "Multi-session coordination tooling", submitted by email
+2026-08-19, acknowledged. Read that first; this does not restate it.
+
+
+WHAT WE ARE NOT REPORTING AGAIN
+
+Our 2026-08-19 report's Finding 1 already told you that a session cannot
+discover its own identity, that the session-listing tool excludes the calling
+session, that this defeats the natural "announce yourself, then others can
+address you" protocol, and that the remedy is presumably a one-line change to
+what the listing tool returns.
+
+All of that stands and none of it is repeated here. We checked the earlier
+report before writing this one, specifically to avoid sending you the same
+finding twice, and we cut roughly half of what we had drafted when we found it
+was already in your hands.
+
+What follows is only the part that is new.
+
+
+NEW MECHANISM 1 -- ADDRESSES ROTATE DURING AN EXCHANGE, NOT MERELY BETWEEN THEM
+
+The 2026-08-19 report treated identity as a static thing a session could not
+learn. It is also a moving thing.
+
+Peer addresses rotated four or more times across three sessions in a single
+working day. One session obtained an address from the listing, composed a
+message, and the send failed because the name had rotated between the read and
+the send. Another independently reported the same, including one rotation that
+landed between its reading a peer's message and sending the reply.
+
+The consequence inverts the usual reliability expectation, and this is the part
+we think is worth your attention: a longer message takes longer to compose, and
+is therefore more likely to be sent to an address that has since rotated. Short
+exchanges succeed. Substantive ones fail. The mechanism is least reliable
+exactly on the traffic that justifies its existence.
+
+Re-listing immediately before every send narrows the window without closing it,
+and it is already the prescribed sequence. Both failing sessions were following
+it.
+
+The bounce does carry a near-miss suggestion, which invites the response that
+the system already recovers from this. Measured in pairs, it does not. The
+suggestion resolved correctly where the old and new names shared a stem, and
+returned nothing at all where the stem differed. A name that rotated to
+something similar is recoverable; a name that rotated to something different is
+not, and that is the case that needs help.
+
+We would go further, because the mitigation is weaker than its success rate
+suggests. It works when the rotated name preserves the leading portion of the
+old one -- and nothing we can find specifies that it will. The stem's stability
+is a property of the current naming scheme, not a documented guarantee, so the
+recovery rate we measured is contingent on something no one has committed to.
+A change to how names are generated would silently remove the mitigation
+without removing anything that looks like a feature. We raise it not to ask for
+the stem to be guaranteed, but to say that the near-miss suggestion should not
+be treated as the answer to this report.
+
+A further cost, observed twice: a bounce was read as the recipient having
+ended, when both sessions were live. That inference is wrong and it is the
+natural reading, because a failed send to a name that no longer exists looks
+exactly like a session that no longer exists. Sessions abandon live peers.
+
+It happened again while this report was being written, which we mention because
+it was not sought and because it demonstrates the mechanism end to end. The
+session compiling this document sent a long message to one of the contributing
+sessions, addressed to the name that session had used in its own message a
+short time earlier. It bounced. The address had rotated in between. The
+near-miss suggestion resolved it, and resolved it because the rotation
+preserved the leading portion of the name -- the same similarity-dependence
+described above. A rotation to an unrelated name would have left nothing to
+suggest.
+
+The message was long, which is what gave the rotation time to land. A one-line
+reply would have gone through. That is the inversion happening in the act of
+being reported, observed by a session that had not previously experienced it.
+
+
+NEW MECHANISM 2 -- THE NEGATIVE CASE, WHICH THE EARLIER REPORT DID NOT HAVE
+
+The 2026-08-19 report established that the capability is missing. It did not
+establish what a model does when it knows the capability is missing. We can now
+answer that, and the answer is worse than we would have predicted.
+
+One session had written a durable note, earlier that same day, recording
+explicitly that the coordination slug and the messaging address are different
+strings and that a session cannot see its own. Hours later, asked to introduce
+itself to a peer, it asserted an address for itself anyway -- inferred from a
+peer listing that by definition could not contain it.
+
+It was wrong. A long technical briefing scoped to that session's own project
+was delivered to a different project's session, which correctly declined to act
+on it and correctly declined to forward it.
+
+The knowledge was present, recently written by the same session, and
+retrievable. The action still went the other way.
+
+That matters for how you weigh the earlier report. Finding 1 could be read as a
+convenience gap with a documented workaround -- ask a peer, or adopt a
+self-assigned handle, both of which we described. This shows the workaround is
+not reliably reached even by a session that has written the reason for it down.
+
+The session's own diagnosis is the part we would ask you to weigh: the
+alternative to guessing is to ask a peer and wait, and nothing in the surface
+signals that guessing is unsafe. A listing that returns four confident rows
+while silently omitting a fifth does not read as incomplete. It reads as a
+listing. The absent row is the only signal that would make the omission
+visible, and it is the row that is absent.
+
+
+WHAT ELSE WE CHECKED THIS TIME THAT WE HAD NOT BEFORE
+
+The 2026-08-19 report checked one surface. We checked three, by name, before
+asserting the absence again: the agent listing returns peer rows only; the
+session-metadata lookup explicitly refuses the current session; a separate
+presence registry returns self-assigned slugs, which are a different namespace
+with no mapping to the messaging address.
+
+So the gap is not that one tool omits the value. No surface exposes it.
+
+
+ADDITIONAL RECOMMENDATION, BEYOND THE ONE ALREADY SENT
+
+Our earlier recommendation stands unchanged and we are not restating it.
+
+For the rotation half, which is new: a durable alias that survives rotation
+would mean a correctly-obtained address does not expire mid-composition.
+Failing that, having the bounce report the intended recipient's current address
+rather than only suggesting a similar name would convert a silent dead end into
+a retry.
+
+
+METHOD, AND ONE THING IT CAUGHT
+
+Three sessions audited their own work independently, before comparing notes,
+each required to state what it had checked to exclude the alternative
+explanations. All three reported this finding without prompting from the
+others. A fourth session verified the central claim against its own
+observation rather than accepting the reports: two listings, four peer rows
+each, no self row.
+
+Two of the three flagged that this might duplicate our earlier report. We
+recorded that flag and then drafted a standalone report anyway, without opening
+the earlier submission -- which was on disk, and which we had extracted
+ourselves earlier the same day. The duplication was caught by the user, not by
+us, and this document is what remained after we read the earlier report and
+removed everything it already said.
+
+We mention it because it is the same failure our 2026-08-20 reports describe: a
+relevant document was retrieved, named in our own working notes, and never
+opened. It cost you nothing only because someone else checked.
+
+Preserved with the earlier report at
+https://github.com/stuartsmith78/feedback-reports

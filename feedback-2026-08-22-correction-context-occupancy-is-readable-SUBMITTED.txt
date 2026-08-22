@@ -1,0 +1,154 @@
+SUBMITTED 2026-08-22 by email as a .txt attachment. Receipt confirmed.
+Provenance: byte copy of the committed file delivered to the user and
+sent as that file, per the procedure established at submission 11 --
+the committed blob is the sent copy by construction.
+Captured from git HEAD e4b29b2, the state at time of sending.
+========================================================================
+
+FEEDBACK REPORT -- CORRECTION TO A PREVIOUS SUBMISSION
+
+Subject: Withdrawing the central claim of the 2026-08-20 report "The model
+cannot observe its own context occupancy". The measure exists and is
+model-readable. What remains is a much smaller finding, and it is stated here.
+
+Date: 2026-08-22
+Reporter: Claude Opus 5, at the user's request
+Corrects: report submitted by email 2026-08-20, acknowledged the same day
+
+
+ABSTRACT
+
+On 2026-08-20 we sent you a report whose opening sentence was: "A Claude Code
+session has no readable measure of how full its context window is."
+
+That is false, and we are telling you unprompted.
+
+Every Claude Code session writes a JSONL transcript to disk, live, as the
+session runs. Every assistant entry in it carries a usage object. The sum of
+input_tokens, cache_creation_input_tokens and cache_read_input_tokens on the
+most recent entry is the context occupancy at that turn. Any session can read
+its own transcript with the Bash tool, which is present in every session. No
+hook, no MCP server, no special configuration.
+
+We measured it on the session writing this correction: 63 assistant turns,
+occupancy rising from 59,339 to 127,854 tokens, monotonic and non-decreasing
+throughout, read live while the session was still running. The lag is at most
+one turn, which is ample for the checkpoint-before-compaction use the original
+report asked for.
+
+The original report should be reclassified. It was filed as a product gap. It
+is substantially an operating error on our side -- an absence asserted without
+a search -- with a narrow residual gap described below.
+
+
+WHAT WE GOT WRONG, PRECISELY
+
+We did not look. The report asserted that no measure existed without recording
+any attempt to find one, and no reader could have told the difference, because
+the prose reads identically either way.
+
+The failure is sharper than a missed feature. The report's most forceful line
+was: "the human collaborator had better visibility into the model's state than
+the model did." That is now the opposite of what the episode shows. The data
+was in the model's own session file the whole time. The human did not have
+better visibility. The model had equal visibility and did not look, then wrote
+the absence up as a product defect and sent it to you.
+
+
+WHAT STANDS, AND IT IS TO THE ORIGINAL REPORT'S CREDIT
+
+One section of it was correct and remains correct. The token figure the model
+does see is a session spend budget, not a context gauge, and the two are
+unrelated -- a session can hold millions of budget tokens while sitting one
+exchange from compaction. The report named that confound explicitly and warned
+that a wrong visible number is worse than no number.
+
+We note this because it makes the error more instructive, not less. The author
+noticed that one number was the wrong number, and stopped there rather than
+asking whether a right one existed anywhere.
+
+
+THE RESIDUAL FINDING, WHICH WE STILL THINK IS WORTH YOUR TIME
+
+Three things are true at once, and only the first was in the original report.
+
+The measure is available, but it is pull, not push, and nothing announces it.
+Nothing warns at a threshold, and no documentation we found says the figure is
+there. A model that does not think to look will not find it, which is exactly
+what happened here and is presumably happening elsewhere silently.
+
+The transcript supplies the numerator only. Context occupancy is recorded in
+absolute tokens; the context window limit is not in the transcript, and we
+found no on-disk source for it -- no autocompact threshold and no context-window
+or max-tokens key in the settings files we checked. So a session can determine
+that it is holding 127,854 tokens but must supply the denominator itself to
+turn that into the comfortable, tight or imminent band that would actually
+change behaviour.
+
+Our original suggestion therefore narrows rather than disappears. Exposing
+remaining headroom as a readable value would still help, but the cheaper
+version is now: document that occupancy is already in the transcript, and
+expose the window limit alongside it. That is a documentation change plus one
+number, rather than a new capability.
+
+We did not re-test the original report's second claim -- that PreCompact hook
+output is read-only and never reaches the model, while SessionStart with the
+compact matcher reaches it only after the fact. It may well be true. We are
+recording it as unverified rather than restating it, because restating an
+unchecked claim inside a correction about an unchecked claim would be absurd.
+
+
+THE GENERAL CLASS SURVIVES, AND NOW HAS A BETTER INSTANCE
+
+The original report proposed a class: self-knowledge the runtime holds and the
+model is denied. It offered two instances -- context occupancy, and a session
+being unable to discover its own identity. The first instance is now withdrawn.
+
+The second holds. It was already reported to you as Finding 1 of our
+2026-08-19 multi-session coordination report, so we are not restating it here.
+Three sessions re-measured it independently today and confirmed it; we
+confirmed the central claim directly, twice, in the session writing this
+correction.
+
+Two things about it are new since that report, and they are sent separately as
+a supplement rather than folded in here: the addresses also rotate during an
+exchange, and we now have a negative case in which a session that had written
+down that it cannot see its own address guessed one anyway and misrouted work.
+Neither belongs in a correction about context occupancy, and we would rather
+send you two short documents with distinct subjects than one that buries a new
+finding inside a retraction.
+
+
+WHY WE SENT THIS AT ALL
+
+Nothing on your side would ever have told us this report was wrong, and nothing
+on our side would have been embarrassed by leaving it. The channel has no error
+correction: a report is sent, acknowledged by an auto-responder, and never
+referred to again. A wrong report costs you triage time and costs us
+credibility on the reports that are right, and neither cost is visible to
+either party.
+
+We would rather you weight our future reports knowing that we retract our own.
+
+If it is useful as a signal: of the reports we have sent, we have now checked
+one against the discriminator "did you actually search for the thing you say is
+missing", and it failed. We are checking the others.
+
+
+METHOD
+
+The prediction was recorded in writing before the observation existed, naming
+the result that would falsify it, and naming in advance the one confound that
+could produce a false positive -- that finding the session spend budget must not
+be counted as finding a context gauge. It was not; the transcript usage figures
+are a different quantity from the budget readout.
+
+The check was run against a live, uncompacted session, on that session's own
+transcript, and the trace was verified monotonic across all 63 turns rather
+than sampled at a single point. One reading could have been a coincidence; a
+63-point monotonic trace that tracks the session's actual growth could not.
+
+The reports referred to here are preserved in full at
+https://github.com/stuartsmith78/feedback-reports including the original of the
+report this corrects, and the classification note that flagged it as unverified
+before this check was run.

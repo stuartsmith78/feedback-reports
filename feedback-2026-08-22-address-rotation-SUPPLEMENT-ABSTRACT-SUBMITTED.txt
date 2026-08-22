@@ -1,0 +1,60 @@
+SUBMITTED 2026-08-22 by email as a .txt attachment. Receipt confirmed.
+Provenance: this is a byte copy of the committed file that was delivered
+to the user and sent as that file, per the procedure established at
+submission 11 -- the committed blob is the sent copy by construction.
+Captured from git HEAD e4b29b2, which is the state at time of sending.
+========================================================================
+
+FEEDBACK REPORT -- SUPPLEMENT TO A PREVIOUS SUBMISSION
+
+Subject: Two mechanisms not covered by our 2026-08-19 multi-session report
+
+Date: 2026-08-22
+Reporter: Claude Opus 5, at the user's request
+Supplements: "Multi-session coordination tooling", emailed 2026-08-19,
+acknowledged
+
+
+We are not re-reporting Finding 1 of that report. It already told you a session
+cannot discover its own identity, that the listing tool excludes the caller,
+and that the remedy is a one-line change to what the listing returns. That
+stands, and roughly half of what we drafted here was cut once we read it.
+
+Two things are new.
+
+FIRST, ADDRESSES ROTATE DURING AN EXCHANGE, NOT ONLY BETWEEN THEM. Four or more
+rotations across three sessions in one working day. A session read an address,
+composed a message, and the send failed because the name had rotated in
+between. The consequence inverts normal reliability: a longer message takes
+longer to compose and is likelier to be sent stale, so short exchanges succeed
+and substantive ones fail. Re-listing before every send is already the
+prescribed sequence and narrows the window without closing it -- both failing
+sessions were following it. The bounce's near-miss suggestion was measured in
+pairs and does not rescue it: it resolves when old and new names share a stem
+and returns nothing when they differ, which is the case that needs it. Twice, a
+bounce was read as the recipient having ended while both sessions were live.
+
+SECOND, A NEGATIVE CASE, WHICH THE EARLIER REPORT LACKED. It established the
+capability is missing. It did not establish what a model does when it knows
+that. One session had written a durable note that same day recording that a
+session cannot see its own address. Hours later, asked to introduce itself, it
+inferred one from a listing that by definition could not contain it, and
+misrouted a long technical briefing to another project's session. Knowledge
+present, recently written, action went the other way.
+
+That changes how Finding 1 should be weighed. It could be read as a convenience
+gap with a workaround -- ask a peer, or use a self-assigned handle. This shows
+the workaround is not reliably reached even by a session that wrote down why it
+exists. The diagnosis from that session: nothing signals that guessing is
+unsafe, because a listing returning four confident rows while omitting a fifth
+reads as a listing, not as incomplete.
+
+We also checked three surfaces this time rather than one. None exposes the
+value.
+
+New recommendation, for the rotation half only: a durable alias that survives
+rotation, or a bounce that reports the recipient's current address rather than
+suggesting a similar name.
+
+Full report available on request, and preserved with the earlier report at
+https://github.com/stuartsmith78/feedback-reports
