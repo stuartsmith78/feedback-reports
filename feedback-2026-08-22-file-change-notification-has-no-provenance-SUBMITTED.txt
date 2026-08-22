@@ -1,0 +1,141 @@
+SUBMITTED 2026-08-22 by email as a .txt attachment. Receipt confirmed.
+Provenance: byte copy of the committed file delivered to the user and
+sent as that file, per the procedure established at submission 11 --
+the committed blob is the sent copy by construction.
+Captured from git HEAD 410f53c, the state at time of sending.
+========================================================================
+
+FEEDBACK REPORT
+
+Subject: The file-changed-on-disk notification cannot distinguish the model's
+own edit from an external one, which is the only discrimination it exists to
+provide. It fires constantly on self-inflicted changes, and the genuine case
+arrives looking identical.
+
+Date: 2026-08-22
+Reporter: Claude Opus 5, at the user's request
+Observed in two concurrent sessions on one machine, independently
+
+
+ABSTRACT
+
+When a file changes on disk after the model has read it, a notification reports
+the change and advises treating the new content as current. Its text notes that
+the change is "usually deliberate".
+
+In a session that edits files through shell commands rather than a dedicated
+file-editing tool, this fires on the model's own writes, repeatedly. One session
+received roughly a dozen in a single working day and every one was self-caused.
+The session compiling this report received them for its own shell redirects into
+its own files, and can state that they were self-caused with certainty rather
+than by inference: it was the only session registered against that project for
+the entire day, so no other party could have written those files.
+
+The noise is not the finding. The notification's entire value lies in warning
+about edits the model did NOT make -- a concurrent session, a build step, a user
+editing in another window. It cannot distinguish those from the model's own. So
+in the one situation it exists for, it arrives wearing the same clothes as a
+dozen false alarms, and the reasonable learned response to a dozen false alarms
+is to stop reading them.
+
+The mechanism is loudest exactly when it carries least information.
+
+
+WHY THIS IS NOT A NOISE COMPLAINT, AND THE EARLIER REPORT THAT MAKES THE POINT
+
+We sent you a report on 2026-08-20 describing a concurrent-session incident: a
+session committed a shared file with a path-scoped commit chosen deliberately as
+a safety measure, and absorbed a second session's uncommitted edit to that same
+file, under a commit message asserting the opposite had happened. We are not
+resending it and this is a different finding, but the two meet at a point worth
+naming.
+
+That incident is precisely the case this notification exists to catch. A file
+the model had read was changed by another party, and the model proceeded on a
+stale understanding of it.
+
+A notification that could say "this file was changed by something other than
+you" would have been the warning. A notification that fires equally on the
+model's own writes is not that warning, and cannot become it by being read more
+carefully, because the information needed to act on it is not in the message.
+
+So the cost is not attention. The cost is that the product actively supports
+concurrent sessions against one working directory -- we have four running as we
+write this -- and ships a mechanism that detects the resulting hazard without
+being able to report it.
+
+
+WHAT THE NOTIFICATION ALREADY KNOWS, AND DOES NOT SAY
+
+The text acknowledges the self-inflicted case in its own wording: it says the
+change is usually deliberate, and advises taking the new content as current.
+
+That is the part we would ask you to weigh. The common case was anticipated well
+enough to be described in the message. The rare case was not separated from it.
+Anticipating one and not distinguishing the other is what makes this a gap
+rather than a decision -- if the self-inflicted case were unforeseen, the wording
+would not mention it.
+
+The runtime is also the party best placed to know. A file written by the model's
+own tool call was written by a process the harness invoked and can observe. The
+model cannot determine this from inside; the harness does not have to infer it.
+
+
+WHAT WE CHECKED TO RULE OUT THE ALTERNATIVES
+
+Against operating skill -- that the model should simply track its own writes:
+this is stated as an absence we could not search rather than one we searched and
+failed to find, and we want that distinction on the record because we have
+recently sent you a correction for getting it wrong the other way. Nothing in
+the notification, and nothing in the surrounding tool surface we could find,
+reports which process wrote the file. A session could in principle remember
+every write it made and diff that against the notifications it receives, but
+that reconstructs from the model's own memory the fact the runtime already
+holds, and it fails precisely when the model's memory is unreliable, which is
+the condition under which the warning matters.
+
+Against design choice: we found no documentation describing the undifferentiated
+behaviour as intended. As above, absence of a stated intent is not evidence of
+absent intent. What argues for a gap is the wording acknowledging the case it
+does not separate.
+
+We also considered whether this is simply the cost of editing via shell rather
+than a dedicated file tool, and whether the answer is "use the file tool". That
+narrows the trigger without addressing the finding: a session that never edits
+via shell still cannot distinguish a peer's edit from a build step's, and the
+notification would still be the only signal either way.
+
+
+RECOMMENDATION
+
+State the provenance in the notification. A single field distinguishing "changed
+by one of your own tool calls" from "changed by something else" would convert a
+message that is currently ignorable into the warning it was built to be.
+
+If provenance is not always determinable, saying so for the unknown cases is
+still strictly better than saying nothing, because the self-caused majority
+would then be identifiable and the remainder would carry real signal.
+
+We are not asking for the notification to be suppressed on self-caused changes.
+Suppression would lose the confirmation that a write landed. Labelling costs
+nothing and keeps both.
+
+
+ONE LIMIT ON OUR OWN EVIDENCE
+
+We could not produce a reliable count of these notifications from a session
+transcript, and the reason is worth recording rather than hiding. Two counting
+attempts disagreed -- one returned an inflated number and one returned zero --
+because the transcript contains this session's own commands, notes and draft
+paragraphs discussing the notification, and those match any search for its
+wording. A corpus that records the investigation of a thing will return the
+investigation as instances of the thing.
+
+The figures above therefore rest on direct observation and on the other
+session's own count, not on a transcript search. The certainty that our own
+instances were self-caused rests on the registry showing a single session
+against that project, which is a fact about the environment rather than about
+the transcript.
+
+Preserved with the earlier report it refers to at
+https://github.com/stuartsmith78/feedback-reports

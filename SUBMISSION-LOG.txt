@@ -1312,3 +1312,83 @@ SCAN, run as its own invocation and read before anything was written about it.
 Zero hits on both files across paths, UUIDs, email, session slugs, project and
 repository names, device identifiers and secrets. Zero markdown markers across
 four classes. Control on a known-dirty file fired on all four categories.
+
+
+SUBMISSION 18 SENT AND ACKNOWLEDGED; SUBMISSION 19 IN FLIGHT
+
+18. feedback-2026-08-22-verification-claimed-before-performed.txt + -ABSTRACT
+    Channel: email, .txt attachment. Confirmed: YES -- receipt acknowledged.
+    Captured: YES, both files, from git HEAD 410f53c. Verified BYTE-IDENTICAL
+    to source below the provenance header by diff.
+
+    VERSION VERIFIED, not assumed. Confirmed present in the sent text: both of
+    this session's own failures (the backtick-swallowed scan pattern, and the
+    control test run against a file that did not contain what it was
+    controlling for), and the section naming the overlap with the 2026-08-18
+    and 2026-08-20 reports. The report went out complete, including the parts
+    least flattering to its author.
+
+19. feedback-2026-08-22-file-change-notification-has-no-provenance.txt
+    plus -ABSTRACT.txt
+    Channel: email, .txt attachment. Confirmed: YES -- receipt acknowledged.
+    Captured: YES, both files, verified BYTE-IDENTICAL to source by diff.
+
+    This entry was written as "SUBMITTED, ACKNOWLEDGEMENT NOT YET SEEN", with a
+    standing instruction to treat continued silence as a FAILED SEND rather than
+    a slow responder, and to take no capture until delivery was confirmed so that
+    no -SUBMITTED.txt in this repo could ever assert a delivery that did not
+    happen. The acknowledgement arrived before the entry was committed, so it was
+    corrected in place.
+
+    THE PRECAUTION IS KEPT ON THE RECORD RATHER THAN DELETED WITH THE CONDITION
+    THAT PROMPTED IT. It is the second time today an entry drafted as unknown was
+    overtaken by confirmation within minutes, and on both occasions writing it as
+    unknown was correct at the time. Every "Confirmed: not yet" in the early part
+    of this file was an unresolved claim about the instrument read as a fact about
+    delivery, and submission 8 sat wrongly marked for two days on exactly that
+    error. A precaution that turns out to be unnecessary is not a precaution that
+    was wrong.
+
+RUNNING TALLY OF THE ATTACHMENT REMEDY: FIVE SENDS, FIVE ACKNOWLEDGED, ZERO
+SILENT FAILURES. Against three consecutive silent discards of the same report as
+inline body text before the remedy was found. The remedy identified at
+submission 13 from a single observation now has five, and the mechanism behind it
+-- that the Google Groups classifier applies to body text and not to attachment
+payloads -- has not been contradicted once.
+
+FIFTH INSTRUMENT FALSE-NEGATIVE OF THE SESSION, caught during the verification
+above. A check for one of the report's own paragraphs returned ZERO and briefly
+indicated the sent text was missing the passage describing this session's bad
+control test. The passage was present. The search phrase was wrong -- this
+session mis-recalled its own wording, searching for "did not contain the things
+it was controlling for" where the file reads "turned out not to contain the
+things it was controlling for".
+
+Same direction as the stem-caveat false negative earlier today: the broken check
+claimed something was MISSING from a report that was in fact complete, which
+would have prompted a needless correction to a correctly-sent document. Five
+instrument failures in one session across five distinct mechanisms -- a swallowed
+backtick, an undirty control, a line-wrapped phrase, a too-loose filter paired
+with a too-tight one, and now a misremembered literal. In every case the subject
+was sound and the measurement was not.
+
+That is the exact subject of submission 18, occurring during the verification of
+submission 18's own delivery.
+
+USER RULING ON A FLAGGED PRIVACY QUESTION, 2026-08-22, recorded so it is not
+re-litigated by a later session.
+
+The question raised: this log names the devkit twice and Bitburner once, in a
+public repository. Flagged to the user rather than decided by the session,
+because the convention holds that privacy and security concerns go to the user
+directly regardless of who approved the post -- the party granting approval is
+not the party carrying the risk.
+
+USER'S DECISION: no concern. Low risk surface, no true exposure of personal
+information. The mentions stand.
+
+Recorded as a decision with its reasoning rather than as silence. A future
+session encountering these names in a public file would otherwise face the same
+question with no way to tell whether it had been considered and cleared or never
+noticed at all -- which is the same searched-versus-assumed absence this corpus
+keeps reporting, applied to a judgement call instead of a claim.
