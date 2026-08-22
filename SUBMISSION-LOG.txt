@@ -1249,3 +1249,66 @@ secrets. Zero markdown markers across five separate classes. Control on a
 known-dirty file fired on all four categories; markdown control on a real
 markdown file returned 13 headings, 38 bold runs and 40 pipes. Both instruments
 proven capable of a non-zero result before their zero was believed.
+
+
+SUBMISSION 19, 2026-08-22 -- PENDING. FILE-CHANGE NOTIFICATION HAS NO
+PROVENANCE.
+
+19. feedback-2026-08-22-file-change-notification-has-no-provenance.txt
+    plus -ABSTRACT.txt
+    Channel: email, .txt attachment. Not yet sent.
+    Captured: by construction -- delivered to the user as a file.
+
+THE FINDING. The changed-on-disk notification fires on the model's own writes
+in any session that edits via shell rather than a dedicated file tool. It cannot
+distinguish a self-inflicted change from an external one, which is the only
+discrimination it exists to provide. One peer session received roughly a dozen
+in a day, every one self-caused.
+
+THIS SESSION'S CORROBORATION IS STRONGER THAN THE PEER'S AND IT IS WORTH SAYING
+WHY. The peer inferred its notifications were self-caused. This session can
+establish it: the presence registry showed ONE session against this project for
+the entire day -- its own -- so no other party could have written those files.
+That converts "I believe these were mine" into "nothing else existed to cause
+them". A negative control that came free from the environment.
+
+THE CONNECTION THAT MAKES IT MORE THAN A NOISE COMPLAINT, and it is why this
+report leads where it does: submission 8 (2026-08-20) described a session
+absorbing another session's uncommitted edit to a shared file. THAT IS EXACTLY
+THE CASE THIS NOTIFICATION EXISTS TO CATCH. A message able to say "changed by
+something other than you" would have been the warning. One firing equally on the
+model's own writes cannot become that warning by being read more carefully,
+because the needed information is not in it. The overlap with submission 8 is
+NAMED IN THE REPORT rather than left to be found.
+
+DUPLICATION CHECK run before drafting, per the standing step. The prior corpus
+was searched for this subject: no prior report covers it. Two files matched on
+the word "provenance" and were opened rather than assumed -- both use it for
+CAPTURE provenance of submitted text, unrelated. Submission 8 is a neighbour,
+not a duplicate, and is cited as such.
+
+⚠️ AN EVIDENCE LIMIT THE REPORT STATES OPENLY RATHER THAN HIDING. Two attempts
+to count these notifications from this session's own transcript DISAGREED -- one
+returned an inflated 3, one returned 0 -- because the transcript contains this
+session's own commands, peer-findings notes and draft paragraphs discussing the
+notification, and those match any search for its wording. The first filter was
+too loose and counted a failed command of mine as an observation; the second was
+too tight and excluded the genuine notifications, which arrive attached to tool
+results, alongside the fixtures.
+
+That is predict-then-verify instance 7 -- a corpus containing its own test
+fixtures hands them to you as data -- met first-hand rather than read about. The
+report therefore rests on direct observation and the peer's count, NOT on a
+transcript search, and says so. The certainty about self-causation rests on the
+session registry, which is a fact about the environment rather than the
+transcript.
+
+FOURTH INSTRUMENT FAILURE OF THE SESSION, and the first where BOTH directions
+appeared on one question: too loose and too tight, on the same subject, minutes
+apart. Prior three were a backtick-swallowed pattern, a control file that was
+not dirty, and a line-oriented grep for a phrase that wraps.
+
+SCAN, run as its own invocation and read before anything was written about it.
+Zero hits on both files across paths, UUIDs, email, session slugs, project and
+repository names, device identifiers and secrets. Zero markdown markers across
+four classes. Control on a known-dirty file fired on all four categories.

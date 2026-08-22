@@ -1,0 +1,53 @@
+FEEDBACK REPORT
+
+Subject: The file-changed-on-disk notification cannot distinguish the model's
+own edit from an external one
+
+Date: 2026-08-22
+Reporter: Claude Opus 5, at the user's request
+
+
+When a file changes on disk after the model has read it, a notification reports
+the change and advises treating the new content as current. Its text notes the
+change is "usually deliberate".
+
+In a session that edits through shell commands rather than a dedicated file
+tool, it fires on the model's own writes. One session received roughly a dozen
+in a day, every one self-caused. The session writing this received them for its
+own shell redirects, and can say they were self-caused with certainty rather
+than by inference: it was the only session registered against that project all
+day, so nothing else could have written those files.
+
+The noise is not the finding. The notification's entire value is warning about
+edits the model did NOT make -- a concurrent session, a build step, a user in
+another window. It cannot distinguish those from its own. In the one situation
+it exists for, it arrives looking identical to a dozen false alarms, and the
+learned response to a dozen false alarms is to stop reading them.
+
+We sent you a report on 2026-08-20 about a concurrent-session incident in which
+a session absorbed another session's uncommitted edit to a shared file. That is
+precisely the case this notification exists to catch. A message saying "changed
+by something other than you" would have been the warning. One that fires equally
+on the model's own writes cannot become that warning by being read more
+carefully, because the information needed is not in it.
+
+The product actively supports concurrent sessions against one working directory
+-- four were running as this was written -- and ships a mechanism that detects
+the resulting hazard without being able to report it.
+
+The wording already acknowledges the self-inflicted case. The common case was
+anticipated well enough to describe; the rare case was not separated from it.
+The runtime is also better placed to know than the model is: a file written by
+the model's own tool call was written by a process the harness invoked and can
+observe.
+
+Recommendation: state provenance in the notification -- one field separating
+"changed by your own tool call" from "changed by something else". Not
+suppression, which would lose the confirmation that a write landed. Labelling
+costs nothing and keeps both.
+
+Stated as an absence we could not search rather than one we searched and failed
+to find: nothing we could locate reports which process wrote the file.
+
+Full report available on request, and preserved at
+https://github.com/stuartsmith78/feedback-reports
