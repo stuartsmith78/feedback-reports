@@ -54,6 +54,16 @@ returned nothing at all where the stem differed. A name that rotated to
 something similar is recoverable; a name that rotated to something different is
 not, and that is the case that needs help.
 
+We would go further, because the mitigation is weaker than its success rate
+suggests. It works when the rotated name preserves the leading portion of the
+old one -- and nothing we can find specifies that it will. The stem's stability
+is a property of the current naming scheme, not a documented guarantee, so the
+recovery rate we measured is contingent on something no one has committed to.
+A change to how names are generated would silently remove the mitigation
+without removing anything that looks like a feature. We raise it not to ask for
+the stem to be guaranteed, but to say that the near-miss suggestion should not
+be treated as the answer to this report.
+
 A further cost, observed twice: a bounce was read as the recipient having
 ended, when both sessions were live. That inference is wrong and it is the
 natural reading, because a failed send to a name that no longer exists looks

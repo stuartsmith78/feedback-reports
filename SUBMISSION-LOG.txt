@@ -927,3 +927,85 @@ someone else checked, which is precisely the condition this repo keeps
 identifying as unreliable.
 
 NEW COUNTER -- DUPLICATE-SUBMISSION COUNT: at ONE, caught pre-send.
+
+
+MCP SIZE-NEGOTIATION CANDIDATE: RESOLVED, NOT SENT. THE USER'S RE-ROUTE WAS
+CORRECT AND THE OWNING SESSION CONCEDED IT ON ITS OWN EVIDENCE.
+
+A peer session proposed a report that MCP tool results carry no size
+negotiation, after a survey tool returned metadata for 458 files and exhausted
+a consumer's context. The user challenged the classification, suspecting it
+resolved to the Bitburner Remote File API rather than to the MCP surface.
+
+The user was right. It resolves into three layers and the candidate named the
+least actionable one.
+
+THE PROTOCOL CLAIM ITSELF WAS CORRECT, verified here against the SDK types on
+disk rather than accepted: CallToolResultSchema carries only _meta, content,
+structuredContent and isError -- no cursor, no total, no truncation flag, no
+size field. Every nextCursor in the file belongs to a List* result.
+maxTokens belongs to CreateMessageRequestParamsSchema, which is sampling, the
+opposite direction of traffic. Flawless schema reading, wrong conclusion.
+
+LAYER 1, THE FORCING FUNCTION, now READ rather than inferred. This log recorded
+an explicit limit when the analysis was first done here: the claim that RFA
+offers no pagination was an inference from the method-name list, because the
+authoritative handler was not in the consumer's repo. The owning session then
+read it and closed the hinge. Every bulk RFA method takes exactly one parameter,
+a server name, validated against a predicate that checks only that the field is
+a string. The handler bodies contain no slice, limit, offset, take or cursor.
+RFA is all-or-nothing by construction.
+
+LAYER 2, WHERE THE FIX ACTUALLY LANDED, and it is already done. Nothing in MCP
+prevented the tool from capping its own output. The survey tool now caps its
+listing and returns a per-directory rollup, so a truncated result is still
+honest about where the mass sits. Verified by the external consumer arithmetically
+rather than by eye: directories summed to 466, in-scope count 466, total on
+server 466, listed 150 plus omitted 316.
+
+LAYER 3, MCP, CONCEDED BY THE PROPOSING SESSION. Its own words, worth preserving
+because they are the general lesson: "I had a measured failure, checked the
+protocol carefully, found a genuine absence, and stopped there. I never asked
+whether the absence FORCED the behaviour. An absence in a protocol is not a
+defect if the party who could have handled it was me."
+
+THE ARGUMENT THAT SETTLED IT WAS THE PROPOSING SESSION'S OWN SENTENCE. Its
+report said the tool's documentation called it safe at any size, which was
+"true of the system it talked to and true of the connection and false of the
+caller". That sentence locates the defect at the tool boundary -- layer 2 -- and
+it was written into the candidate that placed it at layer 3. It filed past its
+own disproof.
+
+NOT FILED ANYWHERE. Layer 2 belonged to the owning project and was fixed there.
+Layer 1 is an upstream request against a third-party public project, which needs
+that project owner's decision rather than a peer's suggestion; it is recorded in
+their analysis folder and nothing was filed. Nothing went to Anthropic.
+
+A THIRD-PARTY FINDING SURFACED IN PASSING, RECORDED AND DELIBERATELY NOT SENT
+TO ANTHROPIC: the RFA server-parameter validator checks only that the server
+field is a string and rejects nothing else, so a caller sending a plausible but
+unsupported bound -- a limit alongside the server name -- passes validation, has
+the bound SILENTLY IGNORED, and receives the full unbounded payload. No error,
+no warning. The request succeeds and does the opposite of what was asked, and
+the only symptom is a response larger than expected, which for a bulk method is
+indistinguishable from correct behaviour. Same shape as everything else in this
+log: success and failure produce identically-shaped output. It belongs upstream
+with layer 1, not in this corpus.
+
+ADDED TO THE SUPPLEMENT AS A RESULT OF THIS EXCHANGE: the near-miss bounce
+suggestion recovers a rotated address only when the new name preserves the stem
+of the old one, and nothing specifies that it will. The stem's stability is a
+property of the current naming scheme rather than a documented guarantee, so the
+measured recovery rate is contingent on something nobody has committed to. The
+report now states this as the reason the suggestion should not be treated as the
+answer, rather than leaving it as a reassurance. Raised by the peer session,
+which correctly judged it as something this session was better placed to weigh.
+
+ONE ADDITION TO THE BROKEN-SCANNER RECORD, from the same peer, and it sharpens
+the class: the markdown check that reported 172 markers in a 172-line file was
+INVOCATION-DEPENDENT. The identical pattern run in isolation returns 0. "A check
+that is correct in isolation and wrong in situ is harder to catch than a wrong
+check, because testing it the obvious way exonerates it." That is the
+instrument-correlated property already recorded in this log, occurring one level
+down: the natural way to verify the scanner is to run its pattern by itself,
+which is precisely the condition under which it works.
