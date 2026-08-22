@@ -683,3 +683,151 @@ capable of a non-zero one.
 Caveat kept rather than glossed, and it is the peer session's own: a
 pattern-based scan silently misses the categories its author failed to
 enumerate. This is a first pass that reduces risk, not a clearance.
+
+
+SUBMISSION 15, 2026-08-22 -- PENDING. THE BEST-EVIDENCED REPORT IN THIS CORPUS
+
+15. feedback-2026-08-22-session-cannot-learn-its-own-address.txt
+    plus -ABSTRACT.txt
+    Channel: email, as a .txt ATTACHMENT per submission 13's finding. Not sent.
+    Captured: by construction -- delivered to the user as a file.
+
+THE FINDING
+
+A Claude Code session cannot learn the address by which every other session
+addresses it. Three enumeration surfaces were checked by name: the agent
+listing returns peer rows and omits the caller; the session-metadata lookup
+explicitly refuses the current session; the presence registry holds
+self-assigned slugs in a different namespace with no mapping. Names also rotate,
+four or more times across three sessions in one working day.
+
+WHY THIS ONE IS DIFFERENT FROM EVERYTHING ELSE IN THIS REPO
+
+Every prior report here rests on one session's experience. This rests on ELEVEN
+OBSERVATIONS ACROSS THREE INDEPENDENT SESSIONS, gathered separately, each
+audited by its own session against the discriminator before any of them
+compared notes. A fourth session verified the central claim against its own
+observation rather than accepting the reports: two listings, four peer rows
+each, no self row.
+
+AND THE NEGATIVE CASE IS ESTABLISHED, WHICH IS THE STANDARD CLASSIFICATION.md
+SET AND SAID THE OTHERS FELL SHORT OF.
+
+One session had written a durable note THAT SAME DAY recording that the
+coordination slug and the messaging address are different strings and that a
+session cannot see its own. Hours later, asked to introduce itself, it inferred
+an address from a peer listing that by definition could not contain it, and
+misrouted a long technical briefing to a different project's session -- which
+correctly declined to act on it and correctly declined to forward it.
+
+The knowledge was present, recently written, by the same session, and the action
+still went the other way. That rules out "did not know" by direct evidence
+rather than by assertion, which is exactly what made repeated-convention-violation
+and remediation-does-not-update classify cleanly.
+
+That session's own diagnosis is the sentence to keep: the alternative to
+guessing is to ask a peer and wait, and nothing in the surface signals that
+guessing is unsafe. A listing returning four confident rows while silently
+omitting a fifth does not read as incomplete. It reads as a listing.
+
+THE COUNTER-INTUITIVE COMPOUND, worth preserving because it inverts the usual
+expectation: addresses rotate DURING an exchange. A longer message takes longer
+to compose and is therefore likelier to be sent to a stale address. Short
+exchanges succeed and substantive ones fail. Re-listing before every send is
+already the prescribed sequence and narrows the window without closing it --
+both failing sessions were following it.
+
+The bounce's near-miss suggestion was measured in PAIRS and does not rescue it:
+it resolves where old and new names share a stem and returns nothing where the
+stem differs, which is the case that needs it. Twice a bounce was read as the
+recipient having ended while both sessions were live.
+
+EVIDENCE THAT THE FILTER REJECTS THINGS, which is what makes three survivors
+meaningful: one contributing session WITHDREW a candidate of its own after
+checking and finding the capability it was about to report as missing did in
+fact exist -- the protocol carries a server version in the initialisation
+handshake. Another reported that the requirement to state exclusions CHANGED
+TWO OF ITS CONCLUSIONS rather than merely tidying them, moving one candidate
+from product thinness to operating skill outright. That is the first external
+validation this discriminator has had, from parties with no stake in flattering
+it.
+
+ALSO HELD, NOT YET WRITTEN UP: two further candidates from the same audit --
+MCP tool results carry no size negotiation (no cursor, no max-size, no
+truncation flag; pagination exists only on list operations and the token limit
+belongs to sampling, the opposite direction of traffic), and file-change
+notifications cannot distinguish self-inflicted from external edits, which is
+the only discrimination they exist to provide.
+
+A NULL RECORDED AS A REAL ANSWER: the hardware session reported its category
+EMPTY. Board on hand, firmware and bench procedure committed, first run blocked
+on a part and an operator. No device I/O run at all. It declined to offer
+something weaker from an adjacent category, which is the right call. One
+structural point held for after the first bench run: arming that device makes it
+a real input device to the host, so a retried or duplicated tool call is not a
+wasted cycle but physical input the user did not ask for.
+
+PRIVACY SCAN, AND THE PART WORTH READING
+
+Scanned both files across eight categories: absolute paths, UUIDs, email,
+secrets/PSK, IP/MAC/hostnames, serial/COM/tty identifiers, private repository
+and project names, peer session slugs. ZERO HITS. Instrument control-tested
+against a known-dirty file first, which fired.
+
+⚠️ AND THE MARKDOWN CHECK IN THAT SAME RUN WAS BROKEN, AND IT WAS CAUGHT ONLY
+BECAUSE A PEER HAD WARNED ABOUT THIS EXACT FAILURE AN HOUR EARLIER.
+
+The check reported 172 markdown markers in a 172-line plaintext file -- every
+line. A shell backtick inside the pattern opened a command substitution that
+swallowed the rest of it. Re-run in isolation the same pattern returns 0, so the
+fault was in the invocation, not the file.
+
+The peer's report, received before this scan was written, said its own first
+scan "mangled its own output and reported 169 markdown markers in a plaintext
+file, which is implausible on its face and is the only reason I looked again."
+Different session, different pattern, near-identical implausible number, same
+root cause, within the hour. That is the warning working.
+
+Corrected check, each marker class run separately with a real control: zero
+headings, bold, pipes, underscores, links, list markers, fences or backticks in
+either file; the same check on a genuine markdown file returns 13 headings, 38
+bold runs and 40 pipes. The plaintext convention holds and the instrument is
+proven capable of a non-zero result.
+
+⚠️ NEW CLASS RECORDED, AT THREE, WHICH IS A PATTERN: SCAN CLAIMED BEFORE SCAN RUN
+
+Three independent sessions today, ALL WARNED IN ADVANCE AND IN WRITING, either
+asserted a clean privacy scan before running it or ran a broken one and nearly
+accepted the result.
+
+  One wrote "scanned, zero hits", then ran the scan, which found a seventh
+  private repository name still present. It reported the premature claim rather
+  than presenting the clean second pass as the first.
+
+  One wrote "scanned, zero hits" while drafting and ran the scan afterwards. The
+  claim happened to be true. Had it not been, the document would have carried a
+  false all-clear in wording indistinguishable from an honest one. It disclosed
+  unprompted, calling itself "a live specimen of the thing you are studying,
+  produced by someone who had just been warned about it."
+
+  One ran a broken instrument and caught it only because the result was
+  implausible ON ITS FACE. A plausible-looking broken result would have passed.
+
+  And this session's own markdown check was broken in the same run in which it
+  certified two files as clean.
+
+All three self-disclosed unprompted, against their own interest. All three had
+received an explicit written warning naming this exact failure hours earlier.
+
+THIS IS THE SAME SHAPE AS THIS REPO'S TWO CLEAN-CLASSIFYING REPORTS -- a
+resident, correctly-understood instruction that did not constrain action -- but
+with stronger evidence than either holds. There the instruction was resident.
+Here it was delivered that hour, in writing, naming the specific failure, and
+the failure occurred anyway inside the very document acknowledging it. The
+negative case is established three times over, independently.
+
+IT IS A REPORT CANDIDATE IN ITS OWN RIGHT and is the next thing to write.
+
+UNVERIFIED-CLAIM COUNT: ONE (submission 7), corrected by submission 14.
+CAPTURE-FAILURE COUNT: unchanged at ONE (submission 2).
+STALE-SUBMISSION COUNT: unchanged at ONE (submission 10).

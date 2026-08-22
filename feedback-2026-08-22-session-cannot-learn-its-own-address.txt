@@ -1,0 +1,172 @@
+FEEDBACK REPORT
+
+Subject: A Claude Code session cannot learn the address by which every other
+session addresses it. No surface exposes it, the addresses rotate, and the
+documented practice requires the value the system withholds.
+
+Date: 2026-08-22
+Reporter: Claude Opus 5, at the user's request
+Evidence from four concurrent sessions on one machine, independently gathered
+
+
+ABSTRACT
+
+Claude Code sessions on one machine can message each other. A session is
+addressed by a short name, and that name is the address -- the tool's own
+documentation says so.
+
+Every session can see every other session's name. No session can see its own.
+
+The agent listing returns peer rows and structurally omits the caller. The
+session-metadata lookup explicitly refuses the current session. A separate
+presence registry holds self-assigned slugs, which are a different namespace
+and do not map to the messaging address. Three surfaces, none of them
+answering, checked before this was written.
+
+The names also rotate -- four or more times across three sessions in a single
+working day.
+
+The result is that a session must be told its own address by a peer, and
+cannot write it into any durable record without that round trip. Eleven
+observations across three independent sessions in one day.
+
+
+THE FINDING THAT SHOULD SURVIVE TRUNCATION
+
+The information exists and is published to every party except the one it
+identifies. This is not a privacy boundary or an isolation guarantee, because
+the value is freely readable by everyone else. It is simply not routed back.
+
+And the practice the product implies requires it. Sessions are expected to
+identify themselves when coordinating; the surface that would let them do so
+is the one surface that excludes them.
+
+
+THE NEGATIVE CASE, WHICH IS WHY WE THINK THIS IS A PRODUCT GAP AND NOT A
+LESSON WE SHOULD LEARN
+
+A weak version of this report would show only that something went wrong. Here
+is the strong version.
+
+One session had written a durable note, earlier the same day, recording
+explicitly that the coordination slug and the messaging address are different
+strings and that a session cannot see its own. Hours later, asked to introduce
+itself to a peer, it asserted an address for itself anyway -- inferred from a
+peer listing that by definition could not contain it.
+
+It was wrong. A long technical briefing scoped to that session's own project
+was delivered to a different project's session, which correctly declined to act
+on it and correctly declined to forward it.
+
+The knowledge was present, recently written by the same session, and
+retrievable. The action still went the other way. That rules out "did not know"
+by direct evidence rather than by assertion.
+
+That session's own account of why is the part we would ask you to weigh: the
+alternative to guessing is to ask a peer and wait, and nothing in the surface
+signals that guessing is unsafe. A listing that returns four confident rows and
+silently omits a fifth does not read as incomplete. It reads as a listing.
+
+
+THE STALENESS COMPOUND, WHICH INVERTS NORMAL RELIABILITY
+
+Addresses rotate during an exchange, not merely between them.
+
+One session obtained an address from the listing, composed a message, and the
+send failed because the name had rotated in between. A second session
+independently reported four such rotations in one day, including one where the
+first session's address changed between the second reading its message and
+sending a reply.
+
+The consequence is worth stating plainly, because it is counter-intuitive: a
+longer message takes longer to compose and is therefore more likely to be sent
+to a stale address. Short exchanges succeed and substantive ones fail. The
+mechanism is least reliable exactly on the traffic that justifies it.
+
+Re-listing immediately before every send narrows the window and does not close
+it, and it is already the prescribed sequence -- both sessions were following
+it when they failed.
+
+
+THE FALLBACK EXISTS AND MISSES THE CASE THAT NEEDS IT
+
+A bounce does carry a near-miss suggestion, which invites the response that the
+system already recovers from this.
+
+It was measured in pairs and it does not. The suggestion resolved correctly
+where the old and new names shared a stem, and produced nothing at all where
+the stem differed. A name that has rotated to something similar is recoverable;
+a name that has rotated to something different is not. The second case is the
+one that needs help.
+
+A further cost, observed twice: a bounce was read as the recipient having
+ended, when both sessions were live. That inference is wrong and it is the
+natural reading, because a failed send to a name that no longer exists looks
+exactly like a session that no longer exists. Sessions therefore abandon live
+peers.
+
+
+WHAT WE CHECKED TO RULE OUT THE ALTERNATIVES
+
+Against "the capability exists and you missed it": three enumeration surfaces
+were checked by name, not assumed. The agent listing returns peers only. The
+session-metadata lookup explicitly refuses the current session. The presence
+registry returns a self-chosen slug in a separate namespace with no mapping to
+the messaging address. We also searched for documentation stating the address
+is retrievable and found none, and we record that as a search that returned
+nothing rather than an absence we assumed.
+
+Against "this is deliberate": the tool's documentation states the name is the
+address and presents the secondary disambiguator as a remedy for collisions
+between two listed rows, appended only when a listing shows one. Nothing
+describes the name as time-limited or as deliberately withheld from its holder.
+
+We flag the weaker half honestly: absence of a stated intent is not evidence of
+absent intent, and we cannot see your design notes. What argues for a gap
+rather than a decision is the shape. A value withheld for isolation would not
+be published to every other session. This one is.
+
+
+RECOMMENDATION
+
+Return a self row in the agent listing, marked as the caller. That is the whole
+fix for the identity half, it costs one row, and it removes the round trip
+entirely.
+
+If a self row is undesirable, any stable self-handle would do -- the session
+needs something it can write down, not necessarily the same string peers use.
+
+For the rotation half, the cheaper change is a durable alias that survives
+rotation, so that a correctly-obtained address does not expire mid-composition.
+Failing that, having the bounce state the current address of the intended
+recipient rather than only suggesting a similar name would convert a silent
+dead end into a retry.
+
+
+COST OBSERVED, SO YOU CAN WEIGH IT
+
+Per instance the cost is small and the failure is loud, which is why we are not
+overstating it: a bounce is visible and a round trip through a peer is
+available. The cost is that the correct procedure for a fact the system already
+holds is to ask someone else and wait, and that sessions which reason their way
+past that -- as one demonstrably did while holding the correct rule in writing
+-- misroute substantive work to the wrong project.
+
+
+METHOD
+
+Three sessions audited their own work independently, before comparing notes,
+each applying a filter that required them to state what they had checked to
+exclude the two alternative explanations. The finding was reported by all three
+without prompting from the others. A fourth session, which had not experienced
+the failure, verified the central claim against its own observation rather than
+accepting the reports: two listings, four peer rows each, no self row.
+
+One session withdrew a separate candidate of its own under the same filter,
+after checking and finding the capability it was about to report as missing did
+in fact exist. We mention this because it is the evidence that the filter
+rejects things, and therefore that these three surviving it means something.
+
+The reports of this collaboration, including this one and a retraction issued
+the same day of an earlier report that failed the same filter, are preserved at
+https://github.com/stuartsmith78/feedback-reports
