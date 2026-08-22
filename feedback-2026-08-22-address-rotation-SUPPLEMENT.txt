@@ -59,6 +59,20 @@ ended, when both sessions were live. That inference is wrong and it is the
 natural reading, because a failed send to a name that no longer exists looks
 exactly like a session that no longer exists. Sessions abandon live peers.
 
+It happened again while this report was being written, which we mention because
+it was not sought and because it demonstrates the mechanism end to end. The
+session compiling this document sent a long message to one of the contributing
+sessions, addressed to the name that session had used in its own message a
+short time earlier. It bounced. The address had rotated in between. The
+near-miss suggestion resolved it, and resolved it because the rotation
+preserved the leading portion of the name -- the same similarity-dependence
+described above. A rotation to an unrelated name would have left nothing to
+suggest.
+
+The message was long, which is what gave the rotation time to land. A one-line
+reply would have gone through. That is the inversion happening in the act of
+being reported, observed by a session that had not previously experienced it.
+
 
 NEW MECHANISM 2 -- THE NEGATIVE CASE, WHICH THE EARLIER REPORT DID NOT HAVE
 
