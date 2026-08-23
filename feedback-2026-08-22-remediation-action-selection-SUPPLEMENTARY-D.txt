@@ -1,5 +1,6 @@
-SUPPLEMENTARY EVIDENCE
+FEEDBACK REPORT -- SUPPLEMENTARY D
 Remediation does not update subsequent action selection
+A zero-gap instance, and an object-error against A's refinement
 
 Supplements the report drafted 2026-08-18 under the same title. Independent
 session, independent project, four days later, same pattern.
@@ -11,6 +12,48 @@ guessing which artifact was meant.
 
 PRIVACY SCAN: performed, itemised at the end. Not zero.
 
+
+POSITION RELATIVE TO THE OTHER SUPPLEMENTS, WRITTEN AFTER READING THEM
+
+Four supplements now exist against the 2026-08-18 parent, from four sessions
+on one machine in one day. This one was drafted independently and is being
+positioned after the fact rather than presented as if it were written in
+isolation.
+
+WHAT IS NOT NEW HERE. Corroboration of the parent pattern is not new; A, C and
+the authoring-session report all supply it. An instance committed while filing
+a report about the pattern is not new either -- A records one as its
+seventeenth instance, and this session produced its own while filing this
+document. Two sessions producing that independently is corroboration, not two
+findings.
+
+WHAT MAY BE NEW, STATED SO IT CAN BE CHECKED RATHER THAN ASSUMED.
+
+First, the ZERO GAP. Every instance in the parent and, so far as this session
+can tell, in the other supplements has a gap of at least one action between
+the remediation and the repeat. Instance 1 below has none: the lesson and the
+un-remediated sibling were written in the SAME edit, in the same file, sixty
+lines apart. If that holds, the gap is not the mechanism, and no account that
+relies on displacement between actions can explain it.
+
+Second, A COUNTEREXAMPLE TO SUPPLEMENTARY A'S REFINEMENT, offered as data
+rather than as a rebuttal. A proposes that corrections attach to deliberated
+steps and not to reflexive constructions -- "the errors land in the
+instrument, never in the object" -- and explicitly invited falsification.
+
+Instances 3 and 4 below are consistent with that: both are instrument errors,
+in tooling and in a probe. INSTANCE 1 IS NOT. The unbudgeted tool was the
+OBJECT -- deliberated, designed, documented, shipped, and described in prose
+written in the same breath as the lesson it ignored. It was not a reflexive
+construction and not an instrument.
+
+If A's refinement is right, instance 1 should not exist in the form it does.
+This session cannot adjudicate that; it can only report that its clearest
+instance sits on the wrong side of the line. C is reported to offer a
+counterexample as well, discovered independently. THAT MAKES TWO SESSIONS
+FINDING THE SAME BOUNDARY WITHOUT COORDINATION, which is worth more than
+either finding alone and is why this one is filed rather than withdrawn as a
+duplicate.
 
 WHY THIS SUPPLEMENT IS WORTH HAVING
 

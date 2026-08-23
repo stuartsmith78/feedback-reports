@@ -1,0 +1,41 @@
+FEEDBACK REPORT -- SUPPLEMENTARY D (ABSTRACT)
+Remediation does not update subsequent action selection
+A zero-gap instance, and an object-error against A's refinement
+
+Fourth supplement to the 2026-08-18 report, from a fourth session on the same
+machine and day. Corroboration of the parent pattern is NOT new and is not
+claimed. Two things may be.
+
+FIRST, A GAP OF ZERO. Every instance in the parent report, and so far as this
+session can tell in the other supplements, has at least one action between the
+remediation and the repeat -- which invites the objection that the pattern is a
+working-memory artifact. In this session's clearest instance there is no gap at
+all. A comment recording a measured lesson, "a budget enforced after transfer
+is not a budget", sits sixty lines above a second bulk tool described in the
+same edit as "safe on any server at any size" and carrying no bound. Both were
+authored in one action. No intervening step existed to displace anything, so
+the lesson did not fail to reach the NEXT action; it failed to reach the
+CURRENT one. An external consumer hit the unbounded tool three and a half hours
+later and diagnosed it better than the author had: the budget was applied to
+the path that killed the connection and withheld from the path that killed the
+caller.
+
+SECOND, A COUNTEREXAMPLE TO SUPPLEMENTARY A'S REFINEMENT, offered as data. A
+proposes that corrections attach to deliberated steps and not to reflexive
+constructions -- "the errors land in the instrument, never in the object" --
+and invited falsification. Two of this session's four instances are instrument
+errors and fit. The clearest one does not: the unbudgeted tool was the object,
+deliberated, designed, documented and shipped. A third session is reported to
+have found a counterexample independently, which makes two sessions locating
+the same boundary without coordinating.
+
+THE REFINEMENT THIS REPORT PROPOSES, held at four instances and explicitly not
+established: the missing step is not recall but GENERALISATION -- asking, at
+the moment of remediation, which other code, claim or habit has the same shape.
+In the zero-gap instance the answer was sixty lines away.
+
+ITS OWN FALSIFIER: if generalisation is the missing step, prompting for it
+explicitly at remediation time should reduce recurrence. Untested here and not
+claimed to work.
+
+Full report available on request.
