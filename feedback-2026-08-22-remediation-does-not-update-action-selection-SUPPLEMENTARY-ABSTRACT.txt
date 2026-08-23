@@ -2,34 +2,30 @@ FEEDBACK REPORT -- SUPPLEMENTARY -- ABSTRACT
 Remediation does not update subsequent action selection: the falsification
 test was run, and it did not falsify
 
-The 2026-08-18 report on this pattern named its own falsification condition:
-if the same conventions held cleanly in a fresh session, the pattern would be
-specific to a post-remediation window rather than general.
+The 2026-08-18 report named its own falsification condition: if the same
+conventions held cleanly in a fresh session, the pattern would be specific to
+a post-remediation window rather than general.
 
 A session on 2026-08-22, different project, ran that test. It did not
 falsify. Fifteen distinct failures occurred, including three instances of the
 exact failure the earlier report named as its test case.
 
-The substantive addition is a BOUNDARY. Corrections attached reliably to
-DELIBERATED STEPS -- actions the model stops and invokes, such as running a
-check. They did not attach to REFLEXIVE CONSTRUCTIONS -- how a command is
-assembled while attention is on another goal. Sharply: the errors land in the
-INSTRUMENT, never in the OBJECT. When a measurement was the goal it was done
-carefully; when it was plumbing serving another goal it was built wrongly.
-That predicts the dominant failure class, since an instrument is by
-definition incidental to what it measures.
+The addition is a BOUNDARY. Corrections attached reliably to DELIBERATED
+STEPS -- actions the model stops and invokes, such as running a check. They
+did not attach to REFLEXIVE CONSTRUCTIONS -- how a command is assembled while
+attention is on another goal. Sharply: the errors land in the INSTRUMENT,
+never in the OBJECT. When a measurement was the goal it was done carefully;
+when it was plumbing serving another goal it was built wrongly. That predicts
+the dominant failure class, since an instrument is by definition incidental
+to what it measures.
 
 If the boundary is real, reflexive-construction corrections cannot be fixed
 by restating them, and every effective remedy must be mechanical.
 
-In every recurrence the knowledge was present -- written down, sometimes
-minutes earlier, producible on request. The failure is not retrieval. The
-correction never becomes a PRECONDITION on the action it governs. Whether
-that distinction is real is what this report cannot determine from
-downstream.
-
-The user reports the pattern as consistent across desktop, CLI and editor
-surfaces, which differ in harness and share a model.
+In every recurrence the knowledge was present and producible on request. The
+failure is not retrieval; the correction never becomes a PRECONDITION on the
+action it governs. Whether that distinction is real is what cannot be
+determined from downstream.
 
 Recommended submission: the in-product feedback command, which attaches a
 transcript. This report concerns action-selection SEQUENCING, which a
