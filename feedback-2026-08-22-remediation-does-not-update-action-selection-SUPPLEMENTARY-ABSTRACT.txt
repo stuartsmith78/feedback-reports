@@ -8,32 +8,26 @@ a post-remediation window rather than general. A session on 2026-08-22, in a
 different project, ran it. It did not falsify -- fifteen failures, including
 three of the exact failure named as the test case.
 
-OPERATIVE FINDING, reached jointly with a peer session and stated in its
-words: A CORRECTION ATTACHES TO WHAT IS UNDER ATTENTION. Evidence is one
-route into attention; being the current task is the other. A method is under
-attention only when the task names it -- when the mechanism is incidental to
-the task, a method is as invisible as an artifact. An instrument is
-definitionally never the task, so it is reachable by neither route, which is
-why instrument errors dominated.
-
-It was adopted because it KILLED a hypothesis this report had proposed,
-using this report's own data, and predicted five of five cases correctly --
-including the two largest classes the earlier hypothesis got wrong.
+OPERATIVE FINDING, reached jointly with a peer session, in its words:
+A CORRECTION ATTACHES TO WHAT IS UNDER ATTENTION. Evidence is one route into
+attention; being the current task is the other. A method is under attention
+only when the task names it; when the mechanism is incidental to the task, a
+method is as invisible as an artifact. An instrument is definitionally never
+the task, reachable by neither route -- which is why instrument errors
+dominated. Adopted because it killed a hypothesis this report had proposed,
+using this report's own data, predicting five of five cases correctly.
 
 COROLLARY, inverting the obvious reading of "make the remedy mechanical":
 A GUARD TELLS YOU AN INSTANCE EXISTS. NAMING THE CLASS IS STILL YOURS. The
 instance is nearly always externally forced; the class formulation can be
-self-generated once an instance exists, and then generalises prospectively.
-Four such prospective catches across two sessions.
+self-generated and then generalises prospectively.
 
-⚠️ WEIGHT THIS REPORT ACCORDINGLY. Every correction in it came from one
-session asking another for the evidence that would damage its own claim.
-Neither session did that unprompted. The conclusions were reached by a
-mechanism the conclusions predict is necessary, and which neither party
-supplied for itself.
+⚠️ WEIGHT ACCORDINGLY. Every correction here came from one session asking
+another for evidence that would damage its own claim. Neither did so
+unprompted. The conclusions were reached by a mechanism the conclusions
+predict is necessary, and which neither party supplied for itself.
 
-Recommended submission: the in-product feedback command, which attaches a
-transcript. This concerns action-selection SEQUENCING, which a transcript
-evidences directly where prose only asserts it.
+Submit via the in-product command, which attaches a transcript: this concerns
+action-selection SEQUENCING, which a transcript evidences directly.
 
-The full report is available on request.
+Full report available on request.
