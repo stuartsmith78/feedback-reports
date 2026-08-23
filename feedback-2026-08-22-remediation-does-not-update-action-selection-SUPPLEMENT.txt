@@ -1,0 +1,170 @@
+SUPPLEMENTARY EVIDENCE
+Remediation does not update subsequent action selection
+
+Supplements the report drafted 2026-08-18 under the same title. Independent
+session, independent project, four days later, same pattern.
+
+NOTE ON FILING: the request named a report "742" and no file, log entry or
+reference matching 742 exists in the corpus. Filed alongside the 2026-08-18
+remediation report, which is unambiguously the subject. Flagging rather than
+guessing which artifact was meant.
+
+PRIVACY SCAN: performed, itemised at the end. Not zero.
+
+
+WHY THIS SUPPLEMENT IS WORTH HAVING
+
+The original report's evidence is three instances in one session, with gaps of
+one to two actions, all in shell quoting and comparison logic. The reasonable
+objection is that a tight gap in one narrow domain might be a working-memory
+artifact rather than a general property of action selection.
+
+This supplement answers that objection with a case where the gap is ZERO. The
+remediation and the un-remediated sibling were authored in the SAME EDIT, in
+the SAME FILE, about sixty lines apart. There was no intervening action to
+displace anything. The lesson was not forgotten between actions; it was not
+applied within one.
+
+It also adds a second instance of the SAME error type after that type had been
+diagnosed by an external party, which the original does not have.
+
+
+INSTANCE 1 - THE REMEDIATION AND ITS UNGUARDED SIBLING, WRITTEN IN ONE ACTION
+
+I had measured a real failure: a bulk fetch of a 465-file directory exceeded a
+WebSocket payload limit and killed the connection outright, close code 1006. I
+rewrote the file that caused it, and opened that file with a prominent comment
+recording the lesson:
+
+    "getAllFiles ... EXCEEDS THE WEBSOCKET PAYLOAD LIMIT AND KILLS THE
+     CONNECTION -- observed ... A budget enforced after transfer is not a
+     budget; the frame that kills you is the one you already asked for."
+
+Sixty lines below that comment, in the same file and the same commit, sits a
+second bulk tool whose description reads:
+
+    "Moves NO file content, so it is safe on any server at any size."
+
+That tool was unbounded. It returned metadata for every file on a server. The
+byte budget I had just written appears three times in the file and is applied
+to one tool only.
+
+Three and a half hours later an external consumer called it on a 458-file
+server, received roughly 74,000 characters, and exhausted their context budget.
+Their diagnosis was better than mine: "you budgeted the path that killed the
+connection and left the path that kills the caller."
+
+THE PROPERTY THIS ISOLATES: I did not fail to recall the lesson. I was writing
+it down at the time. What did not happen is the generalisation step - taking a
+measured failure and asking which OTHER code has the same shape. The remedy was
+applied to the instance that produced the evidence and to nothing else, and the
+sibling was in the same file.
+
+Worth noting for the original report's framing: the un-generalised sibling is
+harder to see BECAUSE the instance is well documented. The comment at the top
+of that file makes the file look handled.
+
+
+INSTANCE 2 - THE SAME ERROR TYPE, TWICE, WITH AN EXTERNAL DIAGNOSIS IN BETWEEN
+
+Earlier the same day I submitted a candidate finding to a colleague auditing
+reports. It claimed a protocol gap. My protocol reading was verified correct in
+every particular; the CONCLUSION was not entailed by it, and my own submission
+contained the sentence that located the defect elsewhere. It was re-routed.
+
+The error type was named explicitly in that exchange: correct facts, over-broad
+conclusion, no check on whether the conclusion followed.
+
+Roughly two hours later, a consumer reported a measurement - that killing a
+server process is sufficient to pick up a rebuilt binary. I wrote it into
+project documentation as an unqualified rule: "picking up a later fix does NOT
+need a session restart."
+
+That is false for configuration. A respawn re-reads the binary and re-uses the
+environment captured when the client started. The consumer discovered this the
+hard way when their own config edit was silently ignored, and corrected my
+documentation. They attributed the bad line to themselves. It was mine: they
+reported a measurement, I published a rule.
+
+THE PROPERTY THIS ISOLATES: having an error type named, by an external party,
+in a conversation still in context, did not prevent the same error type two
+hours later. The original report shows a REMEDY not reaching the next action.
+This shows a DIAGNOSIS not reaching it either.
+
+
+INSTANCE 3 - A DOCUMENTED CLASS REPEATED FIVE TIMES IN ONE DAY, IN THE TOOL
+USED TO DOCUMENT IT
+
+A specific mechanical failure - an escape sequence collapsing when a string
+passes through two interpreter layers - occurred five times in one session. It
+was catalogued after the first occurrence, described in commit messages, and
+proposed to a shared convention repository as a new failure class. Two of the
+five occurred inside the scripts that generate the project's own evidence
+documentation.
+
+Every occurrence used the same tool reached for in the same way. Four of the
+five were caught immediately because the target language refused to parse the
+result; the failure was loud.
+
+THE PROPERTY THIS ISOLATES: the class was known, written down, and actively
+being written down again, and the reach for the failing tool was unaffected.
+This is the original report's pattern at higher frequency and lower stakes, and
+it suggests the mechanism is not about the importance of the lesson.
+
+
+INSTANCE 4 - AN ASSERTION OF A PROPERTY I HAD SPENT THE DAY INSISTING BE
+MEASURED
+
+Across this session I repeatedly argued, to two colleagues, that a reasoned
+hazard must be executed rather than reported, and that a check which cannot
+fail in the way you need is not a check. Both positions were adopted by others
+and produced real findings.
+
+I then told a colleague that no process of mine was running. I had checked the
+PORT and reported the result as an answer to the PROCESS question. A process of
+mine was running; it held no port only because a colleague's process held it
+first, so my own non-compliance was invisible - a consequence of a design
+decision I had made deliberately, so that a port collision would not take the
+tool down.
+
+THE PROPERTY THIS ISOLATES: the discipline was in context, had been argued for
+that hour, and was applied to others' claims and not to my own.
+
+
+WHAT I THINK THE FOUR ADD, STATED AS A CLAIM RATHER THAN A CONCLUSION
+
+The original report locates the failure at "a lesson recorded in an artifact
+does not become an input to the next action-selection". Instance 1 suggests a
+narrower and more actionable statement: the lesson does not become an input to
+the CURRENT action either, so the gap is not the mechanism.
+
+What appears to be missing is not recall but a generalisation step - asking, at
+the moment of remediation, which other code, claim or habit has the same shape.
+In instance 1 the answer was sixty lines away. In instance 2 it was the next
+document written. In instance 4 it was the sentence being typed.
+
+I hold this at the strength of four instances in one session, by one model, on
+one project. It is not established, and the original report's three instances
+are from a different session and project, which is what makes the pair worth
+having.
+
+
+WHAT WOULD FALSIFY IT
+
+If the generalisation step is the missing piece, then prompting for it
+explicitly at the moment of remediation - "what else has this shape" - should
+reduce recurrence. I have not tested that and am not claiming it works. Stating
+it so the claim is refutable rather than merely plausible.
+
+
+PRIVACY SCAN - ITEMISED
+
+Scanned and removed: absolute filesystem paths, a user home directory, session
+UUIDs, local service port numbers, private repository names, an email address,
+and machine hostnames. Colleague session identifiers were generalised to "a
+colleague" or "a consumer". Private tracker issue numbers omitted. File and
+tool names were retained only where generic. Commit hashes omitted as they
+reference a private repository.
+
+NOT ZERO. The raw material was dense with local identifiers, as expected for a
+session whose subject was a local file-transfer tool.
