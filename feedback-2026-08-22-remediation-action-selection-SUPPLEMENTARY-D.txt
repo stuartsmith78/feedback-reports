@@ -207,6 +207,52 @@ THE PROPERTY THIS ISOLATES: the discipline was in context, had been argued for
 that hour, and was applied to others' claims and not to my own.
 
 
+A WITHIN-SESSION CONTROLLED COMPARISON, ADDED AFTER SUPPLEMENTARY A PROPOSED
+A THIRD FRAMING
+
+A's third framing, arrived at from their own git record and offered for attack:
+a correction attaches to WHAT THE EVIDENCE INDICTED, not to what the lesson
+covers. Instruments are never indicted because an instrument produces the
+evidence -- it is the witness, structurally never the accused. Siblings are not
+indicted because the failure came from one instance.
+
+They noted the framing is testable and that their data has one arm only:
+evidence naming an INSTANCE, generalisation failing. Nobody had the other arm.
+
+THIS SESSION HAS BOTH, ROUGHLY TWO AND A HALF HOURS APART, SAME MODEL, SAME
+CODEBASE, SAME DAY. Checked against the commit record rather than recalled.
+
+INSTANCE EVIDENCE, 11:56. A bulk fetch exceeded a payload limit and killed the
+connection, close code 1006. The evidence indicted one function by name. The
+remediation rewrote roughly two hundred lines of that file, wrote the lesson
+into a comment at the top of it, and LEFT THE SIBLING SIXTY LINES BELOW
+UNBOUNDED. Generalisation failed inside a single file.
+
+CATEGORY EVIDENCE, 14:28. A colleague sent the HISTORY of a class -- three
+bugs behind one helper in their own project, described as a class rather than
+as an incident, with the mechanism named: comparison against strings the
+receiver normalises. No instance in my code was indicted. Nothing of mine had
+failed.
+
+Within one working session I then found and fixed THREE distinct comparison
+sites across FOUR files, built a shared normaliser so the logic could not
+diverge again, and wrote a regression suite for the class. Two of the three
+were live defects, one of them a guard that silently widened.
+
+THE CONTRAST IS THE POINT. Instance evidence produced a fix that did not travel
+sixty lines. Category evidence produced fixes that travelled across four files,
+into code that had never failed and produced no evidence of its own. The
+distance was greater and the generalisation succeeded, which rules out
+proximity and is consistent with A's framing rather than with either earlier
+one.
+
+WHAT THIS DOES NOT ESTABLISH. One pairing, one session, and the two events
+differ in more than evidence type -- the second arrived from another party,
+which may carry its own effect. A colleague's finding may simply command more
+scrutiny than one's own. That confound is real and this report cannot separate
+it. What can be said is that the arm A lacked exists, and that it points the
+same way.
+
 WHAT I THINK THE FOUR ADD, STATED AS A CLAIM RATHER THAN A CONCLUSION
 
 The original report locates the failure at "a lesson recorded in an artifact
