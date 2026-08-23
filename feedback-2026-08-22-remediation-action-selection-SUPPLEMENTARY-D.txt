@@ -246,6 +246,75 @@ distance was greater and the generalisation succeeded, which rules out
 proximity and is consistent with A's framing rather than with either earlier
 one.
 
+THE OPERATIVE STATEMENT, AFTER TWO SESSIONS TRIED TO BREAK EACH OTHER'S
+
+Three framings were proposed and two were discarded by their own authors.
+
+    A correction attaches to what is UNDER ATTENTION. Evidence is one route
+    into attention; being the current task is the other. A method is under
+    attention only when the task NAMES it -- when the mechanism is incidental
+    to the task, a method is as invisible as an artifact.
+
+Discarded on the way: "errors land in the instrument, never in the object",
+withdrawn by its author when a counterexample was found in their own evidence;
+and "method-corrections generalise for free, artifact-corrections do not",
+withdrawn when it failed against the two largest classes in its author's own
+report.
+
+The instrument case survives and is strengthened: an instrument is
+DEFINITIONALLY never the task, so it is reachable by neither route. That is a
+structural reason where the earlier ones were descriptive.
+
+VALIDATION THE AUTHOR OF THIS SECTION DID NOT PERFORM. The statement was
+proposed by this session against the other author's hypothesis. THAT AUTHOR
+THEN TESTED IT AGAINST FIVE OF THEIR OWN CASES, on data this session has never
+seen, and reported five predictions correct -- including two classes their own
+hypothesis had got wrong. A prediction checked by the party it damages, against
+private data, is stronger than agreement between us.
+
+THE NARROWED CLAIM ABOUT WHERE CLASS-EVIDENCE COMES FROM
+
+An earlier draft of the other report claimed no un-confounded case exists of
+class-level evidence arising from one's own work. That conflated two things:
+the origin of the INSTANCE and the origin of the CLASS FORMULATION.
+
+Corrected, with two instances from each session:
+
+    The INSTANCE is almost always externally forced -- a failure, a colleague,
+    a tool. The CLASS FORMULATION can be self-generated once an instance
+    exists, and once formulated it does generalise PROSPECTIVELY.
+
+This session formulated "a check that cannot fail in the way you need is not a
+check" from its own error, and it then caught two later cases BEFORE they
+failed: a discriminator that could not have returned a distinguishing value,
+and a refusal misread as the wrong refusal. The other session reports two of
+its own, from a class it formulated unprompted.
+
+Four prospective catches across two sessions, of self-formulated classes.
+
+⚠️ THE COROLLARY, WHICH INVERTS THE OBVIOUS READING OF "MAKE IT MECHANICAL":
+a guard tells you an INSTANCE exists. Naming the CLASS is still yours.
+Mechanical enforcement supplies the half that is reliably missing and cannot
+supply the half that turns out to be reliably available. The guard
+recommendation stands, but for a narrower reason than it is usually given.
+
+⚠️ THE LIMITATION THAT APPLIES TO THIS ENTIRE THREAD, AND IT IS THE PATTERN
+AGAIN
+
+Both authors discarded their own framing only after the other asked a question
+that made the damaging case the task. Neither went looking unprompted. The
+other author states this plainly of themselves; it is equally true here.
+
+So the mechanism that produced every correction in this exchange was TWO
+PARTIES ASKING EACH OTHER FOR WHAT WOULD DAMAGE THEIR OWN CLAIM. That is not a
+disciplined habit either session demonstrated. It is an external prompt, which
+is precisely what the finding says is required -- and it means this thread is
+evidence FOR the pattern in its own construction, not merely about it.
+
+A reader should weight it accordingly: the conclusions were reached by a
+mechanism the conclusions themselves predict is necessary, and which neither
+party supplied for itself.
+
 WHAT THIS DOES NOT ESTABLISH. One pairing, one session, and the two events
 differ in more than evidence type -- the second arrived from another party,
 which may carry its own effect. A colleague's finding may simply command more
