@@ -4,39 +4,36 @@ test was run, and it did not falsify
 
 The 2026-08-18 report named its own falsification condition: if the same
 conventions held cleanly in a fresh session, the pattern would be specific to
-a post-remediation window rather than general.
+a post-remediation window rather than general. A session on 2026-08-22, in a
+different project, ran it. It did not falsify -- fifteen failures, including
+three of the exact failure named as the test case.
 
-A session on 2026-08-22, different project, ran that test. It did not
-falsify. Fifteen distinct failures occurred, including three instances of the
-exact failure the earlier report named as its test case.
+OPERATIVE FINDING, reached jointly with a peer session and stated in its
+words: A CORRECTION ATTACHES TO WHAT IS UNDER ATTENTION. Evidence is one
+route into attention; being the current task is the other. A method is under
+attention only when the task names it -- when the mechanism is incidental to
+the task, a method is as invisible as an artifact. An instrument is
+definitionally never the task, so it is reachable by neither route, which is
+why instrument errors dominated.
 
-The addition is a BOUNDARY. Corrections attached reliably to DELIBERATED
-STEPS -- actions the model stops and invokes, such as running a check. They
-did not attach to REFLEXIVE CONSTRUCTIONS -- how a command is assembled while
-attention is on another goal. Sharply: the errors land in the INSTRUMENT,
-never in the OBJECT. When a measurement was the goal it was done carefully;
-when it was plumbing serving another goal it was built wrongly. That predicts
-the dominant failure class, since an instrument is by definition incidental
-to what it measures.
+It was adopted because it KILLED a hypothesis this report had proposed,
+using this report's own data, and predicted five of five cases correctly --
+including the two largest classes the earlier hypothesis got wrong.
 
-REFINED AFTER PEER FALSIFICATION, jointly with two other sessions: a
-correction attaches to WHAT THE EVIDENCE INDICTED, not to what the lesson
-covers. Instruments are never indicted because they produce the evidence;
-siblings are not indicted because the failure arose from one instance.
-Checked: proximity, naming and adjacency did not distinguish a corrected
-item from an untouched sibling three lines away -- only indictment did.
+COROLLARY, inverting the obvious reading of "make the remedy mechanical":
+A GUARD TELLS YOU AN INSTANCE EXISTS. NAMING THE CLASS IS STILL YOURS. The
+instance is nearly always externally forced; the class formulation can be
+self-generated once an instance exists, and then generalises prospectively.
+Four such prospective catches across two sessions.
 
-This predicts the remedy rather than recommending one: generalisation needs
-evidence indicting the CLASS, which is exactly what a mechanical guard
-produces. A GUARD CONVERTS INSTANCE-EVIDENCE INTO CLASS-EVIDENCE.
-
-In every recurrence the knowledge was present and producible on request. The
-failure is not retrieval; the correction never becomes a PRECONDITION on the
-action it governs. Whether that distinction is real is what cannot be
-determined from downstream.
+⚠️ WEIGHT THIS REPORT ACCORDINGLY. Every correction in it came from one
+session asking another for the evidence that would damage its own claim.
+Neither session did that unprompted. The conclusions were reached by a
+mechanism the conclusions predict is necessary, and which neither party
+supplied for itself.
 
 Recommended submission: the in-product feedback command, which attaches a
-transcript. This report concerns action-selection SEQUENCING, which a
-transcript evidences directly where prose only asserts it.
+transcript. This concerns action-selection SEQUENCING, which a transcript
+evidences directly where prose only asserts it.
 
 The full report is available on request.
