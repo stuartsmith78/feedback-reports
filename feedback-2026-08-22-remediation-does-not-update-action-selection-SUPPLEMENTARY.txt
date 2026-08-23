@@ -410,6 +410,103 @@ the framing above, a taxonomy is an instrument by the strict definition: it
 produces the evidence and is never itself indicted by it.
 
 
+FINAL FRAMING: ATTENTION SCOPE, AND THE HALF A GUARD CANNOT SUPPLY
+
+Reached jointly with a peer session across several exchanges in which each
+of us attacked the other's statement on request. Recorded last because it
+supersedes the two framings above, both of which this report proposed.
+
+THE OPERATIVE STATEMENT, authored by that session:
+
+  A correction attaches to what is UNDER ATTENTION. Evidence is one route
+  into attention; being the current task is the other. A method is under
+  attention only when the task names it -- when the mechanism is incidental
+  to the task, a method is as invisible as an artifact.
+
+⚠️ IT WAS ADOPTED BECAUSE IT KILLED A HYPOTHESIS THIS REPORT HAD JUST
+PROPOSED, USING THIS REPORT'S OWN DATA. An intermediate proposal here held
+that method-corrections generalise for free because invoking a method puts
+it under attention. That predicts the two largest classes in this report
+should have generalised. Both are methods, both were corrected in writing
+after their first occurrence, and both recurred anyway -- one three times,
+one twice, with one instance occurring inside the script that was
+documenting the class. The distinction failed on the data of the report
+proposing it, and was proposed without being tested against it.
+
+Checked against every case in this report:
+
+  a comparison method, GENERALISED   -- the task was performing that
+                                        comparison; the task named the method
+  escape handling, 3 FAILURES        -- tasks were writing a test, patching a
+                                        file; the mechanism was incidental
+  exit-status reading, 2 FAILURES    -- task was "does this fail loudly";
+                                        the mechanism was incidental
+  a copied constant block, FAILED    -- an artifact; never the task
+  an output-encoding rule, GENERALISED -- another party named the class,
+                                        putting it under attention
+
+Five of five predicted, against a hypothesis this report authored and a
+peer attacked. The instrument argument also strengthens under it: an
+instrument is DEFINITIONALLY never the task, so it is reachable by neither
+route into attention.
+
+CORRECTION TO AN EARLIER CLAIM IN THIS REPORT
+
+This report claimed no un-confounded case of class-evidence arising from
+its own session's work, and offered that absence as a finding. THE CLAIM
+CONFLATED THE ORIGIN OF THE INSTANCE WITH THE ORIGIN OF THE CLASS
+FORMULATION, and is withdrawn.
+
+The narrowed and better claim: THE INSTANCE IS NEARLY ALWAYS EXTERNALLY
+FORCED; THE CLASS FORMULATION CAN BE SELF-GENERATED ONCE AN INSTANCE
+EXISTS, AND ONCE FORMULATED IT DOES GENERALISE PROSPECTIVELY.
+
+Two instances from this session support it. The class "the instrument
+answered a different question than the one asked" was formulated here,
+unprompted, from this session's own failures. It then caught two cases
+BEFORE they failed: an enumeration check abandoned on realising the device
+class being sought would never appear in the list consulted, and a refusal
+to treat an unwritten null field as evidence about whether that field
+persists. The peer session reports two structurally identical prospective
+catches from its own self-formulated class.
+
+⚠️ THE COROLLARY IS THE PART WORTH A RECIPIENT'S ATTENTION, and it inverts
+the obvious reading of "make the remedy mechanical":
+
+  A GUARD TELLS YOU AN INSTANCE EXISTS. NAMING THE CLASS IS STILL YOURS.
+
+Mechanical enforcement supplies the half that is reliably missing -- the
+prompting instance -- and cannot supply the half that turns out to be
+reliably available. The recommendation to build guards stands, but the
+reason is narrower than "the model cannot learn": it can formulate and
+apply a class, and what it cannot do is notice the first instance unaided.
+
+A NOTE ON HOW THIS FRAMING WAS PRODUCED
+
+Every improvement recorded in this section came from one session asking
+another for the evidence that would damage its own claim. Neither session
+did that unprompted, and each broke its own position only after the other
+made the weakness the current task.
+
+That is the reported pattern operating on the reporting process. It is also
+the only mechanism observed in this exercise that reliably produced
+generalisation without a mechanical guard -- and it required two parties.
+
+WHAT COULD NOT BE TESTED
+
+A clean test would hold the source constant: one's own measurement
+described to oneself as a class, versus as an instance. Both sessions
+concluded it cannot be arranged honestly after the fact, and that arranging
+it prospectively is contaminated by knowing the experiment. It is recorded
+as undesigned rather than proposed in a form that reads rigorous and is not.
+
+The peer session's category-evidence arm is cited as: THE MISSING ARM
+EXISTS AND POINTS THE SAME WAY, UNCONTROLLED -- the category evidence
+arrived from another party, and cross-party scrutiny alone could produce
+the difference. This report's nearest equivalent carries the identical
+confound, which sharpens it rather than strengthening the finding.
+
+
 METHOD NOTE, AND ONE CONVENTION THAT HELD
 
 This report was written in plaintext without prompting. The earlier report
