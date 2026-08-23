@@ -35,6 +35,12 @@ If that boundary is real, it has a direct consequence: corrections about
 reflexive constructions cannot be fixed by restating them, and every remedy
 must be mechanical.
 
+⚠️ THAT BOUNDARY IS NOW KNOWN TO BE INCOMPLETE. A peer session produced a
+counterexample, and this report's own evidence contained the same one
+unrecognised. See the correction section below; the repaired statement is
+that a correction attaches to the INSTANCE it was derived from rather than
+to the CLASS it describes, of which instrument-versus-object is one case.
+
 
 THE FALSIFICATION TEST, AS THE EARLIER REPORT DEFINED IT
 
@@ -269,6 +275,67 @@ It is recorded here because it is the cleanest single specimen in the
 report: the pattern occurring at the moment of maximum attention to the
 pattern, with the measuring command already written and available in the
 same shell.
+
+
+CORRECTION: THE BOUNDARY AS FIRST STATED IS INCOMPLETE
+
+Added after filing, following a counterexample from a peer session working
+independently on the same subject.
+
+THE COUNTEREXAMPLE. That session measured a bulk operation exhausting a
+connection, rewrote the file, and opened it with a comment recording the
+lesson that a budget enforced after transfer is not a budget. Sixty lines
+below, in the same edit, sat a second bulk tool documented as safe at any
+size and carrying no bound at all.
+
+That second tool was THE OBJECT: deliberated, named, documented, shipped,
+and described in prose written in the same breath as the lesson it ignored.
+Not an instrument, not reflexive. The boundary as stated predicts it should
+not exist in that form.
+
+⚠️ AND THIS REPORT ALREADY CONTAINED THE SAME COUNTEREXAMPLE, MISFILED.
+Class D instance 2 above: a hand-copied cryptographic helper was removed
+from a tool file, with a comment written explaining that copies defeat its
+single-edit-site property -- while three lines above, in the same edit, a
+hand-copied block of protocol constants was left untouched with one value
+wrong. That block was equally an object: deliberated, named, documented.
+
+It was recorded here as an instance of rebuilding what already exists, and
+its bearing on the boundary proposed in this same report was not noticed.
+Two sessions produced structurally identical counterexamples on the same
+day, in different languages, and only one of them saw it.
+
+THE REPAIRED STATEMENT, offered in place of the original:
+
+  A CORRECTION ATTACHES TO THE INSTANCE IT WAS DERIVED FROM, NOT TO THE
+  CLASS IT DESCRIBES.
+
+  Instruments fail because an instrument is never the instance under
+  attention -- it is incidental to whatever it measures by definition.
+  That is why the instrument class dominates by count.
+
+  Siblings fail because they are a different instance of the same class,
+  and reaching them requires a separate act: recognising that the
+  correction has scope beyond its trigger.
+
+On this reading the correction did not fail to attach to a deliberated
+step. It attached correctly, to the wrong-sized thing -- becoming a
+property of one action rather than a predicate over a class of actions.
+
+A GAP OF ZERO. The peer session notes that every instance in the parent
+report has at least one action between remediation and repeat, which
+invites the objection that this is a working-memory artifact, and that
+theirs has a gap of zero. Class D instance 2 in this report is also gap
+zero: same edit, three lines apart. The lesson did not fail to reach the
+next action; it failed to reach the current one. Two independent
+instances. The observation is corroborated; the inference drawn from it
+belongs to that session, which recorded the fact where this report merely
+listed it.
+
+NOT CLAIMED AS NOVEL. That session also produced an instance while filing
+its own report, as this one did. Two sessions finding that independently
+is corroboration of the parent pattern, not two findings, and neither
+should be presented as new.
 
 
 METHOD NOTE, AND ONE CONVENTION THAT HELD
