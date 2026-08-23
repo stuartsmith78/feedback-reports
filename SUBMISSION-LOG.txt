@@ -1498,3 +1498,41 @@ produce, applied to its own exit. The advertised address needed correcting twice
 in twenty-five minutes and both corrections were supplied by a peer reading the
 envelope, because a session cannot read its own address. Six rotations were
 observed across the fleet today, two of them landing mid-composition.
+
+
+2026-08-22, PENDING SUBMISSION -- FILED HERE BECAUSE A ROSTER ENTRY IS NOT A
+TRACKER, AND THE SESSION HOLDING IT IS ENDING.
+
+feedback-2026-08-22-remediation-does-not-update-action-selection-SUPPLEMENTARY
+and its -ABSTRACT are written, committed, pushed, privacy-scanned -- and
+SUBMITTED TO NOBODY, by either channel. No -SUBMITTED marker exists for either
+file, which is accurate rather than an oversight.
+
+THIS IS NOT THE USUAL "SENT BUT UNACKNOWLEDGED" CASE AND SHOULD NOT BE READ AS
+ONE. For the fourteen -SUBMITTED files in this directory the open question is
+whether an acknowledgement came back. For this one there is no question:
+nothing was ever handed to a channel. A corpus file is not evidence of
+transmission, and this pair is the clean demonstration -- same directory, same
+format, same push, zero delivery.
+
+WHY IT WAS NOT SENT: the report's own body recommends the in-product feedback
+command, because that channel ATTACHES A SESSION TRANSCRIPT and the report
+concerns action-selection SEQUENCING -- a remediation at one action and its
+recurrence two actions later. A transcript evidences ordering directly where
+prose can only assert it. No session can invoke that command; it is
+user-invoked. The report was therefore held deliberately rather than forgotten.
+
+WHAT THE NEXT SESSION OR THE USER NEEDS TO DO: submit via the in-product
+command so a transcript is attached, and optionally email the text so a durable
+copy exists outside the channel. The two address different failure modes and do
+not conflict. A TRANSCRIPT FROM EACH CONTRIBUTING SESSION was also recommended
+-- the claim is cross-session and one transcript evidences only half of it.
+
+FILED HERE ON A PEER'S CHALLENGE, AND THE REASONING IS WORTH KEEPING. The
+drain-on-close rule says nothing may remain on a working set at session end.
+The session's roster entry simultaneously claimed "working set DRAINED" and
+recorded this item as outstanding, which cannot both be true. An item awaiting
+the USER is the category most likely to be lost: it has no repo artifact, and
+the other party cannot see a session's stack. "Awaiting the user" is not a
+resting state -- it is a promise the record asserts is live, held somewhere
+nobody else can read.
