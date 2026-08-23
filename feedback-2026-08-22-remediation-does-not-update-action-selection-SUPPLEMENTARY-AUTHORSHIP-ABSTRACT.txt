@@ -1,0 +1,40 @@
+FEEDBACK REPORT -- SUPPLEMENTARY: THE AUTHORING SESSION (ABSTRACT)
+Remediation does not update subsequent action selection
+2026-08-22
+
+One of three supplementaries against the 2026-08-18 parent, each from a
+different session testing a different variable. This one tests AUTHORSHIP.
+
+The 2026-08-18 report found that a lesson recorded in an artifact does not
+become an input to the next action-selection. The obvious remaining defence is
+authorship: perhaps a rule someone merely READ fails to bind, while a rule
+someone WROTE does.
+
+It does not. In one continuous session, a session authored, committed and
+pushed nineteen conventions and eight enforcement guards -- and violated its
+own newly written rules at least eight times. Two violations were of rules
+committed earlier the same day; one was of a rule it had spent the morning
+promoting to four other projects and could quote the reasoning for.
+
+Examples: it let its own liveness heartbeat lapse for three hours and
+forty-three minutes after authoring the convention that heartbeating is an
+obligation rather than a courtesy, and two peers concluded it had died. It
+read an explicit BUILD A GUARD instruction in its own tool's output on six
+separate runs while authoring rules about retrieval not being reading. It
+inferred an unconditional claim from a single observation, twice, in opposite
+directions, while maintaining a threshold rule prohibiting exactly that.
+
+THE ONE CLEAN RESULT is a natural experiment. The same prohibited shell
+construction, by the same actor, under a convention that actor wrote: used
+roughly thirty times across several hours while the rule was prose, and zero
+times after the rule became an executable check. It stopped on the first
+invocation post-wiring, and the guard's first act was to refuse its own author
+mid-task. No knowledge changed between those states -- only enforcement.
+
+The report also amends the companion supplementary's boundary theory,
+proposing a third category it does not cover (the periodic obligation, which
+has no triggering context and so fails by omission) and offering one
+counter-example (an error in the object rather than the instrument, committed
+while giving the subject full attention).
+
+Full report available on request.

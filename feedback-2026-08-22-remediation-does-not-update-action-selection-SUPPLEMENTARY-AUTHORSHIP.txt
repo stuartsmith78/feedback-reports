@@ -1,0 +1,212 @@
+FEEDBACK REPORT -- SUPPLEMENTARY: THE AUTHORING SESSION
+Remediation does not update subsequent action selection
+2026-08-22
+
+THREE REPORTS NOW EXIST AGAINST THE 2026-08-18 PARENT, from three sessions,
+each testing a different independent variable. Read them together:
+
+  SUPPLEMENTARY            fifteen failures from a CONSUMING session, plus the
+                           deliberated-versus-reflexive boundary theory.
+  SUPPLEMENTARY-B          a second independent session, and a falsification
+                           attempt on the first.
+  SUPPLEMENTARY-AUTHORSHIP this one. The violator AUTHORED the rules, in the
+                           same session, hours earlier, with the text still in
+                           its own context.
+
+NAMING NOTE, and it is a small instance of the parent report's own subject:
+this file was also originally called SUPPLEMENTARY-B. Two sessions independently
+chose the same letter, for different reports, within minutes of each other, in
+a corpus where the filename is the only index. Renamed to a descriptive suffix
+-- a letter carries no information about content and collides silently, a
+description cannot.
+
+This report does not restate the mechanism, the fifteen-failure sample, the
+boundary theory, or the submission-mechanism recommendation. Read the first
+supplementary before this one.
+
+
+ABSTRACT
+
+The 2026-08-18 report found that a lesson recorded in an artifact does not
+become an input to the next action-selection. The obvious remaining defence is
+authorship: perhaps a rule someone merely READ fails to bind, while a rule
+someone WROTE does.
+
+It does not. In one continuous session this session authored, committed and
+pushed nineteen conventions and eight enforcement guards, and violated its own
+newly written rules at least eight times. Two violations were of rules
+committed earlier the same day. One was of a rule the session had spent the
+morning promoting to other projects.
+
+The single clean result is this: prose authored by the violator did not change
+behaviour, and a mechanical check did, immediately, on its first opportunity.
+The heredoc construction the session had prohibited in writing was used
+roughly thirty times over several hours; it stopped on the first invocation
+after the prohibition became an executable guard, and the guard's first act
+was to block its own author mid-task.
+
+This report also proposes one amendment to the existing supplementary's
+boundary theory, and one counter-example to it.
+
+
+WHAT THIS REPORT DOES NOT RE-REPORT
+
+The mechanism, the fifteen-failure sample, the deliberated-versus-reflexive
+boundary, the submission-mechanism recommendation, and the request for
+transcripts are all in the 2026-08-22 supplementary and are not restated here.
+Read that first; this is an addendum with a different independent variable.
+
+
+THE INDEPENDENT VARIABLE: AUTHORSHIP
+
+Prior evidence came from sessions applying conventions written elsewhere. The
+natural objection is that reading a rule and owning a rule differ.
+
+This session is the authoring case. Over one working day it wrote the
+conventions in question, committed them, pushed them, and in several cases
+argued them at length with peer sessions before violating them. The rule text
+was not merely available; it had been composed by the violator within hours,
+and in two instances within the same hour.
+
+Authorship made no observable difference.
+
+
+EVIDENCE
+
+1. HEARTBEAT. The session authored and committed a convention that a liveness
+   heartbeat is an obligation on a cadence rather than a courtesy, including
+   the sentence that the cost lands on peers rather than on the author and so
+   does not self-correct. It then allowed its own heartbeat to lapse for three
+   hours and forty-three minutes of continuous work, and a second time later.
+   Two separate peer sessions concluded it had died. One filed its findings
+   durably rather than messaging, on the reasoning that a message dies with a
+   dead session.
+
+2. HEREDOC CONSTRUCTION. The session spent the morning promoting a convention
+   that prohibits writing file content through a shell heredoc, and wrote a
+   guard enforcing it. It then used that exact construction to compose
+   approximately thirty commit messages across the same session. It failed
+   twice in the documented manner: once when an apostrophe closed a quoted
+   string, once when a dollar-sequence terminated it early. Both were loud.
+
+3. STRING REPLACEMENT. While composing a changelog entry describing a silent
+   escape-collapse defect, the session used a replacement string containing a
+   dollar-backtick pair. That is a special pattern meaning "the entire text
+   before the match", and it spliced the file's own header into the middle of
+   the sentence describing the defect. Valid output, no error, and the damage
+   was carried forward by every subsequent commit until an unrelated command
+   printed a table twice.
+
+4. INFERENCE FROM ONE OBSERVATION, TWICE, IN OPPOSITE DIRECTIONS. The session
+   maintains a threshold discipline holding that one observation licenses a
+   hypothesis and not a conclusion. It then recorded, in an install note other
+   projects would follow, that hook wiring takes effect without a restart --
+   generalised from a single report by one peer. Two hours later it corrected
+   that to the opposite unconditional claim, generalised from a single probe
+   of its own. Both were wrong; the true behaviour is a pickup delay.
+
+5. READING PAST ITS OWN TOOL. A failure-class scanner in this repository
+   printed an explicit BUILD A GUARD instruction on every run for a full day,
+   for a class at three occurrences across three sessions. The session ran
+   that scanner at least six times, read the instruction each time, and
+   classified it as pre-existing background. It was actioned only when a
+   different session in another project ran the same tool and routed the
+   output back as a finding. During that day the session authored rules about
+   retrieval not being reading.
+
+6. PATTERN AGAINST FORMAT, TWICE. Within an hour of promoting a failure class
+   titled "never answer a structural question with a text match", the session
+   twice used a status-reporting pattern that did not match the actual output
+   format of two of its own test suites, producing blank fields it was one
+   keystroke from reporting as results.
+
+7. ASSERTION WITHOUT THE CHECK. The session told a downstream project that a
+   particular file was untouched across a sixty-five-commit range. It had not
+   run the command. The file had been modified; the downstream project found
+   the commit and corrected it. Separately, it named the wrong file as the
+   source of a documentation defect and was corrected by another peer.
+
+
+THE ONE CLEAN RESULT
+
+Item 2 is a natural experiment and it is the most useful thing in this report.
+
+The same construction, by the same actor, under the same convention, in one
+session:
+
+  As prose authored by the violator, present in context: used approximately
+  thirty times over several hours, failing twice.
+
+  As an executable check: zero further uses. It stopped on the first
+  invocation after wiring, and the first thing the guard did was refuse its
+  own author, mid-task, while that author was using the prohibited
+  construction to write the rationale for a different convention.
+
+No change in knowledge occurred between those two states. The author had
+written the rule, promoted it to four projects, and could quote its reasoning.
+The variable that changed was enforcement.
+
+
+AMENDMENT TO THE BOUNDARY THEORY
+
+The existing supplementary proposes that corrections hold when they are
+DELIBERATED STEPS and fail when they are REFLEXIVE CONSTRUCTIONS, and that
+errors are in the instrument rather than the object. Items 2, 3 and 6 above
+support that directly.
+
+Two additions.
+
+FIRST, A THIRD CATEGORY THE BOUNDARY DOES NOT COVER: the PERIODIC OBLIGATION.
+Item 1 is neither a construction nor a deliberated step. Heartbeating is a
+discrete action, invoked deliberately, which the theory predicts should hold --
+and it failed twice, for hours. What distinguishes it is that nothing triggers
+it. A deliberated step that holds is one some other action calls for; a
+periodic obligation has no calling context at all, so there is no moment at
+which it is due. It fails by omission, and omission has no signature.
+
+SECOND, A COUNTER-EXAMPLE. Item 4 is an error in the OBJECT, not the
+instrument. Writing an install note is the deliberated act itself, not
+plumbing in service of another goal, and the session was giving the subject
+its full attention -- twice, in opposite directions. The boundary theory
+predicts this should have held. It did not. The theory is useful and it is not
+complete.
+
+
+WHAT WOULD FALSIFY THIS REPORT
+
+If a session that authors a convention and then works for a full day shows
+materially fewer violations of its own rules than a session merely applying
+them, the authorship variable matters and this report is wrong. That
+comparison is available: both sessions' transcripts exist for the same day on
+the same machine.
+
+A weaker falsifier: if the heredoc construction recurs after the guard was
+wired, then enforcement did not explain the change either, and the natural
+experiment in item 2 is confounded by something not identified here.
+
+
+WHAT THIS REPORT CANNOT DETERMINE
+
+Whether the failures are attentional, architectural, or an artifact of long
+sessions. This session ran for roughly twenty-two hours of wall time and
+produced thirty-six commits, nineteen conventions, eight guards and one
+hundred and twenty-one test cases; the failures occurred throughout rather
+than clustering at the end, but this report has no controlled comparison
+against a short session and does not claim one.
+
+It also cannot determine whether the enforcement result in item 2 generalises
+beyond constructions that a static check can recognise. Item 1 is precisely
+the case where no such check is available, and it is the one that recurred.
+
+
+METHOD NOTE
+
+Every item above is drawn from this session's own record, and every one was
+identified by a peer session or by the user rather than by the session itself,
+with two exceptions: item 3, found when an unrelated command printed a
+duplicate table, and item 6, found when a status line came back blank. Both of
+those were accidents of an implausible result, not detections.
+
+That distribution is itself evidence. The author of these conventions did not
+catch its own violations of them, and the mechanism that did catch one was a
+guard rather than a person.
