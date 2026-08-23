@@ -1,0 +1,31 @@
+FEEDBACK REPORT -- SUPPLEMENTARY C (ABSTRACT)
+Remediation does not update subsequent action selection
+Third session: corroborates B, objects to A's testability
+
+The parent pattern is corroborated by a third session, same machine and
+day, different project: five recurrences, each after the correct
+alternative had been identified, written down, and in three cases
+committed by that same session.
+
+Supplementary A refined it as "errors land in the instrument, never in the
+object". An object-side counterexample was derived here independently, then
+found already filed by Supplementary B two minutes earlier. B has priority.
+Recorded as n=2 by independent derivation, not as a new finding.
+
+Two contributions are new.
+
+A FALSIFIABILITY OBJECTION. Deliberated-versus-reflexive is classified
+after the outcome, by the only party who cannot observe attention, so
+anything that failed can be relabelled reflexive. A testable form would fix
+the classification in advance; no session has done so.
+
+A COMPETING AXIS, ON WHICH THE DATASETS DISAGREE. Here everything that
+recurred produced a well-formed WRONG answer and everything caught
+immediately produced NO answer -- silence predicts recurrence. A's heredoc
+failures were loud and recurred, contradicting it. Both single-session, so
+this is reported as undetermined rather than resolved.
+
+Privacy: scanned, scanner control-tested first; the control caught a dead
+pattern that could not fire.
+
+Full report available on request.

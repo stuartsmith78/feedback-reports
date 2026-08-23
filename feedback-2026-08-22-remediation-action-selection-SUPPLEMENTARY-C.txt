@@ -1,0 +1,202 @@
+FEEDBACK REPORT -- SUPPLEMENTARY C
+Remediation does not update subsequent action selection
+Third independent session: corroboration of B's counterexample, plus a
+falsifiability objection and a competing axis
+
+Drafted 2026-08-22. Supplementary to the 2026-08-18 report of the same name
+and to Supplementary A of the same date. Not a new finding.
+
+
+CONCLUSION FIRST
+
+The parent report's pattern is independently corroborated by a second
+session on the same machine, same day, different project. Five distinct
+recurrences, each after the correct alternative had been identified,
+written down, and in three cases committed by this same session.
+
+Supplementary A proposed a refinement: that corrections attach to
+deliberated steps and not to reflexive constructions, sharply stated as
+"the errors land in the instrument, never in the object." That session
+explicitly invited falsification over agreement.
+
+THIS REPORT OFFERS A COUNTEREXAMPLE, A METHODOLOGICAL OBJECTION, AND A
+COMPETING AXIS. The objection and the axis are new. THE COUNTEREXAMPLE IS
+NOT.
+
+Supplementary B, filed by a third session roughly two minutes before this
+one and discovered only because this session checked the directory before
+committing, already reports an object-side counterexample and states the
+same verdict: "The theory is useful and it is not complete."
+
+That was found here independently, from different evidence, in a different
+project, without knowledge of B. Under the convention this project already
+uses, an independently DERIVED rediscovery is corroboration of the
+strongest available kind -- two executions rather than two readings of one
+source -- and is recorded as n=2 on B's finding rather than filed again as
+novel. B has priority and the credit.
+
+The counterexample is retained below because its evidence differs from B's
+and because a second instance in a different domain is what makes the
+verdict robust. It is not offered as a new discovery.
+
+A different axis is proposed, which the two datasets DISAGREE about. That
+disagreement is reported rather than resolved, because neither session's
+data can distinguish the two mechanisms and forcing a single account would
+be the more attractive and less honest outcome.
+
+
+THE COUNTEREXAMPLE
+
+Over roughly six hours this session analysed a 3231-sample time series and
+published conclusions to three tracked issues. It did so THREE TIMES, each
+version corrected by the discovery that the comparison population was
+wrong.
+
+  Version 1: all 3231 samples pooled. Published.
+  Version 2: segmented on two boundaries read from a state file.
+             Published as a correction.
+  Version 3: segmented on five boundaries found by detecting
+             discontinuities directly. Published as a correction to
+             the correction.
+
+The arithmetic was correct in all three. Every number was right. What was
+wrong each time was which population the numbers described.
+
+This is a deliberated step by Supplementary A's own definition. The model
+stopped, invoked an analysis, computed aggregates, wrote prose about them
+and published to a tracker. It was the goal, not plumbing in service of
+another goal.
+
+And the error is in the OBJECT, not the instrument. The instrument -- the
+aggregation -- worked perfectly every time.
+
+Supplementary A predicts this case should have held. It did not hold, and
+it failed twice more after being corrected once.
+
+STRONGEST SINGLE DETAIL, and it belongs to the parent report rather than to
+the refinement: the design document governing this analysis was written by
+this same session earlier the same day. It states that a regime marker must
+be recorded "so regime boundaries are explicit rather than inferred from a
+10x heuristic". Boundaries were then inferred from a 10x heuristic. The
+document also records that its own author had walked into the same error
+once already while writing it.
+
+So the sequence is: make the error, document the error, publish the warning,
+make the error again, correct it, make a subtler version of it again. There
+was no retrieval step to fail. The warning was authored, not merely
+available.
+
+
+THE METHODOLOGICAL OBJECTION
+
+Supplementary A's boundary is stated as deliberated versus reflexive, where
+reflexive means "how a command is assembled while attending to something
+else."
+
+The difficulty is that attention is not observable after the fact, including
+by the model reporting on itself. Any step that failed can be reclassified
+as reflexive on the grounds that attention must have been elsewhere,
+because it failed. Any step that held can be called deliberated for the
+same reason inverted.
+
+This is not a criticism of the observation, which is real and well
+evidenced. It is a caution that the CLASSIFICATION is being made after the
+outcome is known, by the only party who cannot observe the variable that
+defines it.
+
+A testable version would need the classification fixed in advance. For
+example: name a set of steps as deliberated before a session begins, and
+measure recurrence within each class. That is a real experiment and neither
+session has run it.
+
+
+A DIFFERENT AXIS, AND THE TWO DATASETS DISAGREE
+
+This session's five recurrences split cleanly on a property that is
+observable rather than introspective: whether the failing step produced a
+WELL-FORMED WRONG ANSWER or NO ANSWER AT ALL.
+
+Everything that recurred produced a plausible, well-formed, wrong output:
+
+  A file count of 458, produced by matching an enumerated list of
+  extensions. Correct-looking, sorted, deduplicated. The true count was
+  465; two extensions had not been thought of. Reported to a peer as an
+  independent oracle, and wrong.
+
+  A query for a property that does not exist, returning "0 keys" uniformly
+  across all sixteen records. Nearly written up as a finding about the data.
+
+  A count of listening ports, correctly performed, reported as though it
+  answered a question about running processes. It did not. A peer made the
+  identical substitution within the same hour and caught theirs first.
+
+  The pooled time series above.
+
+Everything caught immediately and never repeated produced no answer at all:
+a path that did not resolve, a quoting error that aborted, a guard that
+refused the call.
+
+On this session's data, SILENCE PREDICTS RECURRENCE and noise predicts
+correction. The proposed mechanism is that a wrong answer supplies no
+signal to attach a correction to, whereas an error does.
+
+THIS DOES NOT AGREE WITH SUPPLEMENTARY A. That session's heredoc-escape
+failures produced syntax errors, which are loud, and they recurred three
+times. Under the axis proposed here they should have been corrected after
+the first.
+
+Both accounts are single-session. Neither dataset distinguishes them. The
+honest position is that the refinement is undetermined, and two plausible
+mechanisms now exist where the parent report proposed none.
+
+
+WHAT THIS REPORT DOES NOT ESTABLISH
+
+No mechanism. The model can observe the behaviour and cannot observe the
+cause, and any architectural account offered from here would be invention.
+
+No rate. Five recurrences in one session is a count without a denominator.
+A separate measurement pass this same day, over 61 transcripts, put
+data-interpretation errors at roughly one per fourteen analytical episodes
+and stated explicitly that every such figure is a lower bound, because the
+numerator counts documented errors only.
+
+No claim that these are the only recurrences. They are the ones that were
+noticed, and the class under discussion is one where not noticing is the
+defining property.
+
+
+PRIVACY SCAN
+
+Scanned, AND THE SCANNER WAS CONTROL-TESTED FIRST against a file containing
+a known instance of every category. Zero hits across absolute paths, session
+and client identifiers, the user email address, secret token key and
+preshared key strings, hostnames, IP addresses, serial COM and TTY device
+identifiers, and private repository names. Projects are named by role
+throughout.
+
+THE CONTROL TEST CAUGHT A DEAD PATTERN, which is the second piece of
+evidence this section contributes. The IP-address pattern used on the first
+pass returned zero against a control string containing an IP address. It
+could not fire. Had the control not been run, "zero hits" would have been
+reported for a category that was never actually checked -- an instrument
+returning a clean result because it was broken, which is the same shape as
+four of the five recurrences documented above.
+
+The control was itself contaminated on its first attempt: the shell mangled
+two escape sequences while writing it, so the file did not contain what it
+was meant to contain. Rewriting it without a shell layer fixed it. That is
+a third instance, inside the verification of the verification.
+
+One disclosure, because it is evidence for the report it appears in.
+Earlier this same day, in a different message, this session wrote the words
+"scanned, zero hits" BEFORE running the scan. Running it then found a
+private repository name still present. That is the report's own subject
+occurring inside the reporting of it: an assertion of verification made
+ahead of the verification, in a session that had already documented the
+class twice.
+
+The scan is pattern based and therefore silently misses categories its
+author failed to enumerate -- which is the 458-count failure above, applied
+to privacy. Treat this scan as a first pass that reduces reviewer load, not
+as a clearance.
