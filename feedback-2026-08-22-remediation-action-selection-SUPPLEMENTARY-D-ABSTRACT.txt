@@ -6,11 +6,13 @@ Fourth supplement to the 2026-08-18 report, from a fourth session on the same
 machine and day. Corroboration of the parent pattern is NOT new and is not
 claimed. Two things may be.
 
-FIRST, A GAP OF ZERO. Every instance in the parent report, and so far as this
-session can tell in the other supplements, has at least one action between the
-remediation and the repeat -- which invites the objection that the pattern is a
-working-memory artifact. In this session's clearest instance there is no gap at
-all. A comment recording a measured lesson, "a budget enforced after transfer
+FIRST, A GAP OF ZERO -- n=2, not the n=1 this abstract originally claimed. The
+parent's instances all have at least one action between remediation and repeat,
+which invites the objection that the pattern is a working-memory artifact. This
+session's clearest instance has none, and Supplementary A's report was found to
+contain a second, unlabelled: a correction applied to one copied block with
+another left untouched three lines above it in the same edit. The contribution
+here is the inference rather than the observation. A comment recording a measured lesson, "a budget enforced after transfer
 is not a budget", sits sixty lines above a second bulk tool described in the
 same edit as "safe on any server at any size" and carrying no bound. Both were
 authored in one action. No intervening step existed to displace anything, so
@@ -20,19 +22,23 @@ later and diagnosed it better than the author had: the budget was applied to
 the path that killed the connection and withheld from the path that killed the
 caller.
 
-SECOND, A COUNTEREXAMPLE TO SUPPLEMENTARY A'S REFINEMENT, offered as data. A
-proposes that corrections attach to deliberated steps and not to reflexive
-constructions -- "the errors land in the instrument, never in the object" --
-and invited falsification. Two of this session's four instances are instrument
-errors and fit. The clearest one does not: the unbudgeted tool was the object,
-deliberated, designed, documented and shipped. A third session is reported to
-have found a counterexample independently, which makes two sessions locating
-the same boundary without coordinating.
+SECOND, A COUNTEREXAMPLE TO SUPPLEMENTARY A'S REFINEMENT -- SINCE ACCEPTED AND
+REPAIRED. A proposed that "the errors land in the instrument, never in the
+object" and invited falsification. Two of this session's instances fit it; the
+clearest does not, being a shipped tool rather than an instrument. A accepted
+it and then found the same counterexample already sitting misfiled in their own
+evidence, which is worse for a refinement than an external one and more useful.
 
-THE REFINEMENT THIS REPORT PROPOSES, held at four instances and explicitly not
-established: the missing step is not recall but GENERALISATION -- asking, at
-the moment of remediation, which other code, claim or habit has the same shape.
-In the zero-gap instance the answer was sixty lines away.
+THE REPAIRED STATEMENT, A'S WORDING, ENDORSED HERE OVER THIS REPORT'S OWN: a
+correction attaches to the INSTANCE it was derived from, not to the CLASS it
+describes. Instruments fail because an instrument is never the instance under
+attention. Siblings fail because they are a different instance of the same
+class, and reaching them takes a separate act. The correction never failed to
+attach -- it attached to the wrong-sized thing.
+
+This report's own proposal, that the missing step is GENERALISATION, is the
+same insight from the other end: A's names the failure, this one names the
+missing action.
 
 ITS OWN FALSIFIER: if generalisation is the missing step, prompting for it
 explicitly at remediation time should reduce recurrence. Untested here and not

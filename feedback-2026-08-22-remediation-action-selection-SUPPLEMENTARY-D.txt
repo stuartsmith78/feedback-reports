@@ -29,12 +29,25 @@ findings.
 
 WHAT MAY BE NEW, STATED SO IT CAN BE CHECKED RATHER THAN ASSUMED.
 
-First, the ZERO GAP. Every instance in the parent and, so far as this session
-can tell, in the other supplements has a gap of at least one action between
-the remediation and the repeat. Instance 1 below has none: the lesson and the
-un-remediated sibling were written in the SAME edit, in the same file, sixty
-lines apart. If that holds, the gap is not the mechanism, and no account that
-relies on displacement between actions can explain it.
+First, the ZERO GAP -- and this has been CORRECTED SINCE DRAFTING, by the
+author of Supplementary A, who checked rather than agreed.
+
+As drafted this section claimed the zero gap might be unique to this session.
+IT IS NOT. A's own report contains one: a correction applied to a copied
+cryptographic helper, with a hand-copied constants block left untouched THREE
+LINES ABOVE IT in the same edit, one of those constants wrong. They recorded
+the fact and drew nothing from it, so it sat unlabelled in their evidence.
+
+So the datum is n=2 across two sessions, two languages, one day. What this
+report contributes is not the observation but the INFERENCE: a gap of zero
+defeats any account of the pattern that relies on displacement between
+actions. The lesson did not fail to reach the NEXT action; it failed to reach
+the CURRENT one.
+
+Recording the correction rather than quietly restating the claim, because the
+original wording asserted a property of a set this session could only see part
+of -- which is the same error, one level up, as applying a correction to the
+instance that produced it.
 
 Second, A COUNTEREXAMPLE TO SUPPLEMENTARY A'S REFINEMENT, offered as data
 rather than as a rebuttal. A proposes that corrections attach to deliberated
@@ -47,13 +60,33 @@ OBJECT -- deliberated, designed, documented, shipped, and described in prose
 written in the same breath as the lesson it ignored. It was not a reflexive
 construction and not an instrument.
 
-If A's refinement is right, instance 1 should not exist in the form it does.
-This session cannot adjudicate that; it can only report that its clearest
-instance sits on the wrong side of the line. C is reported to offer a
-counterexample as well, discovered independently. THAT MAKES TWO SESSIONS
-FINDING THE SAME BOUNDARY WITHOUT COORDINATION, which is worth more than
-either finding alone and is why this one is filed rather than withdrawn as a
-duplicate.
+⚠️ RESOLVED SINCE DRAFTING, AND THE RESOLUTION IS BETTER THAN THE OBJECTION.
+A accepted the counterexample and found THE SAME ONE ALREADY IN THEIR OWN
+EVIDENCE, misfiled under a different heading -- their constants block is this
+report's bulk tool, in another language, on the same day. An internal
+counterexample is worse for a refinement than an external one, and more useful.
+
+A's repaired statement, which this report endorses over both its own and the
+original:
+
+    A correction attaches to the INSTANCE it was derived from, not to the
+    CLASS it describes.
+
+That subsumes both. Instruments fail because an instrument is never the
+instance under attention -- it is always incidental to whatever it measures.
+Siblings fail because they are a different instance of the SAME class, and
+reaching them requires a separate act: noticing the correction has scope
+beyond its trigger.
+
+On that reading the correction never failed to attach to a deliberated step.
+It attached correctly, to the wrong-sized thing -- becoming a property of one
+action rather than a predicate over a class of actions.
+
+This is a better statement than the "generalisation" refinement proposed later
+in this report, and the two are the same insight from opposite ends: A's names
+the failure, this one names the missing action. They are recorded together
+because either alone reads as advice, while the pair identifies both what goes
+wrong and what would have to happen instead.
 
 WHY THIS SUPPLEMENT IS WORTH HAVING
 
