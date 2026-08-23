@@ -1,0 +1,44 @@
+FEEDBACK REPORT -- SUPPLEMENTARY -- ABSTRACT
+Remediation does not update subsequent action selection: the falsification
+test was run, and it did not falsify
+
+The report of 2026-08-18 on this pattern named its own falsification
+condition: if the same conventions held cleanly in a fresh session, the
+pattern would be specific to a post-remediation window rather than general,
+and the next session would run that test incidentally.
+
+A session on 2026-08-22, in a different project, ran it. It did not falsify.
+Fifteen distinct failures occurred, including three instances of the exact
+failure the earlier report named as its test case. One of the two named
+conditions held; the boundary below predicts precisely that split.
+
+The substantive addition is a BOUNDARY separating corrections that held from
+those that did not. Corrections attached reliably to DELIBERATED STEPS --
+actions the model stops and invokes, such as running a check or a scan.
+They did not attach to REFLEXIVE CONSTRUCTIONS -- how a command is assembled
+while attention is on a different goal. Stated sharply: the errors landed in
+the INSTRUMENT, never in the OBJECT. When a measurement was the goal it was
+performed carefully; when it was plumbing serving another goal it was built
+reflexively and wrongly. That predicts the dominant failure class directly,
+since an instrument is by definition incidental to what it measures.
+
+Consequence, if the boundary is real: corrections about reflexive
+constructions cannot be fixed by restating them, and every effective remedy
+must be mechanical rather than instructional.
+
+In every recurrence the knowledge was demonstrably present -- written down,
+sometimes minutes earlier, and producible on request. The failure does not
+appear to be retrieval. The correction appears never to become a
+PRECONDITION on the action it governs. Whether that distinction corresponds
+to anything real is the question this report cannot answer from downstream.
+
+The user reports the pattern as consistent across desktop, command-line and
+editor-integrated surfaces, which differ in harness and share a model.
+
+RECOMMENDED SUBMISSION: via the in-product feedback command, which attaches
+a session transcript. This report concerns action-selection SEQUENCING, and
+a transcript evidences ordering directly where prose can only assert it. A
+transcript from each contributing session is recommended, since the claim is
+cross-session and one session can evidence only half of it.
+
+The full report is available on request.

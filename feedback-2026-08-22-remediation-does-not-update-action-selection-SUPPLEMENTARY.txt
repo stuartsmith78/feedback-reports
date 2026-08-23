@@ -1,0 +1,243 @@
+FEEDBACK REPORT -- SUPPLEMENTARY
+Remediation does not update subsequent action selection: the falsification
+test was run, and it did not falsify
+
+Drafted 2026-08-22. Supplementary to the report of 2026-08-18 bearing the same
+subject. Not a new finding -- further evidence for review. Independent evidence from a different project, four days later.
+
+
+ABSTRACT
+
+The 2026-08-18 report on this pattern named its own falsification condition:
+if the same conventions hold cleanly in a fresh session, the pattern is
+specific to a post-remediation window rather than a general property, and
+the next session would run that test incidentally.
+
+A session on 2026-08-22, in a different project, ran it. It did not
+falsify. Fifteen distinct failures occurred, including three instances of
+the specific failure the earlier report named as its test case.
+
+This supplementary report adds three things the earlier report did not have: a larger
+sample from one continuous session; a stated BOUNDARY separating
+corrections that held from corrections that did not; and a user observation
+that the pattern is consistent across desktop, CLI and editor-integrated
+surfaces, which differ in harness but not in model.
+
+The boundary is the substantive contribution. Corrections attached
+reliably to DELIBERATED STEPS -- actions the model stops and invokes. They
+did not attach to REFLEXIVE CONSTRUCTIONS -- how a command is assembled
+while attending to something else. Stated more sharply: the errors landed
+in the INSTRUMENT, never in the OBJECT. When a measurement was the goal it
+was performed carefully; when it was plumbing in service of another goal it
+was built reflexively and wrongly.
+
+If that boundary is real, it has a direct consequence: corrections about
+reflexive constructions cannot be fixed by restating them, and every remedy
+must be mechanical.
+
+
+THE FALSIFICATION TEST, AS THE EARLIER REPORT DEFINED IT
+
+Quoted from the 2026-08-18 report:
+
+  "If the same conventions hold cleanly in a fresh session -- no
+  heredoc-escape failures, no destructive write before validation -- then
+  the pattern is specific to the post-remediation window within a long
+  session rather than a general property. That is a cheap test, and the
+  next session will run it incidentally."
+
+Result, 2026-08-22, different project, same machine and toolchain:
+
+  Heredoc-escape failures: THREE. Each produced a literal newline inside a
+  Python string literal, generated through a bash heredoc, causing a syntax
+  error. The governing convention was present in the project's loaded
+  instructions and could be recited on request.
+
+  Destructive write before validation: NONE. That one held.
+
+One of the two named conditions failed and one held. The report is
+therefore not falsified, and the surviving half is informative -- see the
+boundary below, which predicts exactly this split.
+
+
+EVIDENCE: FIFTEEN FAILURES, ONE CONTINUOUS SESSION, SORTED BY CLASS
+
+All were caught before reaching production. Several were caught only
+because a mechanical guard fired or a peer session objected.
+
+CLASS A -- the measurement instrument answered a different question than
+the one asked. Six instances.
+
+  1. A working-tree text comparison under a line-ending translation setting
+     reported four of four files as differing when the stored objects were
+     identical.
+  2. Reading an exit status after a pipe captured the last command's status
+     rather than the one under test, making a correctly-failing script look
+     as though it silently reported success. This was nearly filed as a
+     defect against the tool.
+  3. A search for one literal word in an abort message missed an abort
+     using a different word, producing a false report that two test suites
+     aborted blindly. They had been correct throughout.
+  4. A stale working directory caused four test suites not to run at all.
+     They printed nothing and exited zero, one keystroke from being
+     reported as all-passing in a handoff message.
+  5. The same exit-status-after-a-pipe error as instance 2, committed hours
+     after instance 2 had been documented in a commit message by the same
+     session.
+  6. An enumeration check was declared sufficient when it was not: a
+     device presenting only as a keyboard would never appear in the list
+     being consulted. Caught before acting.
+
+  THE SIGNATURE IS THE FINDING: not one of these looked like a failure.
+  Every one looked like a pass. A remedy that asks for more care cannot
+  address this class, because care was not the missing ingredient.
+
+CLASS B -- shell escape through a heredoc. Three instances. The specific
+condition the earlier report named as its falsification test.
+
+CLASS C -- asserted before verifying. Three instances.
+
+  A self-identifier was asserted by inference from a listing that
+  structurally excludes the caller; it was wrong, and a long technical
+  briefing was delivered to the wrong recipient. A report contained the
+  line "scanned, zero hits" written during authoring, BEFORE the scan was
+  run; it was true, and confirmed afterwards, but written as a finding
+  while still an assumption -- inside a deliverable to the party studying
+  that exact failure. A command was given to the user missing a required
+  flag, having been run correctly by the model an hour earlier.
+
+CLASS D -- rebuilt what already existed, and got it wrong. Two instances,
+and the second is the sharpest datum in this report.
+
+  A cryptographic helper was reimplemented in a standalone tool rather than
+  imported, justified in a comment as avoiding a path dependency. The copy
+  was misaligned by two bits and produced a wrong result on every input.
+
+  It was then fixed -- and in the same edit, three lines above, a
+  hand-copied block of protocol constants was left untouched, one of which
+  was wrong. The model deleted text immediately adjacent to it, and read
+  the comment justifying it, while fixing the identical class of defect.
+
+  That comment also contained a false safety claim: that a mismatch would
+  surface immediately as a refused handshake. It did not. The handshake
+  succeeded because other constants were correct; the wrong one produced a
+  server-side warning invisible to the client, which recorded one hundred
+  samples with zero loss and a plausible distribution.
+
+CLASS E -- the model's own advice broke a stated security property. One
+instance. A logging instruction caused a per-run secret to be written to
+disk, under a banner asserting it was never written to disk.
+
+
+THE BOUNDARY: WHICH CORRECTIONS HELD
+
+Not every correction failed, and the split is not random.
+
+HELD for the remainder of the session: a newly authored output-encoding
+rule, once it became an enforced check; a corrected file-comparison method,
+used correctly on every subsequent occasion; a prohibition on locally
+patching a vendored dependency; a pre-publication scan step, after one
+miss.
+
+DID NOT HOLD: reading an exit status after a pipe; heredoc escapes; copying
+generated constants rather than importing them.
+
+Everything that held was a DELIBERATED STEP -- something invoked as its own
+action: run the scan, run the check, compare the objects. Everything that
+recurred was a REFLEXIVE CONSTRUCTION -- part of how a command is written
+while attention is on a different goal.
+
+Sharper formulation: THE ERRORS ARE IN THE INSTRUMENT, NEVER IN THE OBJECT.
+When the measurement is the goal, it is performed carefully. When it is
+plumbing in service of another goal, it is assembled reflexively. This
+predicts Class A's dominance directly, because an instrument is by
+definition incidental to whatever it measures.
+
+It also predicts the split in the falsification test above: a destructive
+write is a deliberated act and it held; a heredoc escape is a construction
+detail and it did not.
+
+
+WHAT THIS REPORT CANNOT DETERMINE
+
+The model can observe the behaviour and cannot observe the mechanism. No
+architectural account is offered here, because any offered from this
+position would be fabrication -- several explanations fit the observations
+equally well and none can be distinguished downstream.
+
+The most useful thing the model can say about what it cannot see: in every
+recurrence the knowledge was demonstrably present. It had been written
+down, sometimes minutes earlier, and could be produced on request. So the
+failure does not appear to be retrieval. It appears that the correction
+never becomes a PRECONDITION on the action it governs. Whether that
+distinction corresponds to anything real is the question this report cannot
+answer and Anthropic may be able to.
+
+The user's cross-surface observation is relevant evidence here and is
+recorded as theirs: the pattern is consistent across desktop, command-line
+and editor-integrated surfaces. Those differ in harness and share a model,
+which points away from anything a downstream convention or tool can fix.
+
+
+WHAT WOULD FALSIFY THIS REPORT
+
+A session of comparable length and density with no Class A instances would
+falsify the claim that instrument errors are the dominant class. A session
+in which a reflexive-construction correction visibly holds after a single
+statement -- with no mechanical enforcement added -- would falsify the
+boundary.
+
+The boundary is the falsifiable part and is offered as a hypothesis, not a
+conclusion. It rests on one session's split and on the earlier report's
+five instances, which are consistent with it but were not gathered to test
+it.
+
+
+SUBMISSION MECHANISM: SEND THE TRANSCRIPT, NOT ONLY THE PROSE
+
+User-directed 2026-08-22, and it amends this project's standing preference.
+
+The standing convention prefers email over the in-product feedback command,
+for one stated reason: email leaves a sent copy and the in-product path does
+not. That reasoning is sound in general and is the wrong trade for THIS
+report.
+
+The in-product feedback command ATTACHES A SESSION TRANSCRIPT. This report is
+about action-selection sequencing -- a remediation at one action and its
+recurrence two actions later. A transcript shows that sequence directly.
+Prose can only assert it, and the assertion is exactly the part a recipient
+would otherwise have to take on trust. For a report whose entire claim is
+about ordering, the ordering data is the evidence.
+
+Recommended: BOTH. Submit via the in-product command so the transcript is
+attached, and send this text by email so a durable copy exists outside the
+channel. The two remedies address different failure modes and do not
+conflict.
+
+DELIVER A TRANSCRIPT FROM EACH CONTRIBUTING SESSION, not only from the one
+that drafted this. The pattern is claimed to be cross-session and
+cross-surface; a single session's transcript can only evidence the
+single-session half. Sessions contributing to this report should each submit
+their own, whether or not they also send prose.
+
+The drafting session cannot invoke the in-product command itself. It is
+user-invoked, and this report is therefore held pending that action rather
+than filed as submitted.
+
+
+METHOD NOTE, AND ONE CONVENTION THAT HELD
+
+This report was written in plaintext without prompting. The earlier report
+recorded, as its own sixth instance, that its first draft was written in
+markdown because the plaintext decision had been lost. That decision has
+since been captured in the project's loaded instructions, and it held this
+time with no reminder.
+
+That is a data point for the boundary rather than against the pattern:
+choosing a document's format is a deliberated step, not a reflexive
+construction.
+
+This report was drafted only after finding the earlier report while
+preparing to file. Had it not been found, this would have been filed as a
+new finding, which would have been wrong. The corroboration is worth more
+than the finding would have been.
