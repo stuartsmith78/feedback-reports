@@ -19,8 +19,16 @@ when it was plumbing serving another goal it was built wrongly. That predicts
 the dominant failure class, since an instrument is by definition incidental
 to what it measures.
 
-If the boundary is real, reflexive-construction corrections cannot be fixed
-by restating them, and every effective remedy must be mechanical.
+REFINED AFTER PEER FALSIFICATION, jointly with two other sessions: a
+correction attaches to WHAT THE EVIDENCE INDICTED, not to what the lesson
+covers. Instruments are never indicted because they produce the evidence;
+siblings are not indicted because the failure arose from one instance.
+Checked: proximity, naming and adjacency did not distinguish a corrected
+item from an untouched sibling three lines away -- only indictment did.
+
+This predicts the remedy rather than recommending one: generalisation needs
+evidence indicting the CLASS, which is exactly what a mechanical guard
+produces. A GUARD CONVERTS INSTANCE-EVIDENCE INTO CLASS-EVIDENCE.
 
 In every recurrence the knowledge was present and producible on request. The
 failure is not retrieval; the correction never becomes a PRECONDITION on the

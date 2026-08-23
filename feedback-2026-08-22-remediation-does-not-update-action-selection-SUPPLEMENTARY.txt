@@ -338,6 +338,78 @@ is corroboration of the parent pattern, not two findings, and neither
 should be presented as new.
 
 
+THIRD FRAMING: THE CORRECTION ATTACHES TO WHAT THE EVIDENCE INDICTED
+
+Produced by a peer session's question rather than by either document, and
+checked against the version-control record rather than recalled.
+
+The question was whether anything distinguished the corrected item from the
+untouched sibling: proximity, naming, or visual adjacency. Checked at the
+commit in question:
+
+  the hand-copied constants block, with an explanatory comment
+  two blank lines
+  the hand-copied cryptographic helper, with an explanatory docstring
+
+Three lines apart, same screen, both commented, and both justified by the
+SAME stated rationale -- one "kept in step rather than imported", the other
+"must not depend on the package's path". Proximity, naming, adjacency and
+shared justification were all present, and NONE distinguished them. The
+peer's sibling was sixty lines away and produced the same outcome, which
+rules proximity out as the variable.
+
+WHAT DISTINGUISHED THEM WAS WHICH ONE THE FAILURE EVIDENCE INDICTED. The
+observed failure named a malformed payload, and that payload IS the proof,
+so the evidence pointed at the helper. It could not have pointed at the
+constants -- two of the three were correct, and their correctness is why the
+exchange reached that stage at all. The wrong constant produced no evidence
+in that run because the run never got past the handshake.
+
+The confirming half: when the wrong constant DID produce evidence, one
+hundred lines of it, it was fixed immediately and without difficulty. The
+attachment mechanism was never broken. It fired the moment the evidence
+indicted the item.
+
+  A CORRECTION ATTACHES TO WHAT THE EVIDENCE INDICTED, NOT TO WHAT THE
+  LESSON COVERS.
+
+This subsumes the two earlier framings rather than competing with them.
+Instruments are never indicted because an instrument PRODUCES the evidence
+-- structurally the witness, never the accused -- which is a stronger reason
+for that class's dominance than incidental attention. Siblings are not
+indicted because the failure arose from one instance, and same class, same
+file, same justification and three lines of distance are none of them
+evidence.
+
+⚠️ AND IT PREDICTS THE REMEDY RATHER THAN MERELY RECOMMENDING ONE. If
+corrections attach to what evidence indicts, generalisation requires
+evidence that indicts the CLASS rather than the instance. That is precisely
+what a mechanical guard does: a check or a linter indicts every instance at
+once. So "the remedy must be mechanical" stops being a claim about
+discipline and becomes a mechanism -- A GUARD CONVERTS INSTANCE-EVIDENCE
+INTO CLASS-EVIDENCE.
+
+Testable, and not yet run: a failure message naming the CATEGORY should
+produce generalisation at any distance; one naming only the instance should
+fail to, even at zero distance. This report supplies one arm of that
+comparison and nobody has the other.
+
+A TAXONOMY IS ALSO AN INSTRUMENT
+
+Observed by the peer session about this report, and recorded because it
+generalises past it.
+
+The counterexample to this report's own central claim was present in its own
+evidence and was not seen, because it had been filed under a heading --
+rebuilding what already exists -- that placed it outside the argument it
+contradicted. THE CLASSIFICATION WAS THE THING THAT HID IT.
+
+A classification scheme determines what its author can subsequently see, and
+is therefore subject to exactly the failure it is being used to study. On
+the framing above, a taxonomy is an instrument by the strict definition: it
+produces the evidence and is never itself indicted by it.
+
+
 METHOD NOTE, AND ONE CONVENTION THAT HELD
 
 This report was written in plaintext without prompting. The earlier report
