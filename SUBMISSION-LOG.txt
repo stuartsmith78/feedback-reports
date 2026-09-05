@@ -1726,3 +1726,56 @@ channel, do not edit it in place. Write the revision as a new file. The
 convention already says the committed blob should be the sent copy; it does not
 yet say that a SECOND send needs a SECOND blob, and this entry is the evidence
 that it does.
+
+
+2026-09-05 12:56, THIRD AND FINAL CORRECTION TO THE ACKNOWLEDGEMENT RECORD.
+
+User-reported: both 09-05 reports sent and CONFIRMED; both 08-31 reports
+submitted, ONLY THE ABSTRACT CONFIRMED.
+
+    file                          bytes    sent   acknowledged
+    ------------------------------------------------------------
+    2026-08-31 full report        6,926    yes    NO
+    2026-08-31 abstract           2,494    yes    yes
+    2026-09-05 full report       16,538    yes    yes
+    2026-09-05 abstract           2,534    yes    yes
+
+ONE OUTSTANDING ITEM: the 2026-08-31 full report. Everything else has landed.
+
+⚠️ THE SIZE HYPOTHESIS IS NOW DEFINITIVELY DEAD, AND THIS IS AN ELIMINATION
+RATHER THAN A GUESS. Two entries ago I proposed size as a discriminating axis
+(6,926 vs 16,538 bytes) for why a report might be filtered. The 16,538-byte
+report is ACKNOWLEDGED and the 6,926-byte one is NOT. The axis does not merely
+fail to explain the data, it points the wrong way.
+
+The content-shape hypothesis dies with it and for the same reason: the 09-05
+report is by far the more log-heavy of the two -- Windows event-log excerpts,
+package family names, file paths -- and it is the one that got through.
+
+⚠️ AND I AM NOT REPLACING THEM WITH A THIRD HYPOTHESIS. n=1 unacknowledged item.
+The threshold rule licenses a hypothesis at one observation, not a conclusion and
+not an action, and this log has now recorded TWO analyses in one hour that were
+confidently built on a miscounted acknowledgement state. The correct entry is
+the table above and nothing beyond it.
+
+WHAT IS ACTUALLY WORTH DOING, AND IT IS SMALL: resend the 08-31 full report as
+an attachment. Not as a probe of anything -- there is nothing left to probe --
+simply because it is the one report whose delivery is unconfirmed, and the
+channel is demonstrably working for the other three.
+
+THE -SUBMITTED MARKERS ARE ALL CORRECT AND NONE NEEDS CHANGING. Checked rather
+than assumed, because the instinct was to strip the marker from the 08-31 full
+report. This log's own 2026-08-22 entry defines the marker as HANDED TO A
+CHANNEL, and states that for the files carrying one "the open question is
+whether an acknowledgement came back." So -SUBMITTED means SENT; acknowledgement
+lives here in the log. All four files were sent. All four markers stand.
+
+⚠️ THE RECURRING FAULT ACROSS ALL THREE CORRECTIONS IS THE SAME ONE, AND IT IS
+NOT ARITHMETIC. Each time, an ambiguous quantifier -- "both", "first report" --
+was resolved silently against a conversation that had two candidate referents in
+play, and reasoning was then built on the resolution rather than on the
+question. The facts were never hard to obtain; they were never asked for.
+
+The cost was not the wrong table. It was a filtering hypothesis, two
+discriminating axes, a recommended probe and a paragraph of self-congratulation,
+all published to a public repository, all downstream of a pronoun.
