@@ -1,0 +1,50 @@
+CLAUDE CODE: DUPLICATE PROJECT KEYS IN ~/.claude.json CARRY A DIVERGED TRUST FLAG
+
+Date: 2026-08-31. Platform: Windows 11, Claude Code desktop.
+Classified as product thinness -- a real, silent defect with a security-relevant
+consequence.
+
+Claude Code keys per-project state in ~/.claude.json by absolute path. On
+Windows it writes the same project under multiple spellings that differ only in
+path separator and drive-letter case:
+
+    C:\Users\<user>\...\<name>      C:/Users/<user>/.../<name>      c:/Users/...
+
+These are not aliases. Each holds a SEPARATE state object and they diverge. On
+one machine, 20 project keys collapsed to 13 once normalised: 6 duplicate
+groups, one of them three-way.
+
+The reportable consequence is not the duplication. It is that
+hasTrustDialogAccepted DISAGREED in all six groups -- true under the backslash
+key, false under the forward-slash key. A folder-trust decision resolves
+differently depending on which spelling of the path is looked up. That is a
+security-relevant setting whose value depends on a purely lexical property of
+the key.
+
+Other state diverged as well: mcpServers blocks present under one spelling and
+absent or empty under another; per-project session accounting (cost, duration,
+token counts, lastSessionId) recorded under one spelling only, so totals split
+and under-report.
+
+The failure is silent by construction. The file parses, the app runs, both
+records are valid, neither is marked stale. It is undiscoverable without
+reading the raw JSON and normalising the keys by hand. It is also
+self-perpetuating: deduplicating fixes the symptom, the writer is unchanged,
+the duplicates return.
+
+Recommended: canonicalise the project key at the single point where the map is
+written, and migrate existing maps on load by grouping on the normalised form.
+Affected machines do not self-heal. For the trust flag a merge rule of "true if
+any variant is true" preserves a decision the user already made; taking the
+newest entry would silently revoke it.
+
+Ruled out: operating skill (no setting or command produces these; the app
+writes the file) and design choice (no design intending path aliasing would
+want two aliases holding contradictory values for a trust decision). Not
+established: which code paths write which spelling -- that needs instrumenting
+the writer and is not observable from a session.
+
+Confidence: one machine, but six independent groups on it, with the trust
+divergence present in all six.
+
+Full report available on request.

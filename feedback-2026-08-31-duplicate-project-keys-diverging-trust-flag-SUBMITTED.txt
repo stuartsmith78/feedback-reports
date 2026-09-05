@@ -1,0 +1,156 @@
+CLAUDE CODE: DUPLICATE PROJECT KEYS IN ~/.claude.json, DIFFERING ONLY BY PATH
+SEPARATOR, EACH CARRYING INDEPENDENT STATE -- INCLUDING A DIVERGED TRUST FLAG
+
+Date: 2026-08-31
+Platform: Windows 11, Claude Code desktop
+Classified as: product thinness (a real defect, silent, with a security-relevant
+consequence). Ruled out design choice and operating skill -- see METHOD below.
+
+
+ABSTRACT
+
+Claude Code stores per-project state in ~/.claude.json under a "projects" map
+keyed by absolute path. On Windows it writes the SAME project under multiple
+key spellings that differ only in path separator and drive-letter case:
+
+    C:\Users\<user>\Documents\Projects\<name>
+    C:/Users/<user>/Documents/Projects/<name>
+    c:/Users/<user>/Documents/Projects/<name>
+
+These are not aliases. Each key holds a SEPARATE state object, and they
+diverge. On this machine, 20 project keys collapsed to 13 once normalised --
+6 duplicate groups, one of them three-way.
+
+The consequence that makes this worth reporting is not the duplication. It is
+that hasTrustDialogAccepted DIVERGED in every single one of the six groups:
+true under the backslash key, false under the forward-slash key. A folder-trust
+decision is recorded differently depending on which spelling of the path
+happens to be looked up.
+
+There is no error, no warning, and nothing in the UI that reveals it. It was
+found only because a session was auditing that file for an unrelated reason.
+
+
+THE FINDING
+
+Six duplicate groups on one machine. In all six, the trust flag disagreed
+between spellings:
+
+    project                          backslash    forward-slash
+    ---------------------------------------------------------------
+    Bitburner                        true         true / false (3-way)
+    claude-presence                  --           true / false
+    bitburner-file-mcp-server        true         false
+    devkit                           true         false
+    bitburner-hardware-infiltrator   true         false
+    feedback-reports                 true         false
+
+Other state diverged too, though less seriously:
+
+  - mcpServers blocks existed under some spellings and not others. Two projects
+    had a populated block under one key and an empty one under another.
+  - Session accounting -- lastCost, lastSessionId, lastDuration, token counts,
+    lastModelUsage -- was recorded under one spelling only, so per-project
+    totals are split across keys and under-report.
+  - loggedAuthoredArtifactPaths held different arrays under different keys.
+
+The user has worked in all six of these folders daily without ever seeing a
+trust prompt, which means the "true" entries reflect the real state and the
+"false" entries are shells that were created by a different code path and
+never prompted. Whichever spelling is consulted at any given moment decides
+which record answers.
+
+
+WHY THIS IS MORE THAN COSMETIC
+
+hasTrustDialogAccepted gates whether a project's configuration is honoured.
+A flag that differs by path separator means the answer to "is this folder
+trusted" depends on which normalisation the calling code happened to apply.
+That is a security-relevant setting resolving non-deterministically with
+respect to a purely lexical property of the key.
+
+The failure is also silent by construction. Nothing surfaces it: the file
+parses, the app runs, both records are structurally valid, and neither is
+marked stale. A user cannot discover this without reading the raw JSON and
+normalising the keys themselves.
+
+And it is self-perpetuating. Deduplicating the map by hand fixes the symptom;
+the writer that produced the second spelling is unchanged, so the duplicates
+return.
+
+
+RECOMMENDATION
+
+1. Canonicalise the project key at the single point where the map is written.
+   On Windows this means one separator convention and one drive-letter case,
+   applied on every write path. The specific normalisation matters less than
+   that exactly one function owns it.
+
+2. Migrate existing maps on load: group keys by normalised form, merge, and
+   keep one. A merge needs a stated rule for conflicting scalars -- for the
+   trust flag specifically, taking "true if any variant is true" preserves a
+   decision the user demonstrably already made, whereas taking the newest
+   entry would silently revoke it.
+
+3. Consider whether hasTrustDialogAccepted should be keyed on something more
+   stable than a display path at all. A canonicalised real path, resolved
+   through symlinks and junctions, would be immune to this entire class.
+
+Item 1 alone stops the bleeding. Item 2 is needed because affected machines do
+not self-heal.
+
+
+EVIDENCE
+
+Read directly from ~/.claude.json, verified with an independent script after
+merging:
+
+    before:  project keys 20, distinct after normalisation 13, duplicate
+             groups 6
+    after:   project keys 13, duplicate groups 0, no field dropped from any
+             group
+
+Sample of one group as found, with paths generalised:
+
+    C:\Users\<user>\Documents\Projects\devkit
+        8 fields, hasTrustDialogAccepted = true, mcpServers populated
+
+    C:/Users/<user>/Documents/Projects/devkit
+        10 fields, hasTrustDialogAccepted = false, mcpServers populated,
+        plus hasUnseenTeamArtifacts and loggedAuthoredArtifactPaths
+
+The three-way case added a lowercase-drive variant, c:/Users/..., carrying a
+third independent copy.
+
+
+METHOD, AND WHAT WAS RULED OUT
+
+Operating skill was ruled out: there is no documented setting, command or
+convention that would cause a user to create these variants, and the user did
+not author the file. It is written by the application.
+
+Design choice was ruled out on the trust flag specifically. Duplicate keys
+could conceivably be a deliberate tolerance for path aliasing, but no design
+that intends aliasing would want the two aliases to hold CONTRADICTORY values
+for a trust decision. The divergence is what identifies this as a defect
+rather than an accepted redundancy.
+
+What was not established: which code paths write which spelling. That would
+require instrumenting the writer, which was outside what could be done from a
+session. The report therefore describes the observable state and does not
+speculate about the mechanism.
+
+Confidence: the observation is n=1 machine but 6 independent groups on it, and
+the trust divergence is present in all 6, which is not consistent with a
+one-off corruption.
+
+
+NOTE ON A RELATED CLASS, OFFERED AS CONTEXT RATHER THAN AS PART OF THE REPORT
+
+The same session had that day written a requirement into its own project
+conventions that path-derived identifiers must be canonicalised before use,
+after establishing by measurement that path.normalize and fs.realpathSync do
+NOT correct drive-letter or component case on Windows, while
+fs.realpathSync.native does. The failure reported here is that same class,
+occurring in the tool rather than in the project. It is mentioned only because
+it suggests the fix is a known and small one.

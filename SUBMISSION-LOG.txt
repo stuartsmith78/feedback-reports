@@ -1536,3 +1536,73 @@ the USER is the category most likely to be lost: it has no repo artifact, and
 the other party cannot see a session's stack. "Awaiting the user" is not a
 resting state -- it is a promise the record asserts is live, held somewhere
 nobody else can read.
+
+
+2026-09-05, TWO REPORTS LANDED IN THE CORPUS. ONE ACKNOWLEDGED, ONE STILL OPEN.
+
+feedback-2026-08-31-duplicate-project-keys-diverging-trust-flag
+  SUBMITTED by email, and RECEIPT CONFIRMED (user-reported 2026-09-05 12:38).
+  -SUBMITTED markers created for both the report and its abstract, byte-identical
+  to the committed text (cmp rc=0 on both).
+
+  ⚠️ THIS REPORT SAT WRITTEN-BUT-UNCOMMITTED FOR FIVE DAYS, 08-31 to 09-05. It
+  was not lost, and it came within one folder cleanup of being exactly the
+  failure this repository was founded on: a 2026-08-20 search of one project's
+  full git history found NO feedback report of any kind -- drafted, sent, and
+  never kept. It surfaced only because an unrelated investigation ran
+  `git status` in this directory and the untracked files were sitting there.
+  That is the same accident that surfaced four unprocessed directives in a
+  to-do.txt on 2026-08-26: noticed in passing, during other work, by nobody
+  looking for it.
+
+  So the corpus rule needs its own companion and this is the entry recording it:
+  WRITING A REPORT IS NOT FILING IT. An uncommitted file in this directory has
+  no history, no remote and no recovery, and it is invisible to every reader who
+  is not standing in this folder running git.
+
+feedback-2026-09-05-msix-update-terminated-running-app
+  SUBMITTED by email. ⚠️ NO ACKNOWLEDGEMENT RECORDED. Deliberately NOT marked
+  -SUBMITTED yet, and deliberately not described as sent-and-fine.
+
+  ⚠️ AN ABSENT ACKNOWLEDGEMENT IS A FAILED SEND, NOT A SLOW ONE. feedback@ is a
+  Google Group: a post its classifier filters produces no reply, no bounce and
+  no notice of any kind, while the sender's own sent copy looks perfect. The
+  auto-reply fires only on a post that is ACCEPTED AND DISTRIBUTED, so its
+  absence is the only signal available. Three sends of one report were silently
+  discarded this way on 2026-08-21.
+
+  AND THE CONTROL IS UNUSUALLY GOOD HERE, WHICH IS WHY THIS IS WORTH STATING
+  RATHER THAN SHRUGGING AT: the 08-31 report acknowledged the same day, through
+  the same channel, from the same machine. The channel demonstrably works. So
+  silence on the 09-05 report is EVIDENCE rather than ambiguity -- it is not the
+  usual "cannot tell whether anyone is listening" case.
+
+  ⚠️ A SECOND, SEPARATE AMBIGUITY, RECORDED BECAUSE GUESSING IT WOULD LAUNDER A
+  GUESS INTO PROVENANCE: the 09-05 report was delivered to the user TWICE, about
+  one minute apart -- once before the PowerToys corroboration was measured and
+  once after. If the earlier version was the one sent, the committed blob is NOT
+  the sent copy for this report, and the difference is the whole of Secondary
+  Finding B: 58 Modern Standby entries in 6 days with PowerToys Awake running in
+  INDEFINITE mode, which is what rules out user misconfiguration and turns one
+  observation into two independent mechanisms failing identically.
+
+  That is not a cosmetic delta. A reader of the earlier version gets a question;
+  a reader of the later version gets a measurement.
+
+ON THE -SUBMITTED CONVENTION, AND A CORRECTION TO HOW I ALMOST APPLIED IT.
+The devkit convention says the easiest reliable capture is to deliver the report
+to the user AS A FILE and have them send that file, so the committed blob is the
+sent copy by construction -- no echo, no paste, nothing to remember. That is
+exactly what happened for both reports, and I nearly concluded that no
+-SUBMITTED twin was therefore needed.
+
+⚠️ THAT WOULD HAVE MADE THE FILENAMES ASSERT THE OPPOSITE OF THE TRUTH. This
+log's own 2026-08-22 entry establishes that an ABSENT -SUBMITTED marker means
+NEVER HANDED TO A CHANNEL -- "which is accurate rather than an oversight." A
+reader scanning this directory reads the marker, not the commit message. So the
+twin is created because the local filename convention is a load-bearing signal,
+whatever the general convention says about capture method.
+
+The two rules do not conflict; they answer different questions. The devkit rule
+governs HOW to capture the sent text faithfully. This directory's convention
+governs HOW A READER TELLS SENT FROM UNSENT AT A GLANCE.
