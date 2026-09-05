@@ -1,0 +1,43 @@
+CLAUDE DESKTOP (WINDOWS/MSIX): A PENDING UPDATE TERMINATED THE RUNNING APP
+MID-SESSION, DISCARDING ~49 MINUTES OF ACTIVE WORK, WITH NO PROMPT AND NO
+FINDABLE DIAGNOSTIC TRAIL.
+
+2026-09-05, 10:04:17 EDT. Windows 11, Claude Desktop as an MSIX package,
+version 1.40609.0.0 forcibly replaced by 1.46388.4.0.
+
+A Desktop instance hosting FOUR concurrent Claude Code agent sessions vanished.
+It was not a crash. An update that had sat staged for 93 updater check cycles
+was registered by the Windows MSIX deployment engine, which called
+TerminateApplications on the running instance. The trigger was not a user
+action, a restart, or anything Claude initiated - it was an UNRELATED
+third-party package update whose registration pass swept the pending Claude
+package in with it. So the timing of a Claude update termination is in practice
+decided by unrelated software on the user's machine.
+
+The app logged its exit as [info] and quit cleanly. Nothing reached the Windows
+Application log; Windows Error Reporting never fired. The user experienced an
+unexplained crash and could produce no evidence.
+
+Three asks, in severity order:
+1. Do not register a pending update while agent sessions are active - or prompt,
+   or at minimum say on relaunch "restarted at 10:04 to apply 1.46388.4,
+   N sessions interrupted." Nothing currently says this.
+2. Leave a durable, findable record when a clean exit discards active work.
+3. FIX THE DOCUMENTED LOG PATH. Guidance points at %APPDATA%\Claude\logs, which
+   here held a FIFTEEN-DAY-STALE copy. Live logs are %LOCALAPPDATA%\Claude\logs.
+   This blocks every other investigation: users follow the guidance, find no
+   crash, and truthfully report "no log" about the wrong file.
+
+Also noted, and measured rather than inferred: a keep-awake claimed for
+remote_tools did not prevent Modern Standby on an idle timeout while the user
+was working remotely - which is why the outage went unnoticed for 49 minutes.
+An UNRELATED second mechanism, PowerToys Awake in INDEFINITE mode, was running
+continuously across the same period and was equally ineffective: 58 Modern
+Standby entries in 6 days, every day. Two independent wake locks, same null
+result, so this is not a misconfiguration. If the remote-tools keep-awake uses
+legacy SetThreadExecutionState, that is the wrong instrument for a Modern
+Standby system.
+
+Full report, with the complete timeline from three primary log sources and an
+explicit account of the hypotheses ruled out (including the investigator's own
+wrong one), is available on request.

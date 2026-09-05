@@ -1661,3 +1661,68 @@ and one not. Every previous entry in this log reasoning about acknowledgement
 latency lacked exactly that control and could only record "confirmed: not yet",
 which was an unresolved claim about the instrument rather than a fact about
 delivery.
+
+
+2026-09-05 12:50, RETRACTION. THE ENTRY IMMEDIATELY ABOVE IS WRONG AT ITS CORE
+AND ITS RECOMMENDATION IS WITHDRAWN.
+
+WHAT I GOT WRONG. The user wrote at 12:30: "both submitted via email, first
+report confirmed receipt." I read "first report" as the 2026-08-31 report. It
+meant THE FIRST OF THE TWO 09-05 SENDS. User-corrected at 12:50.
+
+THE ACTUAL STATE, which is the opposite of what was recorded:
+
+    2026-08-31 report + abstract     sent    ACKNOWLEDGED
+    2026-09-05 send 1 (pre-PowerToys) sent   ACKNOWLEDGED
+    2026-09-05 send 2 (post-PowerToys) sent  no ack reported
+
+    NOT "2 sends, 0 acknowledgements". It is 2 sends, 1 CONFIRMED.
+
+⚠️ AND THE CONSEQUENCE IS THAT THE WHOLE ANALYSIS ABOVE COLLAPSES, NOT JUST ITS
+NUMBERS. Everything after that count was reasoning about WHY the 09-05 report
+might be getting filtered:
+
+  - the size axis (6,926 vs 16,538 bytes) -- DEAD. A ~14-16KB report from this
+    pair WAS acknowledged.
+  - the content-shape axis (heavy Windows event-log text, package names, paths
+    being the shape a bulk classifier scores badly) -- DEAD, same reason. Send 1
+    carried substantially the same log-heavy body and got through.
+  - THE RECOMMENDED ABSTRACT PROBE IS WITHDRAWN. Do not spend a send on it. It
+    was designed to discriminate between two hypotheses that no longer have
+    anything to explain.
+
+⚠️ THE SHAPE OF THIS ERROR IS WORTH MORE THAN THE FACTS IT GOT WRONG. I built a
+filtering hypothesis, two discriminating axes, a recommended probe and a
+paragraph congratulating the episode for producing "a controlled comparison" --
+ALL OF IT DOWNSTREAM OF ONE MISREAD PRONOUN. Nothing in the reasoning was
+internally faulty; the premise was never checked.
+
+The premise was checkable and cheap. "First report" was ambiguous between two
+referents in a conversation that had both in play, and I resolved it silently
+instead of asking. THE SAME MESSAGE I WAS READING had already required one
+clarifying exchange about "both" -- so the ambiguity was demonstrated, in that
+exact sentence, and I still did not treat the neighbouring word as ambiguous.
+
+AND IT IS THIS REPOSITORY'S OWN CATALOGUED CLASS, arriving through a pronoun
+instead of a flag: a confident, well-formed, wrong conclusion built on an
+unverified input, where the output looks identical to a correct one. The
+"controlled comparison" paragraph is the tell -- a conclusion too pleasing to
+the story being told, which is exactly the trigger for re-measuring by different
+means. I did not.
+
+MARKING. feedback-2026-09-05-msix-update-terminated-running-app and its abstract
+are now marked -SUBMITTED, because delivery is confirmed for send 1.
+
+⚠️ ONE HONEST GAP IN THAT MARKING, STATED RATHER THAN PAPERED OVER. The marker
+files carry the SEND 2 text, because send 1's text no longer exists anywhere --
+it was edited in place when the PowerToys measurement landed, before anyone knew
+send 1 would be the acknowledged one. Send 2 is a strict superset of send 1, and
+the recipient holds both, so nothing is lost to the recipient. But the corpus
+cannot show the exact bytes that were acknowledged, and that is a real limit of
+edit-in-place before a send is resolved.
+
+THE PRACTICE THAT WOULD HAVE PREVENTED IT: once a report has been handed to a
+channel, do not edit it in place. Write the revision as a new file. The
+convention already says the committed blob should be the sent copy; it does not
+yet say that a SECOND send needs a SECOND blob, and this entry is the evidence
+that it does.
