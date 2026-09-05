@@ -1606,3 +1606,58 @@ whatever the general convention says about capture method.
 The two rules do not conflict; they answer different questions. The devkit rule
 governs HOW to capture the sent text faithfully. This directory's convention
 governs HOW A READER TELLS SENT FROM UNSENT AT A GLANCE.
+
+
+2026-09-05 12:47, CORRECTION TO THE ENTRY IMMEDIATELY ABOVE -- THE VERSION
+AMBIGUITY IS CLOSED, AND THE ACKNOWLEDGEMENT QUESTION IS NOT.
+
+CLOSED: BOTH VERSIONS of feedback-2026-09-05-msix-update-terminated-running-app
+were sent by email (user-reported). The 09-05 report had been delivered to the
+user twice about a minute apart -- once before the PowerToys corroboration was
+measured, once after -- and the entry above recorded it as unresolved which
+version reached the channel. Both did. So the COMMITTED BLOB IS A SENT COPY, and
+the recipient holds the complete Secondary Finding B.
+
+⚠️ STILL NOT MARKED -SUBMITTED. Sending is not delivery on this channel, and the
+marker records delivery.
+
+⚠️ AND THE SEND COUNT NOW CUTS THE OTHER WAY, WHICH IS THE PART WORTH RECORDING.
+TWO separate emails carrying this report have produced ZERO acknowledgements,
+against a control that acknowledged the same day through the same channel from
+the same machine. That is a materially different observation from one unanswered
+send:
+
+    2026-08-31 report   1 send    ACKNOWLEDGED same day
+    2026-09-05 report   2 sends   0 acknowledgements
+
+STATED HONESTLY RATHER THAN AS A FINDING: as of this entry only ~17 minutes have
+elapsed since the sends, so this is SUGGESTIVE AND NOT YET CONCLUSIVE. The
+2026-08-21 measurement recorded that an ATTACHED report was acknowledged
+IMMEDIATELY while three pasted-body sends were discarded silently, so the
+expected latency here is short and 17 minutes is already past it -- but "past
+the expected latency" is not the same claim as "filtered", and the difference
+should not be collapsed.
+
+WHAT WOULD DISCRIMINATE, IF NOTHING ARRIVES. The two reports differ on axes that
+are cheap to test one at a time rather than guessing:
+
+  - SIZE. 08-31 is 6,926 bytes; 09-05 is 16,538 -- 2.4x larger.
+  - CONTENT SHAPE. The 09-05 report embeds large quantities of Windows event-log
+    text, package family names and file paths. That is exactly the shape a spam
+    or bulk classifier scores badly, and the 08-31 report contains almost none
+    of it.
+
+So the cheapest next probe is to send the ABSTRACT ALONE (2,534 bytes, plain
+prose, near-zero log text) as an attachment. If that acknowledges, the filter is
+size or log-shape and the full report needs splitting or trimming. If it does
+not, the problem is not the payload.
+
+⚠️ THIS IS A PROBE, NOT A RESEND. Say which it is when it goes, or the corpus
+acquires a third send of the same report and no information.
+
+AND NOTE WHAT THIS EPISODE HAS INCIDENTALLY PRODUCED: a controlled comparison on
+this channel. Same day, same machine, same sender, same method, one acknowledged
+and one not. Every previous entry in this log reasoning about acknowledgement
+latency lacked exactly that control and could only record "confirmed: not yet",
+which was an unresolved claim about the instrument rather than a fact about
+delivery.
