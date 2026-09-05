@@ -1,0 +1,337 @@
+CLAUDE DESKTOP (WINDOWS, MSIX): A PENDING PACKAGE UPDATE TERMINATED THE RUNNING
+APP MID-SESSION, DISCARDING ~49 MINUTES OF ACTIVE MULTI-SESSION WORK, WITH NO
+PROMPT, NO WARNING, AND NO DIAGNOSTIC TRAIL A USER COULD FIND.
+
+Date of incident: 2026-09-05, 10:04:17 local (EDT)
+Reported: 2026-09-05
+Platform: Windows 11 Pro 26200, Claude Desktop installed as an MSIX package
+Version at time of incident: 1.40609.0.0  ->  forcibly replaced by 1.46388.4.0
+Classification: PRODUCT THINNESS (primary), with a secondary DOCUMENTATION
+                thinness that made the incident near-impossible to investigate.
+
+
+ABSTRACT
+
+A Claude Desktop instance running four concurrent Claude Code agent sessions was
+terminated without warning. The user, who was driving the machine remotely from
+the Claude mobile app at the time, experienced it as an unexplained crash and
+lost roughly 49 minutes.
+
+It was not a crash. The app was terminated by the Windows MSIX deployment engine
+so that a Claude update which had been sitting staged could be registered. The
+app logged its own shutdown as informational and exited cleanly. Consequently
+nothing appeared in the Windows Application event log, Windows Error Reporting
+never fired, and the log path in the published troubleshooting guidance contains
+a fifteen-day-old copy of the logs rather than the live ones.
+
+The update had been staged and waiting for 93 consecutive updater check cycles.
+It was not applied by a user action, nor by a restart, nor by any Claude-initiated
+step. It was applied as a side effect of an UNRELATED third-party MSIX package
+update, which triggered an on-demand registration pass that swept the pending
+Claude package in with it and called TerminateApplications on the running
+instance.
+
+Three things are being reported, in descending order of severity:
+
+  1. An update can terminate a running app with active work, at an arbitrary
+     moment not chosen by the user or by Claude, with no prompt and no deferral.
+  2. The termination is logged at [info]. Nothing surfaces to the user, and
+     nothing is written where Windows crash triage would look.
+  3. The documented log location is wrong on this platform, so a user following
+     the published guidance reports "no crash log exists" - a true statement
+     about a corpus that could not have contained the answer.
+
+
+WHY THIS MATTERS MORE THAN A NORMAL UPDATE RESTART
+
+Claude Desktop now hosts long-lived agent sessions. This one was hosting four,
+across four separate repositories, coordinating with each other. An update
+termination is no longer equivalent to closing a chat window. What was lost:
+
+  - Four concurrent agent sessions, mid-task.
+  - Every session-scoped scheduled job. These are held in memory, write nothing
+    to disk, and are enumerable only from inside the session that created one.
+    Their absence is therefore SILENT and is indistinguishable from a quiet
+    period. After the restart, every session believed its loop was running.
+  - The remote-control address of every session. All four rotated at once. Each
+    session's registration still advertised its pre-restart address, so every
+    session was reachable only by an address that no longer existed, and nothing
+    announced the change.
+  - Peer and user messages sent into the window, which were silently dropped
+    because the coordination server is hosted inside the app that died.
+
+None of these are visible as failures. Each one presents as normal, quiet
+operation. The user discovered the outage only because their own mobile session
+stopped responding.
+
+
+TIMELINE, FROM PRIMARY SOURCES
+
+All times local (EDT). Sources: the app's own main.log, the Windows System log,
+and the Windows AppXDeploymentServer/Operational log. Paths and identifiers are
+redacted; see the PRIVACY note at the end.
+
+  09:52:11  System log, Kernel-Power 506
+            "The system is entering Modern Standby. Reason: Idle Timeout."
+            The machine idled into standby while the user was driving it
+            remotely from the mobile app. Remote-tools activity did not hold
+            the idle timer off. See SECONDARY FINDING B.
+
+  09:56:48  main.log
+            "[updater] Staged version 1.46388.4 is still current
+             (latest: 1.46388.4, lastTarget: 1.46388.4)"
+            This exact line appears 93 times. The update was staged and idle,
+            waiting for a restart that had not happened.
+
+  09:59:52  main.log
+            "[keep-awake] started (id=53, first claim=remote_tools)"
+            "[remote-tools-device] keep-awake held (pss=0)"
+            "[remote-tools-device] served get_device_info"
+            The app took a wake lock specifically for remote tools and served
+            a remote request. It was serving the user at this moment.
+
+  10:03:52  AppXDeployment 603
+            "Started deployment StageByAppInstallerOperation operation on a
+             package with main parameter install-x64.appinstaller and Options
+             ForceUpdateFromAnyVersion"
+            This is a THIRD-PARTY package (a shell-prompt utility), nothing to
+            do with Claude.
+
+  10:04:16  AppXDeployment 679
+            "OnDemandRegisterPackageList <pkg-a> Claude_1.46388.4.0_x64_<id>
+             <pkg-b>"
+            The third-party deployment's registration pass enumerated the
+            pending Claude package alongside its own.
+
+  10:04:17  AppXDeployment 607
+            "Deployment Register operation on package Claude_1.46388.4.0_x64_<id>
+             has been de-queued and is running for user SID <redacted>."
+
+  10:04:17  main.log  -- THE LAST LINE THE APP EVER WROTE
+            "Windows session ending (close-app) - quitting the app"
+            Logged at [info]. No error, no warning. Memory was healthy and flat
+            immediately before (sys_free 8504MB of 65221MB, tree_rss ~13.9GB
+            steady across the preceding ten minutes).
+
+  10:04:30  AppXDeployment 9643   "TerminateApplications successful."
+            AppXDeployment 9648   "TerminateSingleService for update successful
+                                   ... terminateService: true"
+
+  10:04:31  AppXDeployment 472
+            "Moving package folder Claude_1.40609.0.0_x64_<id> to
+             WindowsApps\Deleted\..."
+
+  10:04:17 - 10:53:xx   NOTHING. main.log emits continuously, every minute,
+            all day. It contains 5019 lines for this date. Between 10:04:17 and
+            10:53 it contains ZERO. This 49-minute hole is the outage.
+
+  10:52:48  System log, Kernel-Power 507
+            "The system is exiting Modern Standby. Reason: Input Keyboard."
+            The user returned to the physical machine and pressed a key.
+
+  10:53:xx  main.log resumes with a 246-line startup burst.
+            "[updater] Version changed since last launch: 1.40609.0 -> 1.46388.4"
+
+
+PRIMARY FINDING: AN UPDATE TERMINATED ACTIVE WORK AT A MOMENT NOBODY CHOSE
+
+The staged update was not applied on a schedule Claude controls, nor on user
+action, nor at a natural boundary. It was applied because an unrelated MSIX
+package happened to update, and the resulting registration pass included the
+pending Claude package.
+
+That means the timing of a Claude Desktop update termination is, in practice,
+determined by unrelated software on the user's machine. From the user's side it
+is indistinguishable from a random crash - which is exactly how it was reported.
+
+What is asked for, in descending order of preference:
+
+  1. DO NOT REGISTER A PENDING UPDATE WHILE SESSIONS ARE ACTIVE. The app knows
+     it has live agent sessions; it was serving a remote tool call four minutes
+     earlier. A packaged app can decline or defer registration.
+  2. IF IT MUST HAPPEN, PROMPT. "An update is ready. Restart now, or after your
+     running sessions finish?" One dialog would have converted a 49-minute
+     silent outage into a deliberate 30-second restart.
+  3. AT MINIMUM, MAKE IT RECOVERABLE AND LEGIBLE. On relaunch, tell the user
+     what happened and when: "Claude restarted at 10:04 to apply update
+     1.46388.4. N sessions were interrupted." Nothing currently says this.
+     The user has to infer it, and cannot.
+
+The caveat, stated honestly: the causal link from the third-party package update
+to the Claude registration is the strongest available reading of the deployment
+log, not a proven mechanism. What IS proven is the sequence - a register
+operation on the Claude package began at 10:04:17, the app quit at 10:04:17,
+TerminateApplications succeeded at 10:04:30, and the old package folder was
+moved to Deleted at 10:04:31. Whatever triggered the registration, the
+registration terminated the running app.
+
+
+SECONDARY FINDING A: THE INCIDENT IS INVISIBLE TO STANDARD TRIAGE
+
+  - The Windows Application event log contains NO Error or Critical events for
+    the entire day. Verified across 00:00 to the time of writing.
+  - Windows Error Reporting produced no report. Its 1001 events that day cluster
+    at 00:57, 04:58 and 08:05 with empty fault buckets. There is no cluster
+    anywhere near 10:04.
+  - The app's own record is a single [info] line.
+
+This is correct behaviour for a clean exit and it is precisely the problem: the
+user is told to check Event Viewer, checks it, finds nothing, and concludes
+there is no evidence. A clean exit that discards active work should still leave
+a durable, findable record that it happened and why.
+
+
+SECONDARY FINDING B: TWO INDEPENDENT KEEP-AWAKE MECHANISMS BOTH FAILED TO
+PREVENT MODERN STANDBY. THIS IS MEASURED, NOT INFERRED.
+
+The system entered Modern Standby at 09:52:11 on an idle timeout while the user
+was actively driving the machine from the mobile app. The app then claimed a
+wake lock at 09:59:52 ("first claim=remote_tools") and served a remote request -
+seven minutes AFTER standby had already begun.
+
+Across the whole log there are 112 remote_tools wake-lock claims and 111
+releases. The unreleased one is id=53, the claim held at the moment the app was
+terminated.
+
+⚠️ AND A SECOND, INDEPENDENT MECHANISM WAS ALSO ACTIVE AND ALSO INEFFECTIVE.
+The machine runs Microsoft PowerToys "Awake" set to INDEFINITE (settings.json
+mode=1, keepDisplayOn=false, written 2026-09-01). The process has been running
+continuously since 2026-08-31 05:50:18 - five days, spanning the incident
+without a restart.
+
+The system entered Modern Standby anyway, and not once:
+
+    Modern Standby entry/exit events (Kernel-Power 506/507) since 2026-08-31,
+    i.e. entirely within the window where Awake was running in INDEFINITE mode:
+
+        2026-08-31   11 entries
+        2026-09-01   16
+        2026-09-02    3
+        2026-09-03    9
+        2026-09-04   15
+        2026-09-05    4
+        ----------------
+        TOTAL        58 entries in 6 days, every single day
+
+So this is not a one-off and it is not attributable to a missing user setting.
+A legacy execution-state keep-awake does not appear to hold this machine out of
+Modern Standby at all.
+
+WHAT THIS MEANS FOR CLAUDE, WHICH IS THE REPORTABLE PART: the PowerToys result
+is Microsoft's problem, not Anthropic's, and is included only because it
+CORROBORATES the Claude-side observation and rules out "the user had it
+configured wrong". Two unrelated wake-lock implementations, one of them
+Anthropic's, produced the same null result on the same hardware.
+
+The engineering implication, offered as a hypothesis rather than a diagnosis
+because the app's internals are not visible from outside: if the remote-tools
+keep-awake is implemented with SetThreadExecutionState / ES_SYSTEM_REQUIRED, it
+is the wrong instrument for a Modern Standby (S0 low-power idle) system, where
+the OS does not treat legacy execution-state requests as blocking. A remote
+session intended to survive unattended needs a Modern Standby-aware power
+request, or the app must be exempted.
+
+Two concrete questions:
+
+  - Should remote-tools activity reset the system idle timer, so that a user
+    working remotely does not put the machine to sleep by not touching it?
+  - Should the wake lock be claimed BEFORE serving remote work rather than
+    after standby has already begun, as it was here?
+
+This did not cause the termination and is not being reported as its cause. It is
+adjacent, it is cheap to check, and it materially worsened the outage: had the
+machine not been in standby, the user would have been at the keyboard and seen
+the app vanish immediately rather than 49 minutes later.
+
+LIMIT ON THIS FINDING, STATED RATHER THAN OMITTED: `powercfg /requests`, which
+would show exactly which power requests are registered and by whom, requires
+elevation and was not run. That is the one measurement that would convert the
+hypothesis above into a diagnosis, and it is one elevated command for anyone
+who wants it.
+
+
+SECONDARY FINDING C: THE DOCUMENTED LOG PATH IS WRONG ON THIS PLATFORM
+
+Published troubleshooting guidance points at:
+
+    %APPDATA%\Claude\logs
+
+On this machine that directory exists and contains main.log, main1.log,
+main2.log and six others - all of them LAST WRITTEN 2026-08-21, fifteen days
+before the incident. It is a dead copy.
+
+The live logs are at:
+
+    %LOCALAPPDATA%\Claude\logs
+
+That main.log was 3.8 MB and being actively written during the investigation.
+
+This is the single highest-leverage fix in this report, because it is the one
+that blocks everything else. A user who follows the guidance opens a stale
+directory, finds no crash, and reports "there is no log" - a true statement
+about the wrong file. The investigation behind this report only found the real
+logs by enumerating every Claude directory for files modified that day.
+
+Note also that main.log has rotations (main1.log, main2.log). A crash older than
+main.log's first entry is in a rotation, and reading only main.log will report
+it absent. Guidance should say so.
+
+
+WHAT WAS RULED OUT, AND HOW
+
+Ruled out matters here because the incident was initially reported - reasonably -
+as a network-triggered crash.
+
+  MOBILE NETWORK TRANSITION (the original hypothesis). The user's phone moved
+  from Wi-Fi to cellular around the same period while remote-controlling the
+  machine. RULED OUT as a cause: the app logged a clean, deliberate shutdown
+  attributable to a package registration, and the machine had already been in
+  standby for twelve minutes. The network transition is better explained as a
+  CONSEQUENCE of the remote session dying.
+
+  A CRASH. RULED OUT: no error in the app log, no Error/Critical in the Windows
+  Application log, no WER report, healthy flat memory immediately prior, and an
+  explicit clean-shutdown log line.
+
+  MEMORY EXHAUSTION. RULED OUT: 8.5 GB free of 65 GB at the final measurement,
+  and the app's own tree RSS was flat at ~13.9 GB across the preceding ten
+  minutes with no upward trend.
+
+  WINDOWS RESTARTMANAGER. Initially suspected by the investigator because four
+  RestartManager session pairs cluster at 10:59-11:04. RULED OUT on ordering:
+  they occur AFTER the 10:53 restart, not before the 10:04 termination. Recorded
+  because it was the investigator's own leading hypothesis and it was wrong.
+
+  MACHINE SLEEP AS THE CAUSE. PARTIALLY RULED OUT. The machine was in Modern
+  Standby, but standby alone does not terminate a packaged app, and the
+  termination is independently accounted for by the deployment log. Standby
+  explains why nobody witnessed it, not why it happened.
+
+
+REPRODUCIBILITY
+
+UNKNOWN, and stated as unknown rather than guessed. This is a single observation.
+The report is filed on the strength of the mechanism being fully traced in the
+logs rather than on a repeat count.
+
+It should be reproducible on demand by whoever owns the update path: stage a
+Claude Desktop MSIX update, leave it pending with agent sessions running, then
+trigger any MSIX registration pass on the machine.
+
+
+PRIVACY
+
+This report was scanned before submission for absolute user paths, session and
+client UUIDs, the user's email address, secret/token/key material, hostnames, IP
+addresses, Windows SIDs and device identifiers.
+
+Findings, and all are redacted above: one Windows user SID, one device name, one
+organisation UUID, several internal session UUIDs, one WebSocket bridge URL
+containing an organisation and device identifier, and absolute paths under the
+user's profile directory. Package family identifiers and third-party package
+names have been generalised where they were not load-bearing.
+
+Zero secrets, tokens or key material were found in the extracted material.
+
+The raw extracts remain on the reporting machine and are not attached. They can
+be supplied on request, redacted to the same standard.
